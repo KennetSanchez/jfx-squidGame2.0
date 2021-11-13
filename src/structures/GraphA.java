@@ -8,11 +8,15 @@ import java.util.Queue;
 public class GraphA<E>{
     private int numberOfVertices;
     private E[][] adj;
+    private BFTree bft;
+    private Queue<Node> nodes;
 
     GraphA(int v) {
         this.numberOfVertices = v;
         adj = (E[][])new Object[v][v];
         fillMatrix();
+        bft=new BFTree();
+        nodes = new LinkedList<>();
     }
 
     private void fillMatrix(){
@@ -29,7 +33,9 @@ public class GraphA<E>{
     }
 
     public ArrayList<Integer> BFS(int start) {
-       ArrayList<Integer> distances = new ArrayList();
+        Node st = new Node(0);
+        nodes.add(st);
+       ArrayList<Integer> distances = new ArrayList<>();
         boolean[] visited = new boolean[numberOfVertices];
         Arrays.fill(visited, false);
         distances.add(0);
@@ -41,17 +47,55 @@ public class GraphA<E>{
         int vis;
         while (!q.isEmpty()) {
             vis = q.poll();
-            k++;
-            for(int i = 0; i < numberOfVertices; i++) {
-                if (adj[vis][i] != null && (!visited[i])) {
+            //System.out.print("\n" + vis + "=");
 
+            k++;
+            for (int i = 0; i < numberOfVertices; i++) {
+                if (adj[vis][i] != null && (!visited[i])) {
+                    Node newNode = new Node(i);
+                    nodes.peek().add(newNode);
+                    nodes.add(newNode);
                     q.add(i);
                     visited[i] = true;
-                    distances.add(distances.get(k-1)+1);
+                    //System.out.print("-" + adj[vis][i] + "->" + i + " ");
+                    distances.add(distances.get(k - 1) + 1);
                 }
             }
+            nodes.poll();
         }
+        bft.setRoot(st);
         return distances;
     }
 
+    public int getNumberOfVertices() {
+        return numberOfVertices;
+    }
+
+    public void setNumberOfVertices(int numberOfVertices) {
+        this.numberOfVertices = numberOfVertices;
+    }
+
+    public E[][] getAdj() {
+        return adj;
+    }
+
+    public void setAdj(E[][] adj) {
+        this.adj = adj;
+    }
+
+    public BFTree getBft() {
+        return bft;
+    }
+
+    public void setBft(BFTree bft) {
+        this.bft = bft;
+    }
+
+    public Queue<Node> getNodes() {
+        return nodes;
+    }
+
+    public void setNodes(Queue<Node> nodes) {
+        this.nodes = nodes;
+    }
 }

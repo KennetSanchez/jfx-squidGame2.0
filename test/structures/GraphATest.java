@@ -11,6 +11,8 @@ public class GraphATest {
         exampleGraph=new GraphA<>(5);
     }
 
+
+    //Esta no es una prueba real jaja, es donde debugeo mis cositas uwu
     @Test
     public void addEdgeTest(){
         setupScene1();
@@ -22,6 +24,7 @@ public class GraphATest {
         exampleGraph.addEdge(2,3,3);//3->4
         exampleGraph.addEdge(3,4,2);//4->5
         System.out.println(exampleGraph.BFS(0));
-
+        System.out.println(exampleGraph.getBft().getRoot().getChildrenString());
+        System.out.println(exampleGraph.getBft().getRoot().getChildren().get(0).getChildrenString());
     }
 }
