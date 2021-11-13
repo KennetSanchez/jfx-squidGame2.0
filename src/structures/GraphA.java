@@ -1,15 +1,13 @@
 package structures;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class GraphA<E>{
     private int numberOfVertices;
     private E[][] adj;
     private BFTree bft;
     private Queue<Node> nodes;
+    private Hashtable<Integer,String> shortestPaths;
 
     GraphA(int v) {
         this.numberOfVertices = v;
@@ -64,6 +62,7 @@ public class GraphA<E>{
             nodes.poll();
         }
         bft.setRoot(st);
+        shortestPaths=bft.findShortestPaths();
         return distances;
     }
 
@@ -97,5 +96,13 @@ public class GraphA<E>{
 
     public void setNodes(Queue<Node> nodes) {
         this.nodes = nodes;
+    }
+
+    public Hashtable<Integer, String> getShortestPaths() {
+        return shortestPaths;
+    }
+
+    public void setShortestPaths(Hashtable<Integer, String> shortestPaths) {
+        this.shortestPaths = shortestPaths;
     }
 }

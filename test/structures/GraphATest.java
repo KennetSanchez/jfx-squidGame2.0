@@ -24,7 +24,10 @@ public class GraphATest {
         exampleGraph.addEdge(2,3,3);//3->4
         exampleGraph.addEdge(3,4,2);//4->5
         System.out.println(exampleGraph.BFS(0));
-        System.out.println(exampleGraph.getBft().getRoot().getChildrenString());
-        System.out.println(exampleGraph.getBft().getRoot().getChildren().get(0).getChildrenString());
+        System.out.println(exampleGraph.getShortestPaths().get(0));
+        System.out.println(exampleGraph.getShortestPaths().get(1));
+        System.out.println(exampleGraph.getShortestPaths().get(2));
+        System.out.println(exampleGraph.getShortestPaths().get(3));
+        System.out.println(exampleGraph.getShortestPaths().get(4));
     }
 }
