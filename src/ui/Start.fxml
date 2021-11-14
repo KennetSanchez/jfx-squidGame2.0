@@ -10,142 +10,42 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1650.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="1138.0" fitWidth="1456.0" layoutX="-2.0" layoutY="-58.0" pickOnBounds="true" />
-      <Pane layoutX="1478.0" prefHeight="1200.0" prefWidth="172.0">
+      <ImageView fitHeight="1080.0" fitWidth="1482.0" layoutX="-2.0" pickOnBounds="true">
+         <image>
+            <Image url="@../../multimedia/space%203.gif" />
+         </image></ImageView>
+      <Pane layoutX="1478.0" prefHeight="1080.0" prefWidth="172.0" style="-fx-background-color: #797979;">
          <children>
-            <Button layoutX="35.0" layoutY="178.0" mnemonicParsing="false" onAction="#GAMEgiveUp" style="-fx-background-color: #7f5af0; -fx-background-radius: 15;" text="Give up" textFill="WHITE">
+            <Button layoutX="24.0" layoutY="280.0" mnemonicParsing="false" onAction="#GAMEgiveUp" prefHeight="37.0" prefWidth="124.0" style="-fx-background-color: #7f5af0; -fx-background-radius: 15;" text="Give up" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="20.0" />
                </font>
             </Button>
+            <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="24.0" layoutY="361.0" mnemonicParsing="false" onAction="#GAMEhint" prefHeight="37.0" prefWidth="124.0" style="-fx-background-color: #7f5af0; -fx-background-radius: 15;" text="Hint" textFill="WHITE">
+               <font>
+                  <Font name="Consolas Bold" size="20.0" />
+               </font>
+               <graphic>
+                  <Label fx:id="GAMEhintsCounter" text="5 / 5" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas" size="12.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Label fx:id="GAMEtime" layoutX="45.0" layoutY="105.0" text="00:00" textFill="WHITE">
+               <font>
+                  <Font name="Consolas Bold" size="30.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="24.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GAMElb1" layoutX="57.0" layoutY="35.0" text="20">
-         <font>
-            <Font name="Consolas Bold" size="30.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="156.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GAMElb2" layoutX="189.0" layoutY="35.0" text="20">
-         <font>
-            <Font name="Consolas Bold" size="30.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="288.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GAMElb3" layoutX="321.0" layoutY="35.0" text="20">
-         <font>
-            <Font name="Consolas Bold" size="30.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="420.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GAMElb4" layoutX="453.0" layoutY="35.0" text="20">
-         <font>
-            <Font name="Consolas Bold" size="30.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="552.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GAMElb14" layoutX="585.0" layoutY="35.0" text="20">
-         <font>
-            <Font name="Consolas Bold" size="30.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="552.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GAMElb5" layoutX="585.0" layoutY="35.0" text="20">
-         <font>
-            <Font name="Consolas Bold" size="30.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="684.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GAMElb6" layoutX="717.0" layoutY="35.0" text="20">
-         <font>
-            <Font name="Consolas Bold" size="30.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="816.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GAMElb7" layoutX="849.0" layoutY="35.0" text="20">
-         <font>
-            <Font name="Consolas Bold" size="30.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="948.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GAMElb8" layoutX="981.0" layoutY="35.0" text="20">
-         <font>
-            <Font name="Consolas Bold" size="30.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="1080.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GAMElb9" layoutX="1113.0" layoutY="35.0" text="20">
-         <font>
-            <Font name="Consolas Bold" size="30.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="1212.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GAMElb10" layoutX="1245.0" layoutY="35.0" text="20">
-         <font>
-            <Font name="Consolas Bold" size="30.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="1344.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="GAMElb101" layoutX="1377.0" layoutY="35.0" text="20">
-         <font>
-            <Font name="Consolas Bold" size="30.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="24.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb11" layoutX="57.0" layoutY="112.0" text="20">
+      <Label fx:id="GAMElb11" layoutX="57.0" layoutY="112.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -155,7 +55,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb21" layoutX="189.0" layoutY="112.0" text="20">
+      <Label fx:id="GAMElb21" layoutX="189.0" layoutY="112.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -165,7 +65,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb31" layoutX="321.0" layoutY="112.0" text="20">
+      <Label fx:id="GAMElb31" layoutX="321.0" layoutY="112.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -175,7 +75,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb41" layoutX="453.0" layoutY="112.0" text="20">
+      <Label fx:id="GAMElb41" layoutX="453.0" layoutY="112.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -185,7 +85,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb141" layoutX="585.0" layoutY="112.0" text="20">
+      <Label fx:id="GAMElb141" layoutX="585.0" layoutY="112.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -195,7 +95,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb51" layoutX="585.0" layoutY="112.0" text="20">
+      <Label fx:id="GAMElb51" layoutX="585.0" layoutY="112.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -205,7 +105,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb61" layoutX="717.0" layoutY="112.0" text="20">
+      <Label fx:id="GAMElb61" layoutX="717.0" layoutY="112.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -215,7 +115,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb71" layoutX="849.0" layoutY="112.0" text="20">
+      <Label fx:id="GAMElb71" layoutX="849.0" layoutY="112.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -225,7 +125,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb81" layoutX="981.0" layoutY="112.0" text="20">
+      <Label fx:id="GAMElb81" layoutX="981.0" layoutY="112.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -235,7 +135,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb91" layoutX="1113.0" layoutY="112.0" text="20">
+      <Label fx:id="GAMElb91" layoutX="1113.0" layoutY="112.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -245,7 +145,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb102" layoutX="1245.0" layoutY="112.0" text="20">
+      <Label fx:id="GAMElb102" layoutX="1245.0" layoutY="112.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -255,7 +155,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb1011" layoutX="1377.0" layoutY="112.0" text="20">
+      <Label fx:id="GAMElb1011" layoutX="1377.0" layoutY="112.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -265,7 +165,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb12" layoutX="57.0" layoutY="189.0" text="20">
+      <Label fx:id="GAMElb12" layoutX="57.0" layoutY="189.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -275,7 +175,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb22" layoutX="189.0" layoutY="189.0" text="20">
+      <Label fx:id="GAMElb22" layoutX="189.0" layoutY="189.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -285,7 +185,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb32" layoutX="321.0" layoutY="189.0" text="20">
+      <Label fx:id="GAMElb32" layoutX="321.0" layoutY="189.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -295,7 +195,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb42" layoutX="453.0" layoutY="189.0" text="20">
+      <Label fx:id="GAMElb42" layoutX="453.0" layoutY="189.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -305,7 +205,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb142" layoutX="585.0" layoutY="189.0" text="20">
+      <Label fx:id="GAMElb142" layoutX="585.0" layoutY="189.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -315,7 +215,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb52" layoutX="585.0" layoutY="189.0" text="20">
+      <Label fx:id="GAMElb52" layoutX="585.0" layoutY="189.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -325,7 +225,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb62" layoutX="717.0" layoutY="189.0" text="20">
+      <Label fx:id="GAMElb62" layoutX="717.0" layoutY="189.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -335,7 +235,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb72" layoutX="849.0" layoutY="189.0" text="20">
+      <Label fx:id="GAMElb72" layoutX="849.0" layoutY="189.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -345,7 +245,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb82" layoutX="981.0" layoutY="189.0" text="20">
+      <Label fx:id="GAMElb82" layoutX="981.0" layoutY="189.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -355,7 +255,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb92" layoutX="1113.0" layoutY="189.0" text="20">
+      <Label fx:id="GAMElb92" layoutX="1113.0" layoutY="189.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -365,7 +265,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb103" layoutX="1245.0" layoutY="189.0" text="20">
+      <Label fx:id="GAMElb103" layoutX="1245.0" layoutY="189.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -375,7 +275,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb1012" layoutX="1377.0" layoutY="189.0" text="20">
+      <Label fx:id="GAMElb1012" layoutX="1377.0" layoutY="189.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -385,7 +285,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb13" layoutX="57.0" layoutY="266.0" text="20">
+      <Label fx:id="GAMElb13" layoutX="57.0" layoutY="266.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -395,7 +295,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb23" layoutX="189.0" layoutY="266.0" text="20">
+      <Label fx:id="GAMElb23" layoutX="189.0" layoutY="266.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -405,7 +305,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb33" layoutX="321.0" layoutY="266.0" text="20">
+      <Label fx:id="GAMElb33" layoutX="321.0" layoutY="266.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -415,7 +315,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb43" layoutX="453.0" layoutY="266.0" text="20">
+      <Label fx:id="GAMElb43" layoutX="453.0" layoutY="266.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -425,7 +325,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb143" layoutX="585.0" layoutY="266.0" text="20">
+      <Label fx:id="GAMElb143" layoutX="585.0" layoutY="266.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -435,7 +335,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb53" layoutX="585.0" layoutY="266.0" text="20">
+      <Label fx:id="GAMElb53" layoutX="585.0" layoutY="266.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -445,7 +345,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb63" layoutX="717.0" layoutY="266.0" text="20">
+      <Label fx:id="GAMElb63" layoutX="717.0" layoutY="266.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -455,7 +355,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb73" layoutX="849.0" layoutY="266.0" text="20">
+      <Label fx:id="GAMElb73" layoutX="849.0" layoutY="266.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -465,7 +365,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb83" layoutX="981.0" layoutY="266.0" text="20">
+      <Label fx:id="GAMElb83" layoutX="981.0" layoutY="266.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -475,7 +375,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb93" layoutX="1113.0" layoutY="266.0" text="20">
+      <Label fx:id="GAMElb93" layoutX="1113.0" layoutY="266.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -485,7 +385,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb104" layoutX="1245.0" layoutY="266.0" text="20">
+      <Label fx:id="GAMElb104" layoutX="1245.0" layoutY="266.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -495,7 +395,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb1013" layoutX="1377.0" layoutY="266.0" text="20">
+      <Label fx:id="GAMElb1013" layoutX="1377.0" layoutY="266.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -505,7 +405,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb15" layoutX="57.0" layoutY="343.0" text="20">
+      <Label fx:id="GAMElb15" layoutX="57.0" layoutY="343.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -515,7 +415,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb24" layoutX="189.0" layoutY="343.0" text="20">
+      <Label fx:id="GAMElb24" layoutX="189.0" layoutY="343.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -525,7 +425,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb34" layoutX="321.0" layoutY="343.0" text="20">
+      <Label fx:id="GAMElb34" layoutX="321.0" layoutY="343.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -535,7 +435,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb44" layoutX="453.0" layoutY="343.0" text="20">
+      <Label fx:id="GAMElb44" layoutX="453.0" layoutY="343.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -545,7 +445,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb144" layoutX="585.0" layoutY="343.0" text="20">
+      <Label fx:id="GAMElb144" layoutX="585.0" layoutY="343.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -555,7 +455,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb54" layoutX="585.0" layoutY="343.0" text="20">
+      <Label fx:id="GAMElb54" layoutX="585.0" layoutY="343.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -565,7 +465,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb64" layoutX="717.0" layoutY="343.0" text="20">
+      <Label fx:id="GAMElb64" layoutX="717.0" layoutY="343.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -575,7 +475,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb74" layoutX="849.0" layoutY="343.0" text="20">
+      <Label fx:id="GAMElb74" layoutX="849.0" layoutY="343.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -585,7 +485,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb84" layoutX="981.0" layoutY="343.0" text="20">
+      <Label fx:id="GAMElb84" layoutX="981.0" layoutY="343.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -595,7 +495,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb94" layoutX="1113.0" layoutY="343.0" text="20">
+      <Label fx:id="GAMElb94" layoutX="1113.0" layoutY="343.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -605,7 +505,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb105" layoutX="1245.0" layoutY="343.0" text="20">
+      <Label fx:id="GAMElb105" layoutX="1245.0" layoutY="343.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -615,7 +515,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb1014" layoutX="1377.0" layoutY="343.0" text="20">
+      <Label fx:id="GAMElb1014" layoutX="1377.0" layoutY="343.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -625,7 +525,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb16" layoutX="57.0" layoutY="420.0" text="20">
+      <Label fx:id="GAMElb16" layoutX="57.0" layoutY="420.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -635,7 +535,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb25" layoutX="189.0" layoutY="420.0" text="20">
+      <Label fx:id="GAMElb25" layoutX="189.0" layoutY="420.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -645,7 +545,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb35" layoutX="321.0" layoutY="420.0" text="20">
+      <Label fx:id="GAMElb35" layoutX="321.0" layoutY="420.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -655,7 +555,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb45" layoutX="453.0" layoutY="420.0" text="20">
+      <Label fx:id="GAMElb45" layoutX="453.0" layoutY="420.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -665,7 +565,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb145" layoutX="585.0" layoutY="420.0" text="20">
+      <Label fx:id="GAMElb145" layoutX="585.0" layoutY="420.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -675,7 +575,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb55" layoutX="585.0" layoutY="420.0" text="20">
+      <Label fx:id="GAMElb55" layoutX="585.0" layoutY="420.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -685,7 +585,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb65" layoutX="717.0" layoutY="420.0" text="20">
+      <Label fx:id="GAMElb65" layoutX="717.0" layoutY="420.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -695,7 +595,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb75" layoutX="849.0" layoutY="420.0" text="20">
+      <Label fx:id="GAMElb75" layoutX="849.0" layoutY="420.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -705,7 +605,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb85" layoutX="981.0" layoutY="420.0" text="20">
+      <Label fx:id="GAMElb85" layoutX="981.0" layoutY="420.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -715,7 +615,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb95" layoutX="1113.0" layoutY="420.0" text="20">
+      <Label fx:id="GAMElb95" layoutX="1113.0" layoutY="420.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -725,7 +625,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb106" layoutX="1245.0" layoutY="420.0" text="20">
+      <Label fx:id="GAMElb106" layoutX="1245.0" layoutY="420.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -735,7 +635,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb1015" layoutX="1377.0" layoutY="420.0" text="20">
+      <Label fx:id="GAMElb1015" layoutX="1377.0" layoutY="420.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -745,7 +645,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb17" layoutX="57.0" layoutY="497.0" text="20">
+      <Label fx:id="GAMElb17" layoutX="57.0" layoutY="497.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -755,7 +655,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb26" layoutX="189.0" layoutY="497.0" text="20">
+      <Label fx:id="GAMElb26" layoutX="189.0" layoutY="497.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -765,7 +665,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb36" layoutX="321.0" layoutY="497.0" text="20">
+      <Label fx:id="GAMElb36" layoutX="321.0" layoutY="497.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -775,7 +675,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb46" layoutX="453.0" layoutY="497.0" text="20">
+      <Label fx:id="GAMElb46" layoutX="453.0" layoutY="497.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -785,7 +685,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb146" layoutX="585.0" layoutY="497.0" text="20">
+      <Label fx:id="GAMElb146" layoutX="585.0" layoutY="497.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -795,7 +695,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb56" layoutX="585.0" layoutY="497.0" text="20">
+      <Label fx:id="GAMElb56" layoutX="585.0" layoutY="497.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -805,7 +705,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb66" layoutX="717.0" layoutY="497.0" text="20">
+      <Label fx:id="GAMElb66" layoutX="717.0" layoutY="497.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -815,7 +715,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb76" layoutX="849.0" layoutY="497.0" text="20">
+      <Label fx:id="GAMElb76" layoutX="849.0" layoutY="497.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -825,7 +725,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb86" layoutX="981.0" layoutY="497.0" text="20">
+      <Label fx:id="GAMElb86" layoutX="981.0" layoutY="497.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -835,7 +735,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb96" layoutX="1113.0" layoutY="497.0" text="20">
+      <Label fx:id="GAMElb96" layoutX="1113.0" layoutY="497.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -845,7 +745,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb107" layoutX="1245.0" layoutY="497.0" text="20">
+      <Label fx:id="GAMElb107" layoutX="1245.0" layoutY="497.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -855,7 +755,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb1016" layoutX="1377.0" layoutY="497.0" text="20">
+      <Label fx:id="GAMElb1016" layoutX="1377.0" layoutY="497.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -865,7 +765,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb18" layoutX="57.0" layoutY="574.0" text="20">
+      <Label fx:id="GAMElb18" layoutX="57.0" layoutY="574.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -875,7 +775,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb27" layoutX="189.0" layoutY="574.0" text="20">
+      <Label fx:id="GAMElb27" layoutX="189.0" layoutY="574.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -885,7 +785,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb37" layoutX="321.0" layoutY="574.0" text="20">
+      <Label fx:id="GAMElb37" layoutX="321.0" layoutY="574.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -895,7 +795,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb47" layoutX="453.0" layoutY="574.0" text="20">
+      <Label fx:id="GAMElb47" layoutX="453.0" layoutY="574.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -905,7 +805,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb147" layoutX="585.0" layoutY="574.0" text="20">
+      <Label fx:id="GAMElb147" layoutX="585.0" layoutY="574.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -915,7 +815,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb57" layoutX="585.0" layoutY="574.0" text="20">
+      <Label fx:id="GAMElb57" layoutX="585.0" layoutY="574.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -925,7 +825,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb67" layoutX="717.0" layoutY="574.0" text="20">
+      <Label fx:id="GAMElb67" layoutX="717.0" layoutY="574.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -935,7 +835,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb77" layoutX="849.0" layoutY="574.0" text="20">
+      <Label fx:id="GAMElb77" layoutX="849.0" layoutY="574.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -945,7 +845,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb87" layoutX="981.0" layoutY="574.0" text="20">
+      <Label fx:id="GAMElb87" layoutX="981.0" layoutY="574.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -955,7 +855,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb97" layoutX="1113.0" layoutY="574.0" text="20">
+      <Label fx:id="GAMElb97" layoutX="1113.0" layoutY="574.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -965,7 +865,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb108" layoutX="1245.0" layoutY="574.0" text="20">
+      <Label fx:id="GAMElb108" layoutX="1245.0" layoutY="574.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -975,7 +875,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb1017" layoutX="1377.0" layoutY="574.0" text="20">
+      <Label fx:id="GAMElb1017" layoutX="1377.0" layoutY="574.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -985,7 +885,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb19" layoutX="57.0" layoutY="651.0" text="20">
+      <Label fx:id="GAMElb19" layoutX="57.0" layoutY="651.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -995,7 +895,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb28" layoutX="189.0" layoutY="651.0" text="20">
+      <Label fx:id="GAMElb28" layoutX="189.0" layoutY="651.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1005,7 +905,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb38" layoutX="321.0" layoutY="651.0" text="20">
+      <Label fx:id="GAMElb38" layoutX="321.0" layoutY="651.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1015,7 +915,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb48" layoutX="453.0" layoutY="651.0" text="20">
+      <Label fx:id="GAMElb48" layoutX="453.0" layoutY="651.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1025,7 +925,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb148" layoutX="585.0" layoutY="651.0" text="20">
+      <Label fx:id="GAMElb148" layoutX="585.0" layoutY="651.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1035,7 +935,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb68" layoutX="717.0" layoutY="651.0" text="20">
+      <Label fx:id="GAMElb68" layoutX="717.0" layoutY="651.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1045,7 +945,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb78" layoutX="849.0" layoutY="651.0" text="20">
+      <Label fx:id="GAMElb78" layoutX="849.0" layoutY="651.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1055,7 +955,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb88" layoutX="981.0" layoutY="651.0" text="20">
+      <Label fx:id="GAMElb88" layoutX="981.0" layoutY="651.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1065,7 +965,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb98" layoutX="1113.0" layoutY="651.0" text="20">
+      <Label fx:id="GAMElb98" layoutX="1113.0" layoutY="651.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1075,7 +975,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb109" layoutX="1245.0" layoutY="651.0" text="20">
+      <Label fx:id="GAMElb109" layoutX="1245.0" layoutY="651.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1085,7 +985,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb1018" layoutX="1377.0" layoutY="651.0" text="20">
+      <Label fx:id="GAMElb1018" layoutX="1377.0" layoutY="651.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1095,7 +995,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb110" layoutX="57.0" layoutY="728.0" text="20">
+      <Label fx:id="GAMElb110" layoutX="57.0" layoutY="728.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1105,7 +1005,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb29" layoutX="189.0" layoutY="728.0" text="20">
+      <Label fx:id="GAMElb29" layoutX="189.0" layoutY="728.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1115,7 +1015,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb39" layoutX="321.0" layoutY="728.0" text="20">
+      <Label fx:id="GAMElb39" layoutX="321.0" layoutY="728.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1125,7 +1025,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb49" layoutX="453.0" layoutY="728.0" text="20">
+      <Label fx:id="GAMElb49" layoutX="453.0" layoutY="728.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1135,7 +1035,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb149" layoutX="585.0" layoutY="728.0" text="20">
+      <Label fx:id="GAMElb149" layoutX="585.0" layoutY="728.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1145,7 +1045,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb69" layoutX="717.0" layoutY="728.0" text="20">
+      <Label fx:id="GAMElb69" layoutX="717.0" layoutY="728.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1155,7 +1055,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb79" layoutX="849.0" layoutY="728.0" text="20">
+      <Label fx:id="GAMElb79" layoutX="849.0" layoutY="728.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1165,7 +1065,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb89" layoutX="981.0" layoutY="728.0" text="20">
+      <Label fx:id="GAMElb89" layoutX="981.0" layoutY="728.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1175,7 +1075,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb99" layoutX="1113.0" layoutY="728.0" text="20">
+      <Label fx:id="GAMElb99" layoutX="1113.0" layoutY="728.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1185,7 +1085,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb1010" layoutX="1245.0" layoutY="728.0" text="20">
+      <Label fx:id="GAMElb1010" layoutX="1245.0" layoutY="728.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1195,7 +1095,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb1019" layoutX="1377.0" layoutY="728.0" text="20">
+      <Label fx:id="GAMElb1019" layoutX="1377.0" layoutY="728.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1205,7 +1105,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb111" layoutX="57.0" layoutY="805.0" text="20">
+      <Label fx:id="GAMElb111" layoutX="57.0" layoutY="805.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1215,7 +1115,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb210" layoutX="189.0" layoutY="805.0" text="20">
+      <Label fx:id="GAMElb210" layoutX="189.0" layoutY="805.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1225,7 +1125,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb310" layoutX="321.0" layoutY="805.0" text="20">
+      <Label fx:id="GAMElb310" layoutX="321.0" layoutY="805.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1235,7 +1135,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb410" layoutX="453.0" layoutY="805.0" text="20">
+      <Label fx:id="GAMElb410" layoutX="453.0" layoutY="805.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1245,7 +1145,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb1410" layoutX="585.0" layoutY="805.0" text="20">
+      <Label fx:id="GAMElb1410" layoutX="585.0" layoutY="805.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1255,7 +1155,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb610" layoutX="717.0" layoutY="805.0" text="20">
+      <Label fx:id="GAMElb610" layoutX="717.0" layoutY="805.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1265,7 +1165,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb710" layoutX="849.0" layoutY="805.0" text="20">
+      <Label fx:id="GAMElb710" layoutX="849.0" layoutY="805.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1275,7 +1175,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb810" layoutX="981.0" layoutY="805.0" text="20">
+      <Label fx:id="GAMElb810" layoutX="981.0" layoutY="805.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1285,7 +1185,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb910" layoutX="1113.0" layoutY="805.0" text="20">
+      <Label fx:id="GAMElb910" layoutX="1113.0" layoutY="805.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1295,7 +1195,7 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb1020" layoutX="1245.0" layoutY="805.0" text="20">
+      <Label fx:id="GAMElb1020" layoutX="1245.0" layoutY="805.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
@@ -1305,17 +1205,135 @@
             <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
          </image>
       </ImageView>
-      <Label fx:id="GAMElb10110" layoutX="1377.0" layoutY="805.0" text="20">
+      <Label fx:id="GAMElb10110" layoutX="1377.0" layoutY="805.0" text="20" textFill="#d3d3d3">
          <font>
             <Font name="Consolas Bold" size="30.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="156.0" layoutX="797.0" layoutY="930.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="104.0" fitWidth="89.0" layoutX="689.0" layoutY="956.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../multimedia/Start.png" />
          </image>
          <effect>
-            <ColorAdjust brightness="0.52" contrast="-0.31" hue="-0.52" saturation="1.0" />
+            <ColorAdjust brightness="1.0" contrast="-0.31" hue="1.0" saturation="1.0" />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="24.0" layoutY="861.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="GAMElb112" layoutX="57.0" layoutY="882.0" text="20" textFill="#d3d3d3">
+         <font>
+            <Font name="Consolas Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="156.0" layoutY="861.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="GAMElb211" layoutX="189.0" layoutY="882.0" text="20" textFill="#d3d3d3">
+         <font>
+            <Font name="Consolas Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="288.0" layoutY="861.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="GAMElb311" layoutX="321.0" layoutY="882.0" text="20" textFill="#d3d3d3">
+         <font>
+            <Font name="Consolas Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="420.0" layoutY="861.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="GAMElb411" layoutX="453.0" layoutY="882.0" text="20" textFill="#d3d3d3">
+         <font>
+            <Font name="Consolas Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="552.0" layoutY="861.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="GAMElb58" layoutX="585.0" layoutY="882.0" text="20" textFill="#d3d3d3">
+         <font>
+            <Font name="Consolas Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="684.0" layoutY="861.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="GAMElb611" layoutX="717.0" layoutY="882.0" text="20" textFill="#d3d3d3">
+         <font>
+            <Font name="Consolas Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="816.0" layoutY="861.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="GAMElb711" layoutX="849.0" layoutY="882.0" text="20" textFill="#d3d3d3">
+         <font>
+            <Font name="Consolas Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="948.0" layoutY="861.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="GAMElb811" layoutX="981.0" layoutY="882.0" text="20" textFill="#d3d3d3">
+         <font>
+            <Font name="Consolas Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="1080.0" layoutY="861.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="GAMElb911" layoutX="1113.0" layoutY="882.0" text="20" textFill="#d3d3d3">
+         <font>
+            <Font name="Consolas Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="1212.0" layoutY="861.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="GAMElb1021" layoutX="1245.0" layoutY="882.0" text="20" textFill="#d3d3d3">
+         <font>
+            <Font name="Consolas Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="81.0" fitWidth="99.0" layoutX="1344.0" layoutY="861.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../multimedia/neon-frame-transparent-background-90-700x541.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="GAMElb10111" layoutX="1377.0" layoutY="882.0" text="20" textFill="#d3d3d3">
+         <font>
+            <Font name="Consolas Bold" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="93.0" fitWidth="73.0" layoutX="703.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../multimedia/Finish.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="1.0" contrast="-0.31" saturation="1.0" />
          </effect>
       </ImageView>
    </children>
