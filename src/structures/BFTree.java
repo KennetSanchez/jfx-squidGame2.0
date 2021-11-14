@@ -33,8 +33,7 @@ public class BFTree {
                 aux+=actual+",";
                 //System.out.println("aux es: "+aux);
                 shortestPaths.put(actual,aux.substring(0,aux.length()-1));
-                findShortestPaths(aL.get(i),shortestPaths);
-            }
+                findShortestPaths(aL.get(i),shortestPaths);           }
             aux=aux.substring(0,aux.length()-2);
         }
         else{

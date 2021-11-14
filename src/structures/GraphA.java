@@ -15,6 +15,10 @@ public class GraphA<E>{
         fillMatrix();
         bft=new BFTree();
         nodes = new LinkedList<>();
+        shortestPaths=null;
+
+
+
     }
 
     private void fillMatrix(){
@@ -33,7 +37,7 @@ public class GraphA<E>{
     public ArrayList<Integer> BFS(int start) {
         Node st = new Node(0);
         nodes.add(st);
-       ArrayList<Integer> distances = new ArrayList<>();
+        ArrayList<Integer> distances = new ArrayList<>();
         boolean[] visited = new boolean[numberOfVertices];
         Arrays.fill(visited, false);
         distances.add(0);
