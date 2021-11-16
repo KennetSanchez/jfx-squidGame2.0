@@ -2,7 +2,7 @@ package structures;
 
 import java.util.*;
 
-public class GraphB<E>{
+public class GraphB<E> implements GraphInterface<E>{
     private int numberOfVertices;
     private Hashtable<Integer,Vertex<E>> adjList;
     private Hashtable<Integer,String> shortestPaths;
@@ -17,6 +17,7 @@ public class GraphB<E>{
         nodes=new LinkedList<>();
     }
 
+    @Override
     public void addEdge(int v1,int v2,E edgeValue){
         Vertex<E> vertex1 = new Vertex<>(v1,edgeValue);
         Vertex<E> vertex2 = new Vertex<>(v2,edgeValue);
@@ -34,6 +35,7 @@ public class GraphB<E>{
         }
     }
 
+    @Override
     public ArrayList<Integer> BFS(int start) {
         Node st = new Node(0);
         nodes.add(st);
@@ -58,6 +60,11 @@ public class GraphB<E>{
         bft.setRoot(st);
         shortestPaths=bft.findShortestPaths();
         return distances;
+    }
+
+    @Override
+    public void dijkstra(int src) {
+
     }
 
     public boolean[] allAdjacent(Vertex<E> v,boolean[] visited,Queue queue,ArrayList<Integer> distances,int k){

@@ -29,5 +29,13 @@ public class GraphATest {
         System.out.println(exampleGraph.getShortestPaths().get(2));
         System.out.println(exampleGraph.getShortestPaths().get(3));
         System.out.println(exampleGraph.getShortestPaths().get(4));
+        exampleGraph.dijkstra(0);
+        exampleGraph.findDijkstraShortestPaths();
+        System.out.println("Inicio rutas completas");
+        System.out.println(exampleGraph.getDijkstraShortestPaths().get(0));
+        System.out.println(exampleGraph.getDijkstraShortestPaths().get(1));
+        System.out.println(exampleGraph.getDijkstraShortestPaths().get(2));
+        System.out.println(exampleGraph.getDijkstraShortestPaths().get(3));
+        System.out.println(exampleGraph.getDijkstraShortestPaths().get(4));
     }
 }
