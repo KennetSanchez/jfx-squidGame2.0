@@ -18,6 +18,8 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
         bft = new BFTree();
         nodes = new LinkedList<>();
         bfsShortestPaths = null;
+        parent = null;
+        dijkstraShortestPaths=null;
     }
 
     private void fillMatrix() {
