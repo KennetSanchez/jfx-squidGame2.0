@@ -29,13 +29,13 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
             adjList.put(v1,vertex2);
         }
         else{
-            adjList.get(v1).setNext(vertex2);
+            adjList.get(v1).add(vertex2);
         }
         if(adjList.get(v2)==null){
             adjList.put(v2,vertex1);
         }
         else{
-            adjList.get(v2).setNext(vertex1);
+            adjList.get(v2).add(vertex1);
         }
     }
 
@@ -107,6 +107,54 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
             input1.reverse();
             String info = input1.substring(1,input1.length());
             dijkstraShortestPaths.put(i,info);
+        }
+    }
+
+    public float[][] floydWarshall(){
+        float[][] dist = new float[numberOfVertices][numberOfVertices];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        for(int p=0;p<numberOfVertices;p++){
+            Arrays.fill(dist[p], Float.MAX_VALUE);
+        }
+        dist=adjacencyMatrix(dist);
+        for (k = 0; k < numberOfVertices; k++) {
+            for (i = 0; i < numberOfVertices; i++) {
+                for (j = 0; j < numberOfVertices; j++) {
+                    if (dist[i][k] + dist[k][j] < dist[i][j])
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                }
+
+            }
+        }
+        String info = "\n";
+        for(int m=0;m<numberOfVertices;m++){
+            for(int n=0;n<numberOfVertices;n++){
+                info += (int)dist[m][n]+" ";
+            }
+            info+="\n";
+        }
+        System.out.println(info);
+        return dist;
+    }
+
+    public float[][] adjacencyMatrix(float[][] emptyMatrix){
+        for(int i=0;i<numberOfVertices;i++){
+            emptyMatrix[i][i]=0;
+            emptyMatrix=adjacencyMatrix(emptyMatrix,i,adjList.get(i));
+        }
+        return emptyMatrix;
+    }
+
+    public float[][] adjacencyMatrix(float[][] emptyMatrix,int i,Vertex<E> v){
+        if(v!=null){
+            emptyMatrix[i][v.getValue()] =  v.getEdgeValue().floatValue();
+            System.out.println("["+i+"]"+" ["+v.getValue()+"] = "+v.getEdgeValue().floatValue());
+            return adjacencyMatrix(emptyMatrix,i,v.getNext());
+        }
+        else {
+            return emptyMatrix;
         }
     }
 

@@ -13,6 +13,19 @@ public class Vertex<E> {
         this.edgeValue = edgeValue;
     }
 
+    public void add(Vertex<E> next){
+        add(next,this);
+    }
+
+    public void add(Vertex<E> next,Vertex<E> root){
+        if(root.getNext()==null){
+            root.setNext(next);
+        }
+        else{
+            add(next,root.getNext());
+        }
+    }
+
     public int getValue() {
         return value;
     }

@@ -21,6 +21,18 @@ public class GraphBTest {
         exampleGraph.addEdge(1,4,1);//2->5
         exampleGraph.addEdge(2,3,3);//3->4
         exampleGraph.addEdge(3,4,2);//4->5
+        System.out.println("Matriz entera: ");
+        System.out.println("Los del 0");
+        vertex(exampleGraph.getAdjList().get(0));
+        System.out.println("Los del 1");
+        vertex(exampleGraph.getAdjList().get(1));
+        System.out.println("Los del 2");
+        vertex(exampleGraph.getAdjList().get(2));
+        System.out.println("Los del 3");
+        vertex(exampleGraph.getAdjList().get(3));
+        System.out.println("Los del 4");
+        vertex(exampleGraph.getAdjList().get(4));
+
         System.out.println(exampleGraph.BFS(0));
         System.out.println(exampleGraph.getShortestPaths().get(0));
         System.out.println(exampleGraph.getShortestPaths().get(1));
@@ -35,5 +47,13 @@ public class GraphBTest {
         System.out.println(exampleGraph.getDijkstraShortestPaths().get(2));
         System.out.println(exampleGraph.getDijkstraShortestPaths().get(3));
         System.out.println(exampleGraph.getDijkstraShortestPaths().get(4));
+        System.out.println(exampleGraph.floydWarshall());
+    }
+
+    public void vertex(Vertex<Integer> v){
+        if(v!=null){
+            System.out.println(v.getValue());
+            vertex(v.getNext());
+        }
     }
 }
