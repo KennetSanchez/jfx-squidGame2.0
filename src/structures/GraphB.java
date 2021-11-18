@@ -2,12 +2,14 @@ package structures;
 
 import java.util.*;
 
-public class GraphB<E> implements GraphInterface<E>{
+public class GraphB<E extends Number> implements GraphInterface<E>{
     private int numberOfVertices;
     private Hashtable<Integer,Vertex<E>> adjList;
     private Hashtable<Integer,String> shortestPaths;
     private BFTree bft;
     private Queue<Node> nodes;
+    private int[] parent;
+    private Hashtable<Integer,String> dijkstraShortestPaths;
 
     public GraphB(int v){
         numberOfVertices=v;
@@ -15,6 +17,8 @@ public class GraphB<E> implements GraphInterface<E>{
         bft=new BFTree();
         shortestPaths=null;
         nodes=new LinkedList<>();
+        parent = null;
+        dijkstraShortestPaths=null;
     }
 
     @Override
@@ -25,13 +29,13 @@ public class GraphB<E> implements GraphInterface<E>{
             adjList.put(v1,vertex2);
         }
         else{
-            adjList.get(v1).setNext(vertex2);
+            adjList.get(v1).add(vertex2);
         }
         if(adjList.get(v2)==null){
             adjList.put(v2,vertex1);
         }
         else{
-            adjList.get(v2).setNext(vertex1);
+            adjList.get(v2).add(vertex1);
         }
     }
 
@@ -64,7 +68,108 @@ public class GraphB<E> implements GraphInterface<E>{
 
     @Override
     public void dijkstra(int src) {
+        dijkstra(adjList,src);
+    }
 
+    public int[] dijkstra(Hashtable<Integer,Vertex<E>> graph,int src){
+        parent = new int[numberOfVertices];
+        int[] distance = new int[numberOfVertices];
+        parent[0] = -1;
+        Arrays.fill(distance,Integer.MAX_VALUE);
+        distance[src] = 0;
+
+        PriorityQueue<Vertex<Float>> pq = new PriorityQueue<>(Comparator.comparingDouble(v -> v.getEdgeValue()));
+        pq.add(new Vertex<>(src, (float) 0));
+        while(!pq.isEmpty()){
+            Vertex<Float> current = pq.poll();
+            distance=allVertex(current, graph.get(current.getValue()),pq,distance);
+            /*
+            for (AdjListNode n : graph.get(current.getVertex())) {
+                if (distance[current.getVertex()] + n.getWeight() < distance[n.getVertex()]) {
+                    distance[n.getVertex()] = n.getWeight() + distance[current.getVertex()];
+                    pq.add(new AdjListNode(n.getVertex(), distance[n.getVertex()]));
+                }
+                */
+        }
+        return distance;
+    }
+
+    public void findDijkstraShortestPaths(){
+        dijkstraShortestPaths=new Hashtable<>();
+        for(int i=0;i<numberOfVertices;i++){
+            int pos = parent[i];
+            StringBuilder input1 = new StringBuilder();
+            input1.append(i+",");
+            while(pos!=-1){
+                input1.append(pos+",");
+                pos=parent[pos];
+            }
+            input1.reverse();
+            String info = input1.substring(1,input1.length());
+            dijkstraShortestPaths.put(i,info);
+        }
+    }
+
+    public float[][] floydWarshall(){
+        float[][] dist = new float[numberOfVertices][numberOfVertices];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        for(int p=0;p<numberOfVertices;p++){
+            Arrays.fill(dist[p], Float.MAX_VALUE);
+        }
+        dist=adjacencyMatrix(dist);
+        for (k = 0; k < numberOfVertices; k++) {
+            for (i = 0; i < numberOfVertices; i++) {
+                for (j = 0; j < numberOfVertices; j++) {
+                    if (dist[i][k] + dist[k][j] < dist[i][j])
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                }
+
+            }
+        }
+        String info = "\n";
+        for(int m=0;m<numberOfVertices;m++){
+            for(int n=0;n<numberOfVertices;n++){
+                info += (int)dist[m][n]+" ";
+            }
+            info+="\n";
+        }
+        System.out.println(info);
+        return dist;
+    }
+
+    public float[][] adjacencyMatrix(float[][] emptyMatrix){
+        for(int i=0;i<numberOfVertices;i++){
+            emptyMatrix[i][i]=0;
+            emptyMatrix=adjacencyMatrix(emptyMatrix,i,adjList.get(i));
+        }
+        return emptyMatrix;
+    }
+
+    public float[][] adjacencyMatrix(float[][] emptyMatrix,int i,Vertex<E> v){
+        if(v!=null){
+            emptyMatrix[i][v.getValue()] =  v.getEdgeValue().floatValue();
+            System.out.println("["+i+"]"+" ["+v.getValue()+"] = "+v.getEdgeValue().floatValue());
+            return adjacencyMatrix(emptyMatrix,i,v.getNext());
+        }
+        else {
+            return emptyMatrix;
+        }
+    }
+
+    public int[] allVertex(Vertex<Float> current,Vertex<E> n,PriorityQueue<Vertex<Float>> pq,int[] distance){
+        if(n!=null){
+            if(distance[current.getValue()] + n.getEdgeValue().intValue() < distance[n.getValue()]){
+                distance[n.getValue()] = n.getEdgeValue().intValue() + distance[current.getValue()];
+                parent[n.getValue()] = current.getValue();
+                pq.add(new Vertex<>(n.getValue(), (float) distance[n.getValue()]));
+            }
+            return allVertex(current,n.getNext(),pq,distance);
+        }
+        else{
+            return distance;
+        }
     }
 
     public boolean[] allAdjacent(Vertex<E> v,boolean[] visited,Queue queue,ArrayList<Integer> distances,int k){
@@ -123,5 +228,21 @@ public class GraphB<E> implements GraphInterface<E>{
 
     public void setNodes(Queue<Node> nodes) {
         this.nodes = nodes;
+    }
+
+    public int[] getParent() {
+        return parent;
+    }
+
+    public void setParent(int[] parent) {
+        this.parent = parent;
+    }
+
+    public Hashtable<Integer, String> getDijkstraShortestPaths() {
+        return dijkstraShortestPaths;
+    }
+
+    public void setDijkstraShortestPaths(Hashtable<Integer, String> dijkstraShortestPaths) {
+        this.dijkstraShortestPaths = dijkstraShortestPaths;
     }
 }
