@@ -37,5 +37,6 @@ public class GraphATest {
         System.out.println(exampleGraph.getDijkstraShortestPaths().get(2));
         System.out.println(exampleGraph.getDijkstraShortestPaths().get(3));
         System.out.println(exampleGraph.getDijkstraShortestPaths().get(4));
+        System.out.println(exampleGraph.floydWarshall());
     }
 }

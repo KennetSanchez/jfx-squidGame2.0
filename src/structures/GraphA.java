@@ -83,6 +83,53 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
         dijkstra(adj,src);
     }
 
+    @Override
+    public float[][] floydWarshall() {
+        float[][] dist = new float[numberOfVertices][numberOfVertices];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        for (i = 0; i < numberOfVertices; i++){
+            for (j = 0; j < numberOfVertices; j++){
+                if(i==j){
+                    dist[i][j]=0;
+                }
+                else{
+                    float newN;
+                    if(adj[i][j] != null){
+                        newN = adj[i][j].floatValue();
+                    }
+                    else{
+                        newN = Float.MAX_VALUE;
+                    }
+                    dist[i][j] = newN;
+                }
+            }
+        }
+
+        for (k = 0; k < numberOfVertices; k++) {
+            for (i = 0; i < numberOfVertices; i++) {
+                for (j = 0; j < numberOfVertices; j++) {
+                    if (dist[i][k] + dist[k][j] < dist[i][j])
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                }
+
+            }
+        }
+         /*
+        String info = "\n";
+        for(int m=0;m<numberOfVertices;m++){
+            for(int n=0;n<numberOfVertices;n++){
+                info += (int)dist[m][n]+" ";
+            }
+            info+="\n";
+        }
+        System.out.println(info);
+         */
+        return dist;
+    }
+
     public void dijkstra(E[][] graph,int src) {
         parent = new int[numberOfVertices];
         parent[0]=-1;
