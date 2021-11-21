@@ -147,12 +147,13 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
     public void DFS() {
         dfsForest=new ArrayList<>();
         boolean visited[] = new boolean[numberOfVertices];
-        for (int i = 0; i < numberOfVertices; ++i)
-            if (visited[i] == false){
+        for (int i = 0; i < numberOfVertices; ++i) {
+            if (visited[i] == false) {
                 Node newRoot = new Node(i);
                 dfsForest.add(newRoot);
-                DFSVisit(i,visited,newRoot);
+                DFSVisit(i, visited, newRoot);
             }
+        }
     }
 
     private void DFSVisit(int v,boolean[] visited, Node prevNode) {

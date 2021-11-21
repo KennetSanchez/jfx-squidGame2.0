@@ -134,7 +134,26 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
 
     @Override
     public void DFS() {
+        dfsForest=new ArrayList<>();
+        boolean visited[] = new boolean[numberOfVertices];
+        for (int i = 0; i < numberOfVertices; ++i){
+            if (visited[i] == false) {
+                Node newRoot = new Node(i);
+                dfsForest.add(newRoot);
+                DFSVisit(i, visited, newRoot);
+            }
+        }
+    }
 
+    public void DFSVisit(int v,boolean[] visited,Node prevNode){
+        visited[v] = true;
+        for (int i = 0; i < numberOfVertices; i++) {
+            if (adj[v][i] != null && (!visited[i])) {
+                Node newNode = new Node(i);
+                prevNode.add(newNode);
+                DFSVisit(i, visited,newNode);
+            }
+        }
     }
 
     public void dijkstra(E[][] graph,int src) {
@@ -253,5 +272,13 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
 
     public void setDijkstraShortestPaths(Hashtable<Integer, String> dijkstraShortestPaths) {
         this.dijkstraShortestPaths = dijkstraShortestPaths;
+    }
+
+    public ArrayList<Node> getDfsForest() {
+        return dfsForest;
+    }
+
+    public void setDfsForest(ArrayList<Node> dfsForest) {
+        this.dfsForest = dfsForest;
     }
 }

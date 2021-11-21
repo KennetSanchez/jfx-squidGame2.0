@@ -41,4 +41,21 @@ public class GraphATest {
         System.out.println(exampleGraph.getDijkstraShortestPaths().get(4));
         System.out.println(exampleGraph.floydWarshall());
     }
+
+    //Otro test que no sirve para la entrega jaja, hay que borrar esto cuando ya esten las pruebas reales
+    @Test
+    public void genericTest(){
+        setupScene1();
+        exampleGraph.addEdge(1,4,0);
+        exampleGraph.addEdge(1,3,0);
+        exampleGraph.addEdge(0,2,0);
+        exampleGraph.DFS();
+        System.out.println("1st Tree");
+        System.out.println(exampleGraph.getDfsForest().get(0).getValue());
+        System.out.println(exampleGraph.getDfsForest().get(0).getChildren().get(0).getValue());
+        System.out.println("2nd tree");
+        System.out.println(exampleGraph.getDfsForest().get(1).getValue());
+        System.out.println(exampleGraph.getDfsForest().get(1).getChildren().get(0).getValue());
+        System.out.println(exampleGraph.getDfsForest().get(1).getChildren().get(1).getValue());
+    }
 }
