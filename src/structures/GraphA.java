@@ -10,6 +10,7 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
     private Hashtable<Integer, String> bfsShortestPaths;
     private int[] parent;
     private Hashtable<Integer,String> dijkstraShortestPaths;
+    private ArrayList<Node> dfsForest;
 
     public GraphA(int v) {
         this.numberOfVertices = v;
@@ -20,6 +21,7 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
         bfsShortestPaths = null;
         parent = null;
         dijkstraShortestPaths=null;
+        dfsForest=null;
     }
 
     private void fillMatrix() {
@@ -46,7 +48,7 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
 
     @Override
     public ArrayList<Integer> BFS(int start) {
-        Node st = new Node(0);
+        Node st = new Node(start);
         nodes.add(st);
         ArrayList<Integer> distances = new ArrayList<>();
         boolean[] visited = new boolean[numberOfVertices];
@@ -81,6 +83,77 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
     @Override
     public void dijkstra(int src){
         dijkstra(adj,src);
+    }
+
+    @Override
+    public float[][] floydWarshall() {
+        float[][] dist = new float[numberOfVertices][numberOfVertices];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        for (i = 0; i < numberOfVertices; i++){
+            for (j = 0; j < numberOfVertices; j++){
+                if(i==j){
+                    dist[i][j]=0;
+                }
+                else{
+                    float newN;
+                    if(adj[i][j] != null){
+                        newN = adj[i][j].floatValue();
+                    }
+                    else{
+                        newN = Float.MAX_VALUE;
+                    }
+                    dist[i][j] = newN;
+                }
+            }
+        }
+
+        for (k = 0; k < numberOfVertices; k++) {
+            for (i = 0; i < numberOfVertices; i++) {
+                for (j = 0; j < numberOfVertices; j++) {
+                    if (dist[i][k] + dist[k][j] < dist[i][j])
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                }
+
+            }
+        }
+         /*
+        String info = "\n";
+        for(int m=0;m<numberOfVertices;m++){
+            for(int n=0;n<numberOfVertices;n++){
+                info += (int)dist[m][n]+" ";
+            }
+            info+="\n";
+        }
+        System.out.println(info);
+         */
+        return dist;
+    }
+
+    @Override
+    public void DFS() {
+        dfsForest=new ArrayList<>();
+        boolean visited[] = new boolean[numberOfVertices];
+        for (int i = 0; i < numberOfVertices; ++i){
+            if (visited[i] == false) {
+                Node newRoot = new Node(i);
+                dfsForest.add(newRoot);
+                DFSVisit(i, visited, newRoot);
+            }
+        }
+    }
+
+    public void DFSVisit(int v,boolean[] visited,Node prevNode){
+        visited[v] = true;
+        for (int i = 0; i < numberOfVertices; i++) {
+            if (adj[v][i] != null && (!visited[i])) {
+                Node newNode = new Node(i);
+                prevNode.add(newNode);
+                DFSVisit(i, visited,newNode);
+            }
+        }
     }
 
     public void dijkstra(E[][] graph,int src) {
@@ -199,5 +272,13 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
 
     public void setDijkstraShortestPaths(Hashtable<Integer, String> dijkstraShortestPaths) {
         this.dijkstraShortestPaths = dijkstraShortestPaths;
+    }
+
+    public ArrayList<Node> getDfsForest() {
+        return dfsForest;
+    }
+
+    public void setDfsForest(ArrayList<Node> dfsForest) {
+        this.dfsForest = dfsForest;
     }
 }

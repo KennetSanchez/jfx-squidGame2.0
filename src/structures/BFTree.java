@@ -20,7 +20,6 @@ public class BFTree {
 
     public Hashtable<Integer,String> findShortestPaths(){
         Hashtable<Integer,String> shortestPaths=new Hashtable<>();
-        shortestPaths.put(0,"0");
         findShortestPaths(root,shortestPaths);
         return shortestPaths;
     }

@@ -10,6 +10,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
     private Queue<Node> nodes;
     private int[] parent;
     private Hashtable<Integer,String> dijkstraShortestPaths;
+    private ArrayList<Node> dfsForest;
 
     public GraphB(int v){
         numberOfVertices=v;
@@ -19,6 +20,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
         nodes=new LinkedList<>();
         parent = null;
         dijkstraShortestPaths=null;
+        dfsForest=null;
     }
 
     @Override
@@ -41,7 +43,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
 
     @Override
     public ArrayList<Integer> BFS(int start) {
-        Node st = new Node(0);
+        Node st = new Node(start);
         nodes.add(st);
         ArrayList<Integer> distances = new ArrayList<>();
         boolean visited[] = new boolean[numberOfVertices];
@@ -128,6 +130,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
 
             }
         }
+        /*
         String info = "\n";
         for(int m=0;m<numberOfVertices;m++){
             for(int n=0;n<numberOfVertices;n++){
@@ -136,8 +139,41 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
             info+="\n";
         }
         System.out.println(info);
+         */
         return dist;
     }
+
+    @Override
+    public void DFS() {
+        dfsForest=new ArrayList<>();
+        boolean visited[] = new boolean[numberOfVertices];
+        for (int i = 0; i < numberOfVertices; ++i) {
+            if (visited[i] == false) {
+                Node newRoot = new Node(i);
+                dfsForest.add(newRoot);
+                DFSVisit(i, visited, newRoot);
+            }
+        }
+    }
+
+    private void DFSVisit(int v,boolean[] visited, Node prevNode) {
+        visited[v] = true;
+        Vertex<E> routeNode = adjList.get(v);
+        DFSVisitAux(visited,prevNode,routeNode);
+    }
+
+    private void DFSVisitAux(boolean[] visited,Node prevNode,Vertex<E> routeNode){
+        if(routeNode!=null){
+            if(!visited[routeNode.getValue()]){
+                Node nextNode = new Node(routeNode.getValue());
+                prevNode.add(nextNode);
+                DFSVisit(routeNode.getValue(),visited,nextNode);
+            }
+            DFSVisitAux(visited,prevNode,routeNode.getNext());
+        }
+    }
+
+
 
     public float[][] adjacencyMatrix(float[][] emptyMatrix){
         for(int i=0;i<numberOfVertices;i++){
@@ -244,5 +280,13 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
 
     public void setDijkstraShortestPaths(Hashtable<Integer, String> dijkstraShortestPaths) {
         this.dijkstraShortestPaths = dijkstraShortestPaths;
+    }
+
+    public ArrayList<Node> getDfsForest() {
+        return dfsForest;
+    }
+
+    public void setDfsForest(ArrayList<Node> dfsForest) {
+        this.dfsForest = dfsForest;
     }
 }
