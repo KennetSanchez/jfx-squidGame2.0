@@ -11,7 +11,7 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
     private int[] parent;
     private Hashtable<Integer,String> dijkstraShortestPaths;
 
-    GraphA(int v) {
+    public GraphA(int v) {
         this.numberOfVertices = v;
         adj = (E[][]) new Number[v][v];
         fillMatrix();
