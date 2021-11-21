@@ -10,6 +10,7 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
     private Hashtable<Integer, String> bfsShortestPaths;
     private int[] parent;
     private Hashtable<Integer,String> dijkstraShortestPaths;
+    private ArrayList<Node> dfsForest;
 
     GraphA(int v) {
         this.numberOfVertices = v;
@@ -20,6 +21,7 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
         bfsShortestPaths = null;
         parent = null;
         dijkstraShortestPaths=null;
+        dfsForest=null;
     }
 
     private void fillMatrix() {
@@ -46,7 +48,7 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
 
     @Override
     public ArrayList<Integer> BFS(int start) {
-        Node st = new Node(0);
+        Node st = new Node(start);
         nodes.add(st);
         ArrayList<Integer> distances = new ArrayList<>();
         boolean[] visited = new boolean[numberOfVertices];
@@ -128,6 +130,11 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
         System.out.println(info);
          */
         return dist;
+    }
+
+    @Override
+    public void DFS() {
+
     }
 
     public void dijkstra(E[][] graph,int src) {

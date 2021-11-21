@@ -23,12 +23,14 @@ public class GraphATest {
         exampleGraph.addEdge(1,4,1);//2->5
         exampleGraph.addEdge(2,3,3);//3->4
         exampleGraph.addEdge(3,4,2);//4->5
-        System.out.println(exampleGraph.BFS(0));
+        System.out.println("BFS");
+        System.out.println(exampleGraph.BFS(2));
         System.out.println(exampleGraph.getShortestPaths().get(0));
         System.out.println(exampleGraph.getShortestPaths().get(1));
         System.out.println(exampleGraph.getShortestPaths().get(2));
         System.out.println(exampleGraph.getShortestPaths().get(3));
         System.out.println(exampleGraph.getShortestPaths().get(4));
+        System.out.println("BFS");
         exampleGraph.dijkstra(0);
         exampleGraph.findDijkstraShortestPaths();
         System.out.println("Inicio rutas completas");

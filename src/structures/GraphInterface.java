@@ -7,4 +7,5 @@ public interface GraphInterface<E> {
     public ArrayList<Integer> BFS(int start);
     public void dijkstra(int src);
     public float[][] floydWarshall();
+    public void DFS();
 }
