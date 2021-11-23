@@ -54,6 +54,12 @@ public class GraphBTest {
         System.out.println(exampleGraph.getPrimEdges()[1]);
         System.out.println(exampleGraph.getPrimEdges()[2]);
         System.out.println(exampleGraph.getPrimEdges()[3]);
+        System.out.println("kruskal");
+        exampleGraph.kruskal();
+        System.out.println(exampleGraph.getKruskalEdges()[0]);
+        System.out.println(exampleGraph.getKruskalEdges()[1]);
+        System.out.println(exampleGraph.getKruskalEdges()[2]);
+        System.out.println(exampleGraph.getKruskalEdges()[3]);
     }
 
     //Otro test que no sirve para la entrega jaja, hay que borrar esto cuando ya esten las pruebas reales

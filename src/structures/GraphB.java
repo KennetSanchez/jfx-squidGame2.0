@@ -12,6 +12,9 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
     private Hashtable<Integer,String> dijkstraShortestPaths;
     private ArrayList<Node> dfsForest;
     private String[] primEdges;
+    private String[] kruskalEdges;
+    private PriorityQueue<VertexUnion<E>> vertexUnionsPq;
+    private int[] set;
 
     public GraphB(int v){
         numberOfVertices=v;
@@ -23,6 +26,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
         dijkstraShortestPaths=null;
         dfsForest=null;
         primEdges=null;
+        vertexUnionsPq=new PriorityQueue<>();
     }
 
     @Override
@@ -41,6 +45,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
         else{
             adjList.get(v2).add(vertex1);
         }
+        vertexUnionsPq.add(new VertexUnion<>(v1,v2,edgeValue));
     }
 
     @Override
@@ -52,6 +57,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
         else{
             adjList.get(v1).add(vertex2);
         }
+        vertexUnionsPq.add(new VertexUnion<>(v1,v2,edgeValue));
     }
 
     @Override
@@ -223,7 +229,44 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
 
     @Override
     public void kruskal() {
+        makeSet(numberOfVertices);
+        kruskalEdges=new String[numberOfVertices-1];
+        int counter = 0;
+        while(!vertexUnionsPq.isEmpty()){
+            VertexUnion e = vertexUnionsPq.poll();
+            if(!areEqual(e.getV1(), e.getV2())){
+                kruskalEdges[counter] = e.getV1()+ " - " +e.getV2();
+                union(e.getV1(), e.getV2());
+                counter++;
+            }
+        }
+    }
 
+    private int findSet(int i){
+        if(set[i]==i){
+            return i;
+        }
+        else{
+            set[i] = findSet(set[i]);
+            return set[i];
+        }
+    }
+    private void union(int i, int j){
+        set[findSet(i)] = set[findSet(j)];
+    }
+    private boolean areEqual(int i, int j){
+        return findSet(i) == findSet(j);
+    }
+    private void makeSet(int size) {
+        set = new int[size];
+        for (int i = 0; i < size; i++){
+            set[i] = i;
+        }
+    }
+    private int find(int i,int[] parent) {
+        while (parent[i] != i)
+            i = parent[i];
+        return i;
     }
 
     private void DFSVisit(int v,boolean[] visited, Node prevNode) {
@@ -366,5 +409,29 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
 
     public void setPrimEdges(String[] primEdges) {
         this.primEdges = primEdges;
+    }
+
+    public String[] getKruskalEdges() {
+        return kruskalEdges;
+    }
+
+    public void setKruskalEdges(String[] kruskalEdges) {
+        this.kruskalEdges = kruskalEdges;
+    }
+
+    public PriorityQueue<VertexUnion<E>> getVertexUnionsPq() {
+        return vertexUnionsPq;
+    }
+
+    public void setVertexUnionsPq(PriorityQueue<VertexUnion<E>> vertexUnionsPq) {
+        this.vertexUnionsPq = vertexUnionsPq;
+    }
+
+    public int[] getSet() {
+        return set;
+    }
+
+    public void setSet(int[] set) {
+        this.set = set;
     }
 }
