@@ -8,5 +8,7 @@ public interface GraphInterface<E> {
     public void dijkstra(int src);
     public float[][] floydWarshall();
     public void DFS();
+    public void prim();
+    public void kruskal();
     public void addEdgeDirected(int v1, int v2,E edgeValue);
 }

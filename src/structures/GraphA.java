@@ -48,7 +48,6 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
     @Override
     public void addEdgeDirected(int v1, int v2, E edgeValue) {
         adj[v1][v2] = edgeValue;
-        adj[v2][v1] = edgeValue;
     }
 
 
@@ -152,6 +151,16 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
     }
 
 
+
+    @Override
+    public void prim() {
+
+    }
+
+    @Override
+    public void kruskal() {
+
+    }
 
     public void DFSVisit(int v,boolean[] visited,Node prevNode){
         visited[v] = true;

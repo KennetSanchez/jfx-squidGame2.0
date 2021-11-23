@@ -42,6 +42,17 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
     }
 
     @Override
+    public void addEdgeDirected(int v1, int v2, E edgeValue) {
+        Vertex<E> vertex2 = new Vertex<>(v2,edgeValue);
+        if(adjList.get(v1)==null){
+            adjList.put(v1,vertex2);
+        }
+        else{
+            adjList.get(v1).add(vertex2);
+        }
+    }
+
+    @Override
     public ArrayList<Integer> BFS(int start) {
         Node st = new Node(start);
         nodes.add(st);
@@ -154,6 +165,70 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
                 DFSVisit(i, visited, newRoot);
             }
         }
+    }
+
+    @Override
+    public void prim() {
+        Boolean[] mstset = new Boolean[numberOfVertices];
+        VertexAndKey[] e = new VertexAndKey[numberOfVertices];
+        int[] parent = new int[numberOfVertices];
+
+        for (int i = 0; i < numberOfVertices; i++){
+            e[i] = new VertexAndKey();
+        }
+        for (int i = 0; i < numberOfVertices; i++) {
+            mstset[i] = false;
+            e[i].setKey(Float.MAX_VALUE);
+            e[i].setVertex(i);
+            parent[i] = -1;
+        }
+
+        mstset[0] = true;
+        e[0].setKey(0);
+
+        // Use TreeSet instead of PriorityQueue as the remove function of the PQ is O(n) in java.
+        TreeSet<VertexAndKey> queue = new TreeSet<>(new comparator());
+
+        for (int i = 0; i < numberOfVertices; i++) {
+            queue.add(e[i]);
+        }
+
+        while (!queue.isEmpty()) {
+            VertexAndKey node0 = queue.pollFirst();
+            mstset[node0.getVertex()] = true;
+
+            for (Vertex iterator : adjList.get(node0.getVertex())) {
+
+                // If V is in queue
+                if (mstset[iterator.dest] == false) {
+                    // If the key value of the adjacent vertex is
+                    // more than the extracted key
+                    // update the key value of adjacent vertex
+                    // to update first remove and add the updated vertex
+                    if (e[iterator.dest].key > iterator.weight) {
+                        queue.remove(e[iterator.dest]);
+                        e[iterator.dest].key = iterator.weight;
+                        queue.add(e[iterator.dest]);
+                        parent[iterator.dest] = node0.vertex;
+                    }
+                }
+            }
+        }
+
+        // Prints the vertex pair of mst
+        for (int o = 1; o < graph.V; o++)
+            System.out.println(parent[o] + " "
+                    + "-"
+                    + " " + o);
+    }
+
+    public void primAux(VertexAndKey[] e,TreeSet<VertexAndKey> queue,Vertex<E> actual){
+
+    }
+
+    @Override
+    public void kruskal() {
+
     }
 
     private void DFSVisit(int v,boolean[] visited, Node prevNode) {
@@ -288,5 +363,37 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
 
     public void setDfsForest(ArrayList<Node> dfsForest) {
         this.dfsForest = dfsForest;
+    }
+}
+
+class VertexAndKey{
+    private int vertex;
+    private float key;
+    VertexAndKey(){
+    }
+
+    public int getVertex() {
+        return vertex;
+    }
+
+    public void setVertex(int vertex) {
+        this.vertex = vertex;
+    }
+
+    public float getKey() {
+        return key;
+    }
+
+    public void setKey(float key) {
+        this.key = key;
+    }
+}
+
+class comparator implements Comparator<VertexAndKey> {
+
+    @Override
+    public int compare(VertexAndKey vak1, VertexAndKey vak2)
+    {
+        return (int) (vak1.getKey() - vak2.getKey());
     }
 }
