@@ -1,5 +1,6 @@
 package structures;
 
+
 import java.util.ArrayList;
 
 public class Node {
@@ -16,6 +17,7 @@ public class Node {
     public Node getParent() {
         return parent;
     }
+
     public void add(Node newNode){
         newNode.setParent(parent);
         children.add(newNode);
