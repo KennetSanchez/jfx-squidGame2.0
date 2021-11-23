@@ -14,6 +14,7 @@ public class Game {
     private int columns;
     private GraphA graphA;
     private String obstaclesString;
+    private int[] random;
 
 
     public Game(){
@@ -25,6 +26,8 @@ public class Game {
         genericObstacle();
         graphA=new GraphA(123);
         obstaclesString="";
+        random=new int[123];
+        generateRandoms();
     }
 
 
@@ -70,40 +73,56 @@ public class Game {
            }
     }
 
-    public boolean linkMatrix(int origin, int destination, int weight){
+    public void generateRandoms(){
+        for (int i=1;i<random.length-1;i++){
+            int temp=(int)(Math.random()*99)+1;
+            random[i]=temp;
+        }
+    }
+
+    public boolean linkMatrix(int origin, int destination){
         origin=0;
         destination=1;
-        int random=(int)(Math.random()*99)+1;
         if(origin==0){
-            graphA.addEdgeDirected(0,6,random);
+            graphA.addEdgeDirected(0,6,random[6]);
         }
-        else if(origin==117){
-            graphA.addEdgeDirected(117,123,random);
-        }
-        else if(origin>=1&&origin<122){
-            if(origin%11!=0){
-                if(origin<=110){
-                    if(!((obstaclesString.contains(destination+","))||obstaclesString.contains(0+""+destination+","))){
-                        graphA.addEdgeDirected(origin,destination,random);
+            else if(origin==117){
+                graphA.addEdgeDirected(117,123,0);
+            }
+        if(!((obstaclesString.contains(origin+",")||obstaclesString.contains(0+""+origin+",")))){
+            if (origin >= 1 && origin < 122) {
+                if (origin % 11 != 0) {
+                    if (origin <= 110) {
+                        if (!((obstaclesString.contains(destination + ",")) || obstaclesString.contains(0 + "" + destination + ","))) {
+                            graphA.addEdgeDirected(origin, destination, random[destination]);
+                            graphA.addEdgeDirected(destination, origin, random[origin]);
+
+                        }
+                        if (!(obstaclesString.contains((origin + 11) + ","))) {
+                            graphA.addEdgeDirected(origin, origin + 11, random[origin + 11]);
+                        }
+                    } else {
+                        if (!((obstaclesString.contains(destination + ",")) || obstaclesString.contains(0 + "" + destination + ","))) {
+                            graphA.addEdgeDirected(origin, destination, random[destination]);
+                            graphA.addEdgeDirected(destination, origin, random[origin]);
+                        }
                     }
-                    if (!(obstaclesString.contains((origin+11)+","))){
-                        random=(int)(Math.random()*99)+1;
-                        graphA.addEdgeDirected(origin,origin+11,random);
-                    }
-                }
-                else{
-                    if(!((obstaclesString.contains(destination+","))||obstaclesString.contains(0+""+destination+","))){
-                        graphA.addEdgeDirected(origin,destination,random);
+
+                } else {
+                    if (origin <= 110) {
+                        if (!(obstaclesString.contains((origin + 11) + ","))) {
+                            graphA.addEdgeDirected(origin, origin + 11, random[origin + 11]);
+                        }
                     }
                 }
 
             }
-            else{
-
+            else if(origin==122){
+                return true;
             }
-
         }
-        linkMatrix(origin+1,destination+1,random);
+        linkMatrix(origin+1,destination+1);
+        return false;
     }
 
     public void boardExample(){
