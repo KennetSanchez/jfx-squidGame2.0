@@ -11,6 +11,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
     private int[] parent;
     private Hashtable<Integer,String> dijkstraShortestPaths;
     private ArrayList<Node> dfsForest;
+    private String[] primEdges;
 
     public GraphB(int v){
         numberOfVertices=v;
@@ -21,6 +22,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
         parent = null;
         dijkstraShortestPaths=null;
         dfsForest=null;
+        primEdges=null;
     }
 
     @Override
@@ -169,6 +171,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
 
     @Override
     public void prim() {
+        primEdges= new String[numberOfVertices-1];
         Boolean[] mstset = new Boolean[numberOfVertices];
         VertexAndKey[] e = new VertexAndKey[numberOfVertices];
         int[] parent = new int[numberOfVertices];
@@ -197,33 +200,25 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
             VertexAndKey node0 = queue.pollFirst();
             mstset[node0.getVertex()] = true;
 
-            for (Vertex iterator : adjList.get(node0.getVertex())) {
-
-                // If V is in queue
-                if (mstset[iterator.dest] == false) {
-                    // If the key value of the adjacent vertex is
-                    // more than the extracted key
-                    // update the key value of adjacent vertex
-                    // to update first remove and add the updated vertex
-                    if (e[iterator.dest].key > iterator.weight) {
-                        queue.remove(e[iterator.dest]);
-                        e[iterator.dest].key = iterator.weight;
-                        queue.add(e[iterator.dest]);
-                        parent[iterator.dest] = node0.vertex;
-                    }
-                }
-            }
+            primAux(mstset,parent,node0.getVertex(),e,queue,adjList.get(node0.getVertex()));
         }
-
-        // Prints the vertex pair of mst
-        for (int o = 1; o < graph.V; o++)
-            System.out.println(parent[o] + " "
-                    + "-"
-                    + " " + o);
+        for (int i = 1; i < numberOfVertices; i++) {
+            primEdges[i-1]=parent[i]+ " - " + i;
+        }
     }
 
-    public void primAux(VertexAndKey[] e,TreeSet<VertexAndKey> queue,Vertex<E> actual){
-
+    public void primAux(Boolean[] mstset,int[] parent,int value,VertexAndKey[] e,TreeSet<VertexAndKey> queue,Vertex<E> actual){
+        if(actual!=null){
+            if (mstset[actual.getValue()] == false) {
+                if (e[actual.getValue()].getKey() > actual.getEdgeValue().floatValue()) {
+                    queue.remove(e[actual.getValue()]);
+                    e[actual.getValue()].setKey(actual.getEdgeValue().floatValue());
+                    queue.add(e[actual.getValue()]);
+                    parent[actual.getValue()] = value;
+                }
+            }
+            primAux(mstset,parent,value,e,queue,actual.getNext());
+        }
     }
 
     @Override
@@ -261,7 +256,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
     public float[][] adjacencyMatrix(float[][] emptyMatrix,int i,Vertex<E> v){
         if(v!=null){
             emptyMatrix[i][v.getValue()] =  v.getEdgeValue().floatValue();
-            System.out.println("["+i+"]"+" ["+v.getValue()+"] = "+v.getEdgeValue().floatValue());
+            //System.out.println("["+i+"]"+" ["+v.getValue()+"] = "+v.getEdgeValue().floatValue());
             return adjacencyMatrix(emptyMatrix,i,v.getNext());
         }
         else {
@@ -364,36 +359,12 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
     public void setDfsForest(ArrayList<Node> dfsForest) {
         this.dfsForest = dfsForest;
     }
-}
 
-class VertexAndKey{
-    private int vertex;
-    private float key;
-    VertexAndKey(){
+    public String[] getPrimEdges() {
+        return primEdges;
     }
 
-    public int getVertex() {
-        return vertex;
-    }
-
-    public void setVertex(int vertex) {
-        this.vertex = vertex;
-    }
-
-    public float getKey() {
-        return key;
-    }
-
-    public void setKey(float key) {
-        this.key = key;
-    }
-}
-
-class comparator implements Comparator<VertexAndKey> {
-
-    @Override
-    public int compare(VertexAndKey vak1, VertexAndKey vak2)
-    {
-        return (int) (vak1.getKey() - vak2.getKey());
+    public void setPrimEdges(String[] primEdges) {
+        this.primEdges = primEdges;
     }
 }

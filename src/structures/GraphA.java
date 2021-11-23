@@ -11,6 +11,7 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
     private int[] parent;
     private Hashtable<Integer,String> dijkstraShortestPaths;
     private ArrayList<Node> dfsForest;
+    private String[] primEdges;
 
     public GraphA(int v) {
         this.numberOfVertices = v;
@@ -22,6 +23,7 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
         parent = null;
         dijkstraShortestPaths=null;
         dfsForest=null;
+        primEdges=null;
     }
 
     private void fillMatrix() {
@@ -154,7 +156,47 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
 
     @Override
     public void prim() {
+        primEdges= new String[numberOfVertices-1];
+        Boolean[] mstset = new Boolean[numberOfVertices];
+        VertexAndKey[] e = new VertexAndKey[numberOfVertices];
+        int[] parent = new int[numberOfVertices];
 
+        for (int i = 0; i < numberOfVertices; i++){
+            e[i] = new VertexAndKey();
+        }
+        for (int i = 0; i < numberOfVertices; i++) {
+            mstset[i] = false;
+            e[i].setKey(Float.MAX_VALUE);
+            e[i].setVertex(i);
+            parent[i] = -1;
+        }
+
+        mstset[0] = true;
+        e[0].setKey(0);
+        TreeSet<VertexAndKey> queue = new TreeSet<>(new comparator());
+
+        for (int i = 0; i < numberOfVertices; i++) {
+            queue.add(e[i]);
+        }
+
+        while (!queue.isEmpty()) {
+            VertexAndKey node0 = queue.pollFirst();
+            mstset[node0.getVertex()] = true;
+            int F = node0.getVertex();
+            for(int i=1;i<numberOfVertices;i++){
+                if (mstset[i] == false && adj[F][i]!=null) {
+                    if (e[i].getKey() > adj[F][i].floatValue()) {
+                        queue.remove(e[i]);
+                        e[i].setKey(adj[F][i].floatValue());
+                        queue.add(e[i]);
+                        parent[i] = F;
+                    }
+                }
+            }
+        }
+        for (int i = 1; i < numberOfVertices; i++) {
+            primEdges[i-1]=parent[i]+ " - " + i;
+        }
     }
 
     @Override
@@ -297,5 +339,12 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
 
     public void setDfsForest(ArrayList<Node> dfsForest) {
         this.dfsForest = dfsForest;
+    }
+    public String[] getPrimEdges() {
+        return primEdges;
+    }
+
+    public void setPrimEdges(String[] primEdges) {
+        this.primEdges = primEdges;
     }
 }

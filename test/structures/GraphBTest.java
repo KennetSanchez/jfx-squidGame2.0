@@ -48,6 +48,12 @@ public class GraphBTest {
         System.out.println(exampleGraph.getDijkstraShortestPaths().get(3));
         System.out.println(exampleGraph.getDijkstraShortestPaths().get(4));
         System.out.println(exampleGraph.floydWarshall());
+        System.out.println("prim");
+        exampleGraph.prim();
+        System.out.println(exampleGraph.getPrimEdges()[0]);
+        System.out.println(exampleGraph.getPrimEdges()[1]);
+        System.out.println(exampleGraph.getPrimEdges()[2]);
+        System.out.println(exampleGraph.getPrimEdges()[3]);
     }
 
     //Otro test que no sirve para la entrega jaja, hay que borrar esto cuando ya esten las pruebas reales
