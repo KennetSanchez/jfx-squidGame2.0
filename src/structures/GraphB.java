@@ -65,18 +65,20 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
         Node st = new Node(start);
         nodes.add(st);
         ArrayList<Integer> distances = new ArrayList<>();
+        ArrayList<Integer> vertices = new ArrayList<>();
         boolean visited[] = new boolean[numberOfVertices];
         Arrays.fill(visited, false);
         distances.add(0);
         Queue<Integer> queue = new LinkedList<>();
         visited[start]=true;
         queue.add(start);
+
         int k = 0;
         int vis;
 
         while (!queue.isEmpty()) {
             vis = queue.poll();
-            System.out.print(vis+" ");
+            vertices.add(vis);
             k++;
             Vertex<E> i = adjList.get(vis);
             visited=allAdjacent(i,visited,queue,distances,k);
@@ -84,7 +86,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
         }
         bft.setRoot(st);
         shortestPaths=bft.findShortestPaths();
-        return distances;
+        return vertices;
     }
 
     @Override
@@ -321,7 +323,7 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
         }
     }
 
-    public boolean[] allAdjacent(Vertex<E> v,boolean[] visited,Queue queue,ArrayList<Integer> distances,int k){
+    public boolean[] allAdjacent(Vertex<E> v,boolean[] visited,Queue queue,ArrayList<Integer> vertices,int k){
         if(v!=null){
             int n = v.getValue();
             if (!visited[n]) {
@@ -330,9 +332,9 @@ public class GraphB<E extends Number> implements GraphInterface<E>{
                 nodes.add(newNode);
                 visited[n] = true;
                 queue.add(n);
-                distances.add(distances.get(k - 1) + 1);
+                vertices.add(n);
             }
-            return allAdjacent(v.getNext(),visited,queue,distances,k);
+            return allAdjacent(v.getNext(),visited,queue,vertices,k);
         }
         else{
             return visited;

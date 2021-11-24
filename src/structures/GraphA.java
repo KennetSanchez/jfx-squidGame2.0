@@ -64,9 +64,11 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
         Node st = new Node(start);
         nodes.add(st);
         ArrayList<Integer> distances = new ArrayList<>();
+        ArrayList<Integer> vertices = new ArrayList<>();
         boolean[] visited = new boolean[numberOfVertices];
         Arrays.fill(visited, false);
         distances.add(0);
+        vertices.add(start);
         Queue<Integer> q = new LinkedList<>();
         q.add(start);
         int k = 0;
@@ -84,13 +86,14 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
                     q.add(i);
                     visited[i] = true;
                     distances.add(distances.get(k - 1) + 1);
+                    vertices.add(i);
                 }
             }
             nodes.poll();
         }
         bft.setRoot(st);
         bfsShortestPaths=bft.findShortestPaths();
-        return distances;
+        return vertices;
     }
 
     @Override

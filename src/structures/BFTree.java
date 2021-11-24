@@ -20,23 +20,21 @@ public class BFTree {
 
     public Hashtable<Integer,String> findShortestPaths(){
         Hashtable<Integer,String> shortestPaths=new Hashtable<>();
-        findShortestPaths(root,shortestPaths);
+        findShortestPaths(root,shortestPaths,aux);
         return shortestPaths;
     }
 
-    public void findShortestPaths(Node init,Hashtable<Integer,String> shortestPaths){
+    public void findShortestPaths(Node init,Hashtable<Integer,String> shortestPaths,String aux){
         if(!init.getChildren().isEmpty()){
             ArrayList<Node> aL = init.getChildren();
             for(int i=0;i<aL.size();i++){
                 int actual = aL.get(i).getValue();
                 aux+=actual+",";
-                //System.out.println("aux es: "+aux);
+                //System.out.println(actual+" es "+aux.substring(0,aux.length()-1));
                 shortestPaths.put(actual,aux.substring(0,aux.length()-1));
-                findShortestPaths(aL.get(i),shortestPaths);           }
-            aux=aux.substring(0,aux.length()-2);
-        }
-        else{
-            aux=aux.substring(0,aux.length()-2);
+                findShortestPaths(aL.get(i),shortestPaths,aux);
+                aux = aux.replace(actual+",","");
+            }
         }
     }
 

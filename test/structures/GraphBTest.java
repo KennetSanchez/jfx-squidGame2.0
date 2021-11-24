@@ -33,7 +33,7 @@ public class GraphBTest {
         System.out.println("Los del 4");
         vertex(exampleGraph.getAdjList().get(4));
 
-        System.out.println(exampleGraph.BFS(0));
+        System.out.println(exampleGraph.BFS(1));
         System.out.println(exampleGraph.getShortestPaths().get(0));
         System.out.println(exampleGraph.getShortestPaths().get(1));
         System.out.println(exampleGraph.getShortestPaths().get(2));
