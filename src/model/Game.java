@@ -22,7 +22,7 @@ public class Game {
         rows=11;
         board=new int[rows][columns];
         boardExample();
-        fillBoard();
+        //fillBoard();
         genericObstacle();
         graphA=new GraphA(123);
         obstaclesString="";
@@ -30,7 +30,7 @@ public class Game {
         generateRandoms();
     }
 
-
+    /*
     public void fillBoard(){
        for (int i=0;i<rows;i++){
            for (int j=0;j<columns;j++){
@@ -71,7 +71,7 @@ public class Game {
 
                }
            }
-    }
+    }*/
 
     public void generateRandoms(){
         for (int i=1;i<random.length-1;i++){
@@ -156,7 +156,51 @@ public class Game {
 
     }
 
-    public void searchObstaclesPlace(){
+    public int countObstaclesInRange(int a, int b){
+        int count=0;
+            for(int i=a;i<=b;i++){
+                if(a>=1&&a<=122){
+                    if(obstaclesString.contains(i+",")||obstaclesString.contains(0+""+i+",")){
+                        count++;
+                    }
+                }
+            }
+            return count;
+    }
+    public boolean foundAPlace(int a){
+        if(!(obstaclesString.contains(a+",")||obstaclesString.contains(0+""+a+","))){
+            //Validation  down, left, right
+            if(!(((obstaclesString.contains((a+1)+","))||(obstaclesString.contains(0+""+(a+1)+",")))||
+                            ((obstaclesString.contains((a-1)+","))||(obstaclesString.contains(0+""+(a-1)+",")))||
+                                     ((obstaclesString.contains((a+11)+","))||(obstaclesString.contains(0+""+(a+11)+","))))){
+                                            //Validation down, down-left, down-right
+                                            if(!((obstaclesString.contains((a-10)+",")||obstaclesString.contains(0+""+(a-10)+","))||
+                                                    (obstaclesString.contains((a-11)+",")||obstaclesString.contains(0+""+(a-11)+","))||
+                                                            (obstaclesString.contains((a-12)+",")||obstaclesString.contains(0+""+(a-12)+",")))){
+                                                            //Validation up-right and up-left
+                                                            if(!((obstaclesString.contains((a+10)+",")||obstaclesString.contains(0+""+(a+10)+","))||
+                                                                    (obstaclesString.contains((a+12)+",")||obstaclesString.contains(0+""+(a+12)+",")))){
+                                                                    return true;
+                                                            }
+                                            }
+            }
+
+        }
+       return false;
+    }
+
+    public void searchObstaclesPlace(int obstacles){
+            for (int i=0;i<=121;i=i+30){
+                if(countObstaclesInRange(i,i+30)<6) {
+                    for(int j=i;j<=i+30;j++){
+                        if(countObstaclesInRange(i,i+30)<6) {
+                            if (foundAPlace(j)) {
+                                obstaclesToPlace.add(j);
+                            }
+                        }
+                    }
+                }
+            }
 
     }
 }
