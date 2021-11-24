@@ -24,10 +24,8 @@ public class Game {
         rows=11;
         board=new int[rows][columns];
         boardExample();
-        //fillBoard();
-        genericObstacle();
+        obstaclesString = ",38,39,41,59,60,61,62,64,83,";
         graphA=new GraphA(123);
-        obstaclesString="";
         random=new int[123];
         generateRandoms();
     }
@@ -102,18 +100,6 @@ public class Game {
                 board[i][j]=temp;
                 temp++;
             }
-        }
-    }
-    public void genericObstacle(){
-        Integer[] temp={38,39,41,59,60,61,62,64,83};
-        ArrayList<Integer> aux= new ArrayList<Integer>(Arrays.asList(temp));
-        obstaclesToPlace=aux;
-    }
-
-    public void turnObstaclesToString(){
-        obstaclesString=",";
-        for(int i=0;i<obstaclesToPlace.size();i++){
-                obstaclesString+=obstaclesToPlace.get(i)+",";
         }
     }
 

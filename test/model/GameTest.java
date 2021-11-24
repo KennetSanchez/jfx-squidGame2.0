@@ -40,21 +40,19 @@ public class GameTest {
     }
 
     @Test
-    public void correctCreationOfObstaclesTest(){
+    public void correctCreationOfObstaclesTest() {
         setupScene1();
-        game.turnObstaclesToString();
-        //System.out.println(game.getObstaclesString());
         game.linkMatrix();
-        System.out.println("BFS");
-        System.out.println(game.getGraphA().BFS(0));
         Hashtable<Integer, String> test = game.graphShortestPaths(true);
-        System.out.println(test.get(1));
-        System.out.println(test.get(2));
-        System.out.println(test.get(11));
-        System.out.println(test.get(40));
-        System.out.println(test.get(38));
-        System.out.println(test.get(60));
-        System.out.println(test.get(122));
+        assertEquals(test.get(38),null);
+        assertEquals(test.get(39),null);
+        assertEquals(test.get(41),null);
+        assertEquals(test.get(59),null);
+        assertEquals(test.get(60),null);
+        assertEquals(test.get(61),null);
+        assertEquals(test.get(62),null);
+        assertEquals(test.get(64),null);
+        assertEquals(test.get(83),null);
 
 
     }
