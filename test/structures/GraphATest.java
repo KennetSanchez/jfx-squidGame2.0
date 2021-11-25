@@ -123,10 +123,17 @@ public class GraphATest {
     assertEquals(aux,4);
     }
 
+    @Test
+    public void BFSTest(){
+    testScene2();
+    exampleGraph.BFS(4);
+    assertEquals(exampleGraph.getBfsShortestPaths().get(1),(4+","+1));
+    }
 
 
 
-    //Esta no es una prueba real jaja, es donde debugeo mis cositas uwu
+
+    /*
     @Test
     public void addEdgeTest1(){
         setupScene1();
@@ -183,5 +190,5 @@ public class GraphATest {
         System.out.println(exampleGraph.getDfsForest().get(1).getValue());
         System.out.println(exampleGraph.getDfsForest().get(1).getChildren().get(0).getValue());
         System.out.println(exampleGraph.getDfsForest().get(1).getChildren().get(1).getValue());
-    }
+    }*/
 }
