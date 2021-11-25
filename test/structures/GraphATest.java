@@ -7,6 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GraphATest {
     private GraphA<Integer> exampleGraph;
 
+    private void setupScene1(){
+        exampleGraph=new GraphA<>(5);
+    }
+
     public void testScene1(){
         exampleGraph=new GraphA<>(5);
     }
@@ -95,7 +99,7 @@ public class GraphATest {
     }
 
     @Test
-    public void KruskalGreaterEdge(){
+    public void KruskalGreatestEdge(){
         testScene2();
         exampleGraph.kruskal();
         String temp="0 - 2";
