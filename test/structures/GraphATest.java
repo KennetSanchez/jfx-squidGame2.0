@@ -63,7 +63,7 @@ public class GraphATest {
        assertEquals(exampleGraph.getDijkstraShortestPaths().get(1),temp);
 
     }
-
+//
     @Test
     public void DijkstraToFarthestVertex(){
         testScene2();
