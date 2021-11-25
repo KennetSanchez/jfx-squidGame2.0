@@ -24,12 +24,8 @@ public class Game {
         rows=11;
         board=new int[rows][columns];
         boardExample();
-        //fillBoard();
-        genericObstacle();
+        obstaclesString = ",38,39,41,59,60,61,62,64,83,";
         graphA=new GraphA(123);
-        //Remember add the methods for GraphB
-        graphB=new GraphB(123);
-        obstaclesString="";
         random=new int[123];
         generateRandoms();
     }
@@ -42,8 +38,8 @@ public class Game {
     }
 
     public boolean linkMatrix(){
-        graphA.addEdge(0,6,random[6]);
-        graphA.addEdge(116,122,0);
+        graphA.addEdgeDirected(0,6,random[6]);
+        graphA.addEdgeDirected(116,122,0);
         return linkMatrix(1,2);
     }
 
@@ -64,26 +60,26 @@ public class Game {
                 if (origin % 11 != 0) {
                     if (origin <= 110) {
                         if (!(obstaclesString.contains(","+destination+","))) {
-                            graphA.addEdge(origin, destination, random[destination]);
-                            graphA.addEdge(destination, origin, random[origin]);
+                            graphA.addEdgeDirected(origin, destination, random[destination]);
+                            graphA.addEdgeDirected(destination, origin, random[origin]);
 
                         }
                         if (!(obstaclesString.contains(","+(origin+11)+","))) {
-                            graphA.addEdge(origin, origin + 11, random[origin + 11]);
-                            graphA.addEdge(origin + 11,origin, random[origin]);
+                            graphA.addEdgeDirected(origin, origin + 11, random[origin + 11]);
+                            graphA.addEdgeDirected(origin + 11,origin, random[origin]);
                         }
                     } else {
                         if (!(obstaclesString.contains(","+(destination)+","))) {
-                            graphA.addEdge(origin, destination, random[destination]);
-                            graphA.addEdge(destination, origin, random[origin]);
+                            graphA.addEdgeDirected(origin, destination, random[destination]);
+                            graphA.addEdgeDirected(destination, origin, random[origin]);
                         }
                     }
 
                 } else {
                     if (origin <= 110) {
                         if (!(obstaclesString.contains(","+(origin+11)+","))) {
-                            graphA.addEdge(origin, origin + 11, random[origin + 11]);
-                            graphA.addEdge(origin + 11,origin, random[origin]);
+                            graphA.addEdgeDirected(origin, origin + 11, random[origin + 11]);
+                            graphA.addEdgeDirected(origin + 11,origin, random[origin]);
                         }
                     }
                 }
