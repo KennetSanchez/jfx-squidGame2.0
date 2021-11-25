@@ -27,6 +27,8 @@ public class Game {
         //fillBoard();
         genericObstacle();
         graphA=new GraphA(123);
+        //Remember add the methods for GraphB
+        graphB=new GraphB(123);
         obstaclesString="";
         random=new int[123];
         generateRandoms();
@@ -95,6 +97,44 @@ public class Game {
         return false; //Creo que no es necesario xd
     }
 
+    public boolean linkMatrixB(int origin, int destination){
+        if(!(obstaclesString.contains(","+origin+","))){
+            if (origin >= 1 && origin < 122) {
+                if (origin % 11 != 0) {
+                    if (origin <= 110) {
+                        if (!(obstaclesString.contains(","+destination+","))) {
+                            graphB.addEdge(origin, destination, random[destination]);
+                            graphB.addEdge(destination, origin, random[origin]);
+
+                        }
+                        if (!(obstaclesString.contains(","+(origin+11)+","))) {
+                            graphB.addEdge(origin, origin + 11, random[origin + 11]);
+                            graphB.addEdge(origin + 11,origin, random[origin]);
+                        }
+                    } else {
+                        if (!(obstaclesString.contains(","+(destination)+","))) {
+                            graphB.addEdge(origin, destination, random[destination]);
+                            graphB.addEdge(destination, origin, random[origin]);
+                        }
+                    }
+
+                } else {
+                    if (origin <= 110) {
+                        if (!(obstaclesString.contains(","+(origin+11)+","))) {
+                            graphB.addEdge(origin, origin + 11, random[origin + 11]);
+                            graphB.addEdge(origin + 11,origin, random[origin]);
+                        }
+                    }
+                }
+
+            }
+            else if(origin==122){
+                return true;
+            }
+        }
+        linkMatrixB(origin+1,destination+1);
+        return false; //Creo que no es necesario xd
+    }
     public void boardExample(){
         int temp=1;
         for (int i=0;i<rows;i++){

@@ -135,7 +135,7 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
 
             }
         }
-         /*
+
         String info = "\n";
         for(int m=0;m<numberOfVertices;m++){
             for(int n=0;n<numberOfVertices;n++){
@@ -143,8 +143,8 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
             }
             info+="\n";
         }
-        System.out.println(info);
-         */
+        //System.out.println(info);
+
         return dist;
     }
 
