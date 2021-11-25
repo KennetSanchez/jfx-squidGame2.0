@@ -33,12 +33,11 @@ public class GraphBTest {
         exampleGraph.addEdge(3,4,0);//3->4
     }
 
-    /*@Test
+    @Test
     public void addOneEdgeTest() {
         testScene1();
         exampleGraph.addEdge(0, 1, 15);
-        int temp = exampleGraph.getElementAdj(0,1);
-        assertEquals(temp,15);
+        assertEquals(exampleGraph.getAdjList().get(0).getValue(),1);
     }
 
     @Test
@@ -51,9 +50,9 @@ public class GraphBTest {
         exampleGraph.addEdge(1,4,1);
         exampleGraph.addEdge(2,3,3);
         exampleGraph.addEdge(3,4,2);
-        assertEquals(exampleGraph.getElementAdj(3,4),2);
-        assertEquals(exampleGraph.getElementAdj(1,3),14);
-    }*/
+        assertEquals(exampleGraph.getAdjList().get(0).getValue(),1);
+
+    }
 
     @Test
     public void DijkstraTestToNearestVertex(){
