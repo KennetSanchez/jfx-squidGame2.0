@@ -4,7 +4,7 @@ import java.util.*;
 
 public class GraphA<E extends Number> implements GraphInterface<E> {
     private int numberOfVertices;
-    private E[][] adj;
+    private E adj[][];
     private BFTree bft;
     private Queue<Node> nodes;
     private Hashtable<Integer, String> bfsShortestPaths;
@@ -289,10 +289,12 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
                 }
             }
         }
+        /*
         System.out.println("Inicio de caminos");
         for(int j=0;j<parent.length;j++){
             System.out.println(parent[j]);
         }
+         */
     }
 
     public int minDistance(float[] dist,boolean[] sptSet){
@@ -321,6 +323,10 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
             String info = input1.substring(1,input1.length());
             dijkstraShortestPaths.put(i,info);
         }
+    }
+
+    public E getElementAdj(int i,int j){
+        return adj[i][j];
     }
 
     public int getNumberOfVertices() {

@@ -36,8 +36,8 @@ public class GraphATest {
     public void addOneEdgeTest() {
         testScene1();
         exampleGraph.addEdge(0, 1, 15);
-       // int temp =exampleGraph.getAdj()[0][1];
-        assertEquals(exampleGraph.getAdj()[0][1],15);
+        int temp = exampleGraph.getElementAdj(0,1);
+        assertEquals(temp,15);
     }
 
     @Test
@@ -50,8 +50,8 @@ public class GraphATest {
         exampleGraph.addEdge(1,4,1);
         exampleGraph.addEdge(2,3,3);
         exampleGraph.addEdge(3,4,2);
-        assertEquals(exampleGraph.getAdj()[3][4],2);
-        assertEquals(exampleGraph.getAdj()[1][3],14);
+        assertEquals(exampleGraph.getElementAdj(3,4),2);
+        assertEquals(exampleGraph.getElementAdj(1,3),14);
     }
 
     @Test
