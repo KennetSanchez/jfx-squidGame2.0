@@ -14,12 +14,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Game.fxml")); //Se cambia por el fxml inicial
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/startMenu.fxml")); //Se cambia por el fxml inicial
         fxmlLoader.setController(controller);
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Squid Game 2.0");
+        primaryStage.setTitle("SquidGame 2.0");
         primaryStage.setResizable(false);
         primaryStage.show();
     }

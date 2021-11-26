@@ -1,9 +1,23 @@
 package ui;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.Game;
+
+import javax.swing.text.Style;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameGUIController {
     @FXML
@@ -396,6 +410,53 @@ public class GameGUIController {
     @FXML
     private Label GAMElb10111;
 
+    @FXML
+    private BorderPane mainPane;
+
+    @FXML
+    private Button newGameBTN;
+
+    @FXML
+    private Button scoreBoardBTN;
+
+    @FXML
+    private Button closeGameBTN;
+
+    @FXML
+    void closeGame(ActionEvent event) {
+
+    }
+
+    @FXML
+    void newGame(ActionEvent event) {
+        ((Stage) newGameBTN.getScene().getWindow()).close();
+        launchWindow("fxml/Game.fxml","SquidGame 2.0",Modality.NONE, StageStyle.DECORATED);
+        timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                secs++;
+                if (secs > 59) {
+                    secs = 0;
+                    min++;
+                }
+                if (min > 59) {
+                    min = 0;
+                    hour++;
+                }
+                Platform.runLater(() -> GAMEtime.setText(String.format("%02d:%02d", min, secs)));
+            }
+        };
+
+        timer.scheduleAtFixedRate(task, 1000, 1000);
+
+    }
+
+    @FXML
+    void scoreBoard(ActionEvent event) {
+
+    }
+
     public GameGUIController(Game game){
         game = new Game();
     }
@@ -408,6 +469,36 @@ public class GameGUIController {
     @FXML
     void GAMEhint(ActionEvent event) {
 
+    }
+
+    private Timer timer = new Timer();
+    private int secs = 0, min = 0, hour = 0;
+
+    private void launchWindow(String fxml, String title, Modality modality, StageStyle style) {
+        try {
+            Parent loadedPane = loadFxml(fxml);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loadedPane));
+            stage.setTitle(title);
+            stage.initModality(modality);
+            stage.initStyle(style);
+            stage.setResizable(false);
+            stage.show();
+        } catch (NullPointerException npe) {
+            System.out.println("Can't load requested window right now.\nRequested window: \"" + fxml + "\"");
+            System.err.println(npe.getMessage());
+        }
+    }
+
+    private Parent loadFxml(String fxml) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
+            fxmlLoader.setController(this);
+            return fxmlLoader.load();
+        } catch (Exception e) {
+            System.out.println("Can't load requested document right now.\nRequested document: \"" + fxml + "\"");
+            throw new NullPointerException("Document is null");
+        }
     }
 
 }
