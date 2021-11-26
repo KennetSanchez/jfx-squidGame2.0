@@ -3,6 +3,7 @@ package ui;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import model.Game;
 
 public class GameGUIController {
     @FXML
@@ -394,6 +395,10 @@ public class GameGUIController {
 
     @FXML
     private Label GAMElb10111;
+
+    public GameGUIController(Game game){
+        game = new Game();
+    }
 
     @FXML
     void GAMEgiveUp(ActionEvent event) {
