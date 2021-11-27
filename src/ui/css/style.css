@@ -1,6 +1,19 @@
-.buttons{
-    background-color:  #7f5af0;
-    font-family: Consolas;
-    font-size: 20px;
-    border-radius: 15px;
+.Button{
+    -fx-font-family: Consolas;
+    -fx-font-size: 20px;
+    -fx-background-color: #7f5af0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-pref-width: 140;
+    -fx-pref-height: 38;
 }
+
+.Label{
+    -fx-font-family: Consolas;
+    -fx-font-size: 20px;
+    -fx-background-color: #7f5af0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
