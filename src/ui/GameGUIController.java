@@ -424,12 +424,22 @@ public class GameGUIController {
     private Button closeGameBTN;
 
     @FXML
+    private Label graphOptionLabel;
+
+    Game game;
+
+
+    @FXML
     void closeGame(ActionEvent event) {
 
     }
 
     @FXML
     void newGame(ActionEvent event) {
+        launchWindow("fxml/GraphOption.fxml","Choose your graph",Modality.NONE,StageStyle.DECORATED);
+    }
+
+    private void openGameScreen(){
         ((Stage) newGameBTN.getScene().getWindow()).close();
         launchWindow("fxml/Game.fxml","SquidGame 2.0",Modality.NONE, StageStyle.DECORATED);
         timer = new Timer();
@@ -450,7 +460,6 @@ public class GameGUIController {
         };
 
         timer.scheduleAtFixedRate(task, 1000, 1000);
-
     }
 
     @FXML
@@ -459,7 +468,7 @@ public class GameGUIController {
     }
 
     public GameGUIController(Game game){
-        game = new Game();
+        this.game=game;
 
         //Creation of the labels ArrayList
         ArrayList<Label> labelsArray = new ArrayList<>();
@@ -602,6 +611,18 @@ public class GameGUIController {
     @FXML
     void GAMEhint(ActionEvent event) {
 
+    }
+
+    @FXML
+    void useAdjacencyList(ActionEvent event) {
+        ((Stage) graphOptionLabel.getScene().getWindow()).close();
+        openGameScreen();
+    }
+
+    @FXML
+    void useAdjacencyMatrix(ActionEvent event) {
+        ((Stage) graphOptionLabel.getScene().getWindow()).close();
+        openGameScreen();
     }
 
     private Timer timer = new Timer();

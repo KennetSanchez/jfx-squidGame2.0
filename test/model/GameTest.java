@@ -42,7 +42,7 @@ public class GameTest {
     @Test
     public void correctCreationOfObstaclesTest() {
         setupScene1();
-        game.linkMatrix();
+        game.linkMatrix(true);
         Hashtable<Integer, String> test = game.graphShortestPaths(true);
         assertEquals(test.get(38),null);
         assertEquals(test.get(39),null);

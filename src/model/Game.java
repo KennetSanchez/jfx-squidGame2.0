@@ -37,10 +37,17 @@ public class Game {
         }
     }
 
-    public boolean linkMatrix(){
-        graphA.addEdgeDirected(0,6,random[6]);
-        graphA.addEdgeDirected(116,122,0);
-        return linkMatrix(1,2);
+    public boolean linkMatrix(boolean graph){
+        if(graph){
+            graphA.addEdgeDirected(0,6,random[6]);
+            graphA.addEdgeDirected(116,122,0);
+            return linkMatrix(1,2);
+        }
+        else {
+            graphB.addEdgeDirected(0,6,random[6]);
+            graphB.addEdgeDirected(116,122,0);
+            return linkMatrixB(1,2);
+        }
     }
 
     public Hashtable<Integer, String> graphShortestPaths(boolean option){
