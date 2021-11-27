@@ -8,14 +8,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.Game;
 
 import javax.swing.text.Style;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,6 +27,116 @@ import java.util.TimerTask;
 public class GameGUIController {
     @FXML
     private Label GAMEhintsCounter;
+    @FXML
+    private Label GAMElb29;
+
+    @FXML
+    private Label GAMElb39;
+
+    @FXML
+    private Label GAMElb49;
+
+    @FXML
+    private Label GAMElb149;
+
+    @FXML
+    private Label GAMElb69;
+
+    @FXML
+    private Label GAMElb79;
+
+    @FXML
+    private Label GAMElb89;
+
+    @FXML
+    private Label GAMElb99;
+
+    @FXML
+    private Label GAMElb1010;
+
+    @FXML
+    private Label GAMElb1019;
+
+    @FXML
+    private Label GAMElb111;
+
+    @FXML
+    private Label GAMElb210;
+
+    @FXML
+    private Label GAMElb310;
+
+    @FXML
+    private Label GAMElb410;
+
+    @FXML
+    private Label GAMElb1410;
+
+    @FXML
+    private Label GAMElb610;
+
+    @FXML
+    private Label GAMElb710;
+
+    @FXML
+    private Label GAMElb810;
+
+    @FXML
+    private Label GAMElb910;
+
+    @FXML
+    private Label GAMElb1020;
+
+    @FXML
+    private Label GAMElb10110;
+
+    @FXML
+    private Label GAMElb112;
+
+    @FXML
+    private Label GAMElb211;
+
+    @FXML
+    private Label GAMElb311;
+
+    @FXML
+    private Label GAMElb411;
+
+    @FXML
+    private Label GAMElb58;
+
+    @FXML
+    private Label GAMElb611;
+
+    @FXML
+    private Label GAMElb711;
+
+    @FXML
+    private Label GAMElb811;
+
+    @FXML
+    private Label GAMElb911;
+
+    @FXML
+    private Label GAMElb1021;
+
+    @FXML
+    private Label GAMElb10111;
+
+    @FXML
+    private BorderPane mainPane;
+
+    @FXML
+    private Button newGameBTN;
+
+    @FXML
+    private Button scoreBoardBTN;
+
+    @FXML
+    private Button closeGameBTN;
+
+    @FXML
+    private Label graphOptionLabel;
 
     @FXML
     private Label GAMEtime;
@@ -316,117 +430,18 @@ public class GameGUIController {
     private Label GAMElb110;
 
     @FXML
-    private Label GAMElb29;
-
-    @FXML
-    private Label GAMElb39;
-
-    @FXML
-    private Label GAMElb49;
-
-    @FXML
-    private Label GAMElb149;
-
-    @FXML
-    private Label GAMElb69;
-
-    @FXML
-    private Label GAMElb79;
-
-    @FXML
-    private Label GAMElb89;
-
-    @FXML
-    private Label GAMElb99;
-
-    @FXML
-    private Label GAMElb1010;
-
-    @FXML
-    private Label GAMElb1019;
-
-    @FXML
-    private Label GAMElb111;
-
-    @FXML
-    private Label GAMElb210;
-
-    @FXML
-    private Label GAMElb310;
-
-    @FXML
-    private Label GAMElb410;
-
-    @FXML
-    private Label GAMElb1410;
-
-    @FXML
-    private Label GAMElb610;
-
-    @FXML
-    private Label GAMElb710;
-
-    @FXML
-    private Label GAMElb810;
-
-    @FXML
-    private Label GAMElb910;
-
-    @FXML
-    private Label GAMElb1020;
-
-    @FXML
-    private Label GAMElb10110;
-
-    @FXML
-    private Label GAMElb112;
-
-    @FXML
-    private Label GAMElb211;
-
-    @FXML
-    private Label GAMElb311;
-
-    @FXML
-    private Label GAMElb411;
-
-    @FXML
-    private Label GAMElb58;
-
-    @FXML
-    private Label GAMElb611;
-
-    @FXML
-    private Label GAMElb711;
-
-    @FXML
-    private Label GAMElb811;
-
-    @FXML
-    private Label GAMElb911;
-
-    @FXML
-    private Label GAMElb1021;
-
-    @FXML
-    private Label GAMElb10111;
-
-    @FXML
-    private BorderPane mainPane;
-
-    @FXML
-    private Button newGameBTN;
-
-    @FXML
-    private Button scoreBoardBTN;
-
-    @FXML
-    private Button closeGameBTN;
-
-    @FXML
-    private Label graphOptionLabel;
-
+    private ToggleButton musicButton;
+    //-------------------------------------     CODE FOR ALL WINDOWS    -------------------------------------
     Game game;
+
+    @FXML
+    void changeMusicState(ActionEvent event) {
+        if("PLAYING".equalsIgnoreCase(mp.getStatus() + "")){
+            mp.pause();
+        }else{
+            mp.play();
+        }
+    }
 
 
     @FXML
@@ -467,8 +482,17 @@ public class GameGUIController {
 
     }
 
+    MediaPlayer mp;
     public GameGUIController(Game game){
         this.game=game;
+
+        //Music code
+        String songName = "Squid game song - pink soldiers.mp3";
+        String path = "multimedia/" + songName;
+        Media media = new Media(new File(path).toURI().toString());
+        mp = new MediaPlayer(media);
+        mp.setCycleCount(MediaPlayer.INDEFINITE);
+        mp.play();
 
         //Creation of the labels ArrayList
         ArrayList<Label> labelsArray = new ArrayList<>();
@@ -628,6 +652,12 @@ public class GameGUIController {
     private Timer timer = new Timer();
     private int secs = 0, min = 0, hour = 0;
 
+    public void stopTimer(){
+        min = 0;
+        secs= 0;
+        timer.cancel();
+    }
+
     private void launchWindow(String fxml, String title, Modality modality, StageStyle style) {
         try {
             Parent loadedPane = loadFxml(fxml);
@@ -643,6 +673,8 @@ public class GameGUIController {
             System.err.println(npe.getMessage());
         }
     }
+
+
 
     private Parent loadFxml(String fxml) {
         try {

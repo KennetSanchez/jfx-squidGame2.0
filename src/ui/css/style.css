@@ -12,7 +12,6 @@
 .Label{
     -fx-font-family: Consolas;
     -fx-font-size: 20px;
-    -fx-background-color: #7f5af0;
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }

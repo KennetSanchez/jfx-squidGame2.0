@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -649,10 +650,13 @@
                   <Font name="Consolas Bold" size="20.0" />
                </font>
             </Button>
-            <ToggleButton layoutX="42.0" layoutY="31.0" mnemonicParsing="false" style="-fx-background-color: #7f5af0;" text="Music" textFill="WHITE">
+            <ToggleButton fx:id="musicButton" layoutX="5.0" layoutY="33.0" mnemonicParsing="false" onAction="#changeMusicState" selected="true" style="-fx-background-color: #7f5af0; -fx-background-radius: 15;" text="Play/stop music" textFill="WHITE">
                <font>
-                  <Font name="Consolas Bold" size="20.0" />
+                  <Font name="Consolas Bold" size="17.0" />
                </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="music" />
+               </toggleGroup>
             </ToggleButton>
          </children>
       </Pane>
