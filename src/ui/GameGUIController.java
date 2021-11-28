@@ -446,6 +446,12 @@ public class GameGUIController {
     //-------------------------------------     CODE FOR ALL WINDOWS    -------------------------------------
     Game game;
 
+    private final double originalX = 718;
+    private final double originalY = 929;
+    private final double maxX = 1377;
+    private final double minX = 57;
+    private final double maxY = 112;
+
     @FXML
     void changeMusicState(ActionEvent event) {
         if("PLAYING".equalsIgnoreCase(mp.getStatus() + "")){
@@ -471,6 +477,8 @@ public class GameGUIController {
         launchWindow("resources/Game.fxml","SquidGame 2.0",Modality.NONE, StageStyle.DECORATED);
         bg.setImage(new Image(String.valueOf(getClass().getResource("resources/Background.png"))));
         GAMECharacter.setImage(new Image(String.valueOf(getClass().getResource("resources/Character.png"))));
+        GAMECharacter.setLayoutX(originalX);
+        GAMECharacter.setLayoutY(originalY);
 
         timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -496,20 +504,29 @@ public class GameGUIController {
     @FXML
     void GAMEmove(KeyEvent event) {
         char keyPressed = event.getText().toLowerCase().charAt(0);
-        double x = GAMECharacter.getX();
-        double y = GAMECharacter.getY();
+        double x = GAMECharacter.getLayoutX();
+        double y = GAMECharacter.getLayoutY();
         switch (keyPressed){
             case 'w':
-                GAMECharacter.setY(y-77);
+                if(y>=maxY || x==originalX){
+                    GAMECharacter.setLayoutY(y-77);
+                }
+                //Aqui se debe mirar cuando gana y terminar el juego
                 break;
             case 'a':
-                GAMECharacter.setX(x-132);
+                if(y!=originalY && x >= minX+3){
+                    GAMECharacter.setLayoutX(x-132);
+                }
                 break;
             case 's':
-                GAMECharacter.setY(y+77);
+                if(y+77<=originalY-77){
+                    GAMECharacter.setLayoutY(y+77);
+                }
                 break;
             case 'd':
-                GAMECharacter.setX(x+132);
+                if(y!=originalY && x <= maxX){
+                    GAMECharacter.setLayoutX(x+132);
+                }
                 break;
         }
     }
