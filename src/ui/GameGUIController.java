@@ -451,6 +451,7 @@ public class GameGUIController {
     private final double maxX = 1377;
     private final double minX = 57;
     private final double maxY = 112;
+    private int boardNumber = -5;
 
     @FXML
     void changeMusicState(ActionEvent event) {
@@ -509,23 +510,55 @@ public class GameGUIController {
         switch (keyPressed){
             case 'w':
                 if(y>=maxY || x==originalX){
-                    GAMECharacter.setLayoutY(y-77);
+                    if(game.getObstaclesString().contains(","+(boardNumber+11)+",")){
+                        boardNumber=-5;
+                        GAMECharacter.setLayoutX(originalX);
+                        GAMECharacter.setLayoutY(originalY);
+                    }
+                    else{
+                        boardNumber+=11;
+                        GAMECharacter.setLayoutY(y-77);
+                    }
                 }
                 //Aqui se debe mirar cuando gana y terminar el juego
                 break;
             case 'a':
                 if(y!=originalY && x >= minX+3){
-                    GAMECharacter.setLayoutX(x-132);
+                    if(game.getObstaclesString().contains(","+(boardNumber-1)+",")) {
+                        boardNumber=-5;
+                        GAMECharacter.setLayoutX(originalX);
+                        GAMECharacter.setLayoutY(originalY);
+                    }
+                    else {
+                        boardNumber--;
+                        GAMECharacter.setLayoutX(x - 132);
+                    }
                 }
                 break;
             case 's':
                 if(y+77<=originalY-77){
-                    GAMECharacter.setLayoutY(y+77);
+                    if(game.getObstaclesString().contains(","+(boardNumber-11)+",")) {
+                        boardNumber=-5;
+                        GAMECharacter.setLayoutX(originalX);
+                        GAMECharacter.setLayoutY(originalY);
+                    }
+                    else {
+                        boardNumber-=11;
+                        GAMECharacter.setLayoutY(y + 77);
+                    }
                 }
                 break;
             case 'd':
                 if(y!=originalY && x <= maxX){
-                    GAMECharacter.setLayoutX(x+132);
+                    if(game.getObstaclesString().contains(","+(boardNumber+1)+",")) {
+                        boardNumber=-5;
+                        GAMECharacter.setLayoutX(originalX);
+                        GAMECharacter.setLayoutY(originalY);
+                    }
+                    else {
+                        boardNumber++;
+                        GAMECharacter.setLayoutX(x + 132);
+                    }
                 }
                 break;
         }
