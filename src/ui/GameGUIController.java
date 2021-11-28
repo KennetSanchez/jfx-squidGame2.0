@@ -500,7 +500,7 @@ public class GameGUIController {
 
         //Music code
         String songName = "Squid game song - pink soldiers.mp3";
-        String path = "resources/" + songName;
+        String path = "src/ui/resources/" + songName;
         Media media = new Media(new File(path).toURI().toString());
         mp = new MediaPlayer(media);
         mp.setCycleCount(MediaPlayer.INDEFINITE);
