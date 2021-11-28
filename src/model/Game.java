@@ -17,6 +17,7 @@ public class Game {
     private GraphB<Integer> graphB;
     private String obstaclesString;
     private int[] random;
+    private int actualPlayerNegativeScore;
 
 
     public Game(){
@@ -27,13 +28,28 @@ public class Game {
         obstaclesString = ",38,39,41,59,60,61,62,64,83,";
         graphA=new GraphA(123);
         random=new int[123];
+        //antes del generateRandoms tiene que estar el metodo de generar los obstaculos aleatorios
         generateRandoms();
+        actualPlayerNegativeScore=0;
+    }
+
+    public void giveNegativeScore(int boardPosition){
+        if(boardPosition>-5 && boardPosition < 122){
+            actualPlayerNegativeScore+=random[boardPosition];
+            random[boardPosition]=0;
+        }
     }
 
     public void generateRandoms(){
+        random[0]=-1;
         for (int i=1;i<random.length-1;i++){
-            int temp=(int)(Math.random()*99)+1;
-            random[i]=temp;
+            if(obstaclesString.contains(","+i+",")){
+                random[i]=-1;
+            }
+            else {
+                int temp=(int)(Math.random()*99)+1;
+                random[i]=temp;
+            }
         }
     }
 
@@ -248,10 +264,6 @@ public class Game {
         return graphA;
     }
 
-    public void setGraphA(GraphA graphA) {
-        this.graphA = graphA;
-    }
-
     public String getObstaclesString() {
         return obstaclesString;
     }
@@ -266,5 +278,25 @@ public class Game {
 
     public void setRandom(int[] random) {
         this.random = random;
+    }
+
+    public void setGraphA(GraphA<Integer> graphA) {
+        this.graphA = graphA;
+    }
+
+    public GraphB<Integer> getGraphB() {
+        return graphB;
+    }
+
+    public void setGraphB(GraphB<Integer> graphB) {
+        this.graphB = graphB;
+    }
+
+    public int getActualPlayerNegativeScore() {
+        return actualPlayerNegativeScore;
+    }
+
+    public void setActualPlayerNegativeScore(int actualPlayerNegativeScore) {
+        this.actualPlayerNegativeScore = actualPlayerNegativeScore;
     }
 }
