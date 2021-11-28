@@ -1,4 +1,4 @@
-.Button{
+Button{
     -fx-font-family: Consolas;
     -fx-font-size: 20px;
     -fx-background-color: #7f5af0;
@@ -9,10 +9,19 @@
     -fx-pref-height: 38;
 }
 
+Button:pressed{
+    background: #7f5af0;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 1px 1px 2px rgba(255, 255, 255, 0.2);
+    color: red;
+    text-decoration: none;
+    text-shadow: -1px -1px 0 #c2211c;
+    transition: all 250ms linear;
+}
 .Label{
     -fx-font-family: Consolas;
     -fx-font-size: 20px;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-weight: bold;
 }
 

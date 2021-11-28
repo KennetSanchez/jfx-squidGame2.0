@@ -639,13 +639,13 @@ public class GameGUIController {
 
     @FXML
     void useAdjacencyList(ActionEvent event) {
-        ((Stage) graphOptionLabel.getScene().getWindow()).close();
+       // ((Stage) graphOptionLabel.getScene().getWindow()).close();
         openGameScreen();
     }
 
     @FXML
     void useAdjacencyMatrix(ActionEvent event) {
-        ((Stage) graphOptionLabel.getScene().getWindow()).close();
+        //((Stage) graphOptionLabel.getScene().getWindow()).close();
         openGameScreen();
     }
 
