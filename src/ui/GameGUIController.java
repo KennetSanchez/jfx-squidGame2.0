@@ -437,13 +437,16 @@ public class GameGUIController {
     private Label GAMElb110 = new Label();
 
     @FXML
-    private ImageView bg = new ImageView();
+    private ImageView GAMEBackground = new ImageView();
 
     @FXML
     private ImageView GAMECharacter = new ImageView();
 
     @FXML
     private ToggleButton musicButton;
+
+    @FXML
+    private ImageView GAMEPlatforms = new ImageView();
     //-------------------------------------     CODE FOR ALL WINDOWS    -------------------------------------
     Game game;
 
@@ -480,7 +483,8 @@ public class GameGUIController {
     private void openGameScreen() throws FileNotFoundException, InterruptedException {
         ((Stage) newGameBTN.getScene().getWindow()).close();
         launchWindow("resources/Game.fxml","SquidGame 2.0",Modality.NONE, StageStyle.DECORATED);
-        bg.setImage(new Image(String.valueOf(getClass().getResource("resources/Background.png"))));
+        GAMEBackground.setImage(new Image(String.valueOf(getClass().getResource("resources/Background.png"))));
+        GAMEPlatforms.setImage(new Image(String.valueOf(getClass().getResource("resources/Platforms.png"))));
         GAMECharacter.setImage(new Image(String.valueOf(getClass().getResource("resources/Character.png"))));
         GAMECharacter.setLayoutX(originalX);
         GAMECharacter.setLayoutY(originalY);
