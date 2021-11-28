@@ -97,7 +97,7 @@ public class Game {
             }
         }
         linkMatrix(origin+1,destination+1);
-        return false; //Creo que no es necesario xd
+        return false;
     }
 
     public boolean linkMatrixB(int origin, int destination){

@@ -4,12 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button layoutX="387.0" layoutY="242.0" mnemonicParsing="false" onAction="#useAdjacencyList" styleClass="Button" stylesheets="@../css/style.css" text="List" />
       <Button layoutX="104.0" layoutY="242.0" mnemonicParsing="false" onAction="#useAdjacencyMatrix" styleClass="Button" stylesheets="@../css/style.css" text="Matrix" />
-      <Label layoutX="31.0" layoutY="14.0" styleClass="Label" stylesheets="@../css/style.css" text="Which implementation of graph do you want to use?" />
+      <Label fx:id="graphOptionLabel" layoutX="31.0" layoutY="14.0" styleClass="Label" stylesheets="@../css/style.css" text="Which implementation of graph do you want to use?" />
       <Label layoutX="142.0" layoutY="147.0" prefHeight="53.0" prefWidth="329.0" styleClass="Label" stylesheets="@../css/style.css" text="Choose one of the adjacency options below:" wrapText="true" />
    </children>
 </Pane>

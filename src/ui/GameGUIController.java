@@ -4,12 +4,14 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -20,6 +22,9 @@ import model.Game;
 
 import javax.swing.text.Style;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -454,9 +459,11 @@ public class GameGUIController {
         launchWindow("fxml/GraphOption.fxml","Choose your graph",Modality.NONE,StageStyle.DECORATED);
     }
 
-    private void openGameScreen(){
+    private void openGameScreen() throws FileNotFoundException {
         ((Stage) newGameBTN.getScene().getWindow()).close();
+
         launchWindow("fxml/Game.fxml","SquidGame 2.0",Modality.NONE, StageStyle.DECORATED);
+
         timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -638,14 +645,14 @@ public class GameGUIController {
     }
 
     @FXML
-    void useAdjacencyList(ActionEvent event) {
-       // ((Stage) graphOptionLabel.getScene().getWindow()).close();
+    void useAdjacencyList(ActionEvent event) throws FileNotFoundException {
+       ((Stage) graphOptionLabel.getScene().getWindow()).close();
         openGameScreen();
     }
 
     @FXML
-    void useAdjacencyMatrix(ActionEvent event) {
-        //((Stage) graphOptionLabel.getScene().getWindow()).close();
+    void useAdjacencyMatrix(ActionEvent event) throws FileNotFoundException {
+        ((Stage) graphOptionLabel.getScene().getWindow()).close();
         openGameScreen();
     }
 
@@ -682,6 +689,7 @@ public class GameGUIController {
             fxmlLoader.setController(this);
             return fxmlLoader.load();
         } catch (Exception e) {
+            System.out.println(e);
             System.out.println("Can't load requested document right now.\nRequested document: \"" + fxml + "\"");
             throw new NullPointerException("Document is null");
         }
