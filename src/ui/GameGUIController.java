@@ -435,6 +435,9 @@ public class GameGUIController {
     private Label GAMElb110;
 
     @FXML
+    private ImageView bg = new ImageView();
+
+    @FXML
     private ToggleButton musicButton;
     //-------------------------------------     CODE FOR ALL WINDOWS    -------------------------------------
     Game game;
@@ -456,13 +459,15 @@ public class GameGUIController {
 
     @FXML
     void newGame(ActionEvent event) {
-        launchWindow("fxml/GraphOption.fxml","Choose your graph",Modality.NONE,StageStyle.DECORATED);
+        launchWindow("resources/GraphOption.fxml","Choose your graph",Modality.NONE,StageStyle.DECORATED);
     }
 
     private void openGameScreen() throws FileNotFoundException {
         ((Stage) newGameBTN.getScene().getWindow()).close();
+        Image i = new Image(String.valueOf(getClass().getResource("resources/Background.png")));
 
-        launchWindow("fxml/Game.fxml","SquidGame 2.0",Modality.NONE, StageStyle.DECORATED);
+        launchWindow("resources/Game.fxml","SquidGame 2.0",Modality.NONE, StageStyle.DECORATED);
+        bg.setImage(i);
 
         timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -495,7 +500,7 @@ public class GameGUIController {
 
         //Music code
         String songName = "Squid game song - pink soldiers.mp3";
-        String path = "multimedia/" + songName;
+        String path = "resources/" + songName;
         Media media = new Media(new File(path).toURI().toString());
         mp = new MediaPlayer(media);
         mp.setCycleCount(MediaPlayer.INDEFINITE);
@@ -683,14 +688,14 @@ public class GameGUIController {
 
 
 
-    private Parent loadFxml(String fxml) {
+    private Parent loadFxml(String resources) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resources));
             fxmlLoader.setController(this);
             return fxmlLoader.load();
         } catch (Exception e) {
             System.out.println(e);
-            System.out.println("Can't load requested document right now.\nRequested document: \"" + fxml + "\"");
+            System.out.println("Can't load requested document right now.\nRequested document: \"" + resources + "\"");
             throw new NullPointerException("Document is null");
         }
     }
