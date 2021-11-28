@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1006.0" prefWidth="1650.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#GAMEmove" prefHeight="1006.0" prefWidth="1650.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="bg" fitHeight="1022.0" fitWidth="1480.0" layoutY="-8.0" pickOnBounds="true" />
       <ImageView fitHeight="110.0" fitWidth="100.0" layoutX="1343.0" layoutY="82.0" pickOnBounds="true">
@@ -1292,6 +1292,7 @@
             <Font name="Consolas Bold" size="30.0" />
          </font>
       </Label>
+      <ImageView fx:id="GAMECharacter" fitHeight="70.0" fitWidth="54.0" layoutX="718.0" layoutY="929.0" pickOnBounds="true" preserveRatio="true" />
 
    </children>
 </Pane>

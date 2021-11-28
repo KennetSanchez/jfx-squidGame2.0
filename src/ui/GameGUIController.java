@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -438,6 +439,9 @@ public class GameGUIController {
     private ImageView bg = new ImageView();
 
     @FXML
+    private ImageView GAMECharacter = new ImageView();
+
+    @FXML
     private ToggleButton musicButton;
     //-------------------------------------     CODE FOR ALL WINDOWS    -------------------------------------
     Game game;
@@ -464,10 +468,9 @@ public class GameGUIController {
 
     private void openGameScreen() throws FileNotFoundException {
         ((Stage) newGameBTN.getScene().getWindow()).close();
-        Image i = new Image(String.valueOf(getClass().getResource("resources/Background.png")));
-
         launchWindow("resources/Game.fxml","SquidGame 2.0",Modality.NONE, StageStyle.DECORATED);
-        bg.setImage(i);
+        bg.setImage(new Image(String.valueOf(getClass().getResource("resources/Background.png"))));
+        GAMECharacter.setImage(new Image(String.valueOf(getClass().getResource("resources/Character.png"))));
 
         timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -486,7 +489,29 @@ public class GameGUIController {
             }
         };
 
+
         timer.scheduleAtFixedRate(task, 1000, 1000);
+    }
+
+    @FXML
+    void GAMEmove(KeyEvent event) {
+        char keyPressed = event.getText().toLowerCase().charAt(0);
+        double x = GAMECharacter.getX();
+        double y = GAMECharacter.getY();
+        switch (keyPressed){
+            case 'w':
+                GAMECharacter.setY(y-77);
+                break;
+            case 'a':
+                GAMECharacter.setX(x-132);
+                break;
+            case 's':
+                GAMECharacter.setY(y+77);
+                break;
+            case 'd':
+                GAMECharacter.setX(x+132);
+                break;
+        }
     }
 
     @FXML
