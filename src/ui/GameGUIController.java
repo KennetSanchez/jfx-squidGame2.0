@@ -34,101 +34,372 @@ import java.util.concurrent.TimeUnit;
 public class GameGUIController {
     @FXML
     private Label GAMEhintsCounter = new Label();
-    @FXML
-    private Label GAMElb29 = new Label();
 
     @FXML
-    private Label GAMElb39 = new Label();
+    private Label GAMElb1= new Label();
 
     @FXML
-    private Label GAMElb49 = new Label();
+    private Label GAMElb2= new Label();
 
     @FXML
-    private Label GAMElb149 = new Label();
+    private Label GAMElb3= new Label();
 
     @FXML
-    private Label GAMElb69 = new Label();
+    private Label GAMElb4= new Label();
 
     @FXML
-    private Label GAMElb79 = new Label();
+    private Label GAMElb5= new Label();
 
     @FXML
-    private Label GAMElb89 = new Label();
+    private Label GAMElb6= new Label();
 
     @FXML
-    private Label GAMElb99 = new Label();
+    private Label GAMElb7= new Label();
 
     @FXML
-    private Label GAMElb1010 = new Label();
+    private Label GAMElb8= new Label();
 
     @FXML
-    private Label GAMElb1019 = new Label();
+    private Label GAMElb9= new Label();
 
     @FXML
-    private Label GAMElb111 = new Label();
+    private Label GAMElb10= new Label();
 
     @FXML
-    private Label GAMElb210 = new Label();
+    private Label GAMElb11= new Label();
 
     @FXML
-    private Label GAMElb310 = new Label();
+    private Label GAMElb12= new Label();
 
     @FXML
-    private Label GAMElb410 = new Label();
+    private Label GAMElb13= new Label();
 
     @FXML
-    private Label GAMElb1410 = new Label();
+    private Label GAMElb14= new Label();
 
     @FXML
-    private Label GAMElb610 = new Label();
+    private Label GAMElb15= new Label();
 
     @FXML
-    private Label GAMElb710 = new Label();
+    private Label GAMElb16= new Label();
 
     @FXML
-    private Label GAMElb810 = new Label();
+    private Label GAMElb17= new Label();
 
     @FXML
-    private Label GAMElb910 = new Label();
+    private Label GAMElb18= new Label();
 
     @FXML
-    private Label GAMElb1020 = new Label();
+    private Label GAMElb19= new Label();
 
     @FXML
-    private Label GAMElb10110 = new Label();
+    private Label GAMElb20= new Label();
 
     @FXML
-    private Label GAMElb112 = new Label();
+    private Label GAMElb21= new Label();
 
     @FXML
-    private Label GAMElb211 = new Label();
+    private Label GAMElb22= new Label();
 
     @FXML
-    private Label GAMElb311 = new Label();
+    private Label GAMElb23= new Label();
 
     @FXML
-    private Label GAMElb411 = new Label();
+    private Label GAMElb24= new Label();
 
     @FXML
-    private Label GAMElb58 = new Label();
+    private Label GAMElb25= new Label();
 
     @FXML
-    private Label GAMElb611 = new Label();
+    private Label GAMElb26= new Label();
 
     @FXML
-    private Label GAMElb711 = new Label();
+    private Label GAMElb27= new Label();
 
     @FXML
-    private Label GAMElb811 = new Label();
+    private Label GAMElb28= new Label();
 
     @FXML
-    private Label GAMElb911 = new Label();
+    private Label GAMElb29= new Label();
 
     @FXML
-    private Label GAMElb1021 = new Label();
+    private Label GAMElb30= new Label();
 
     @FXML
-    private Label GAMElb10111 = new Label();
+    private Label GAMElb31= new Label();
+
+    @FXML
+    private Label GAMElb32= new Label();
+
+    @FXML
+    private Label GAMElb33= new Label();
+
+    @FXML
+    private Label GAMElb34= new Label();
+
+    @FXML
+    private Label GAMElb35= new Label();
+
+    @FXML
+    private Label GAMElb36= new Label();
+
+    @FXML
+    private Label GAMElb37= new Label();
+
+    @FXML
+    private Label GAMElb38= new Label();
+
+    @FXML
+    private Label GAMElb39= new Label();
+
+    @FXML
+    private Label GAMElb40= new Label();
+
+    @FXML
+    private Label GAMElb41= new Label();
+
+    @FXML
+    private Label GAMElb42= new Label();
+
+    @FXML
+    private Label GAMElb43= new Label();
+
+    @FXML
+    private Label GAMElb44= new Label();
+
+    @FXML
+    private Label GAMElb45= new Label();
+
+    @FXML
+    private Label GAMElb46= new Label();
+
+    @FXML
+    private Label GAMElb47= new Label();
+
+    @FXML
+    private Label GAMElb48= new Label();
+
+    @FXML
+    private Label GAMElb49= new Label();
+
+    @FXML
+    private Label GAMElb50= new Label();
+
+    @FXML
+    private Label GAMElb51= new Label();
+
+    @FXML
+    private Label GAMElb52= new Label();
+
+    @FXML
+    private Label GAMElb53= new Label();
+
+    @FXML
+    private Label GAMElb54= new Label();
+
+    @FXML
+    private Label GAMElb55= new Label();
+
+    @FXML
+    private Label GAMElb56= new Label();
+
+    @FXML
+    private Label GAMElb57= new Label();
+
+    @FXML
+    private Label GAMElb58= new Label();
+
+    @FXML
+    private Label GAMElb59= new Label();
+
+    @FXML
+    private Label GAMElb60= new Label();
+
+    @FXML
+    private Label GAMElb61= new Label();
+
+    @FXML
+    private Label GAMElb62= new Label();
+
+    @FXML
+    private Label GAMElb63= new Label();
+
+    @FXML
+    private Label GAMElb64= new Label();
+
+    @FXML
+    private Label GAMElb65= new Label();
+
+    @FXML
+    private Label GAMElb66= new Label();
+
+    @FXML
+    private Label GAMElb67= new Label();
+
+    @FXML
+    private Label GAMElb68= new Label();
+
+    @FXML
+    private Label GAMElb69= new Label();
+
+    @FXML
+    private Label GAMElb70= new Label();
+
+    @FXML
+    private Label GAMElb71= new Label();
+
+    @FXML
+    private Label GAMElb72= new Label();
+
+    @FXML
+    private Label GAMElb73= new Label();
+
+    @FXML
+    private Label GAMElb74= new Label();
+
+    @FXML
+    private Label GAMElb75= new Label();
+
+    @FXML
+    private Label GAMElb76= new Label();
+
+    @FXML
+    private Label GAMElb77= new Label();
+
+    @FXML
+    private Label GAMElb78= new Label();
+
+    @FXML
+    private Label GAMElb79= new Label();
+
+    @FXML
+    private Label GAMElb80= new Label();
+
+    @FXML
+    private Label GAMElb81= new Label();
+
+    @FXML
+    private Label GAMElb82= new Label();
+
+    @FXML
+    private Label GAMElb83= new Label();
+
+    @FXML
+    private Label GAMElb84= new Label();
+
+    @FXML
+    private Label GAMElb85= new Label();
+
+    @FXML
+    private Label GAMElb86= new Label();
+
+    @FXML
+    private Label GAMElb87= new Label();
+
+    @FXML
+    private Label GAMElb88= new Label();
+
+    @FXML
+    private Label GAMElb89= new Label();
+
+    @FXML
+    private Label GAMElb90= new Label();
+
+    @FXML
+    private Label GAMElb91= new Label();
+
+    @FXML
+    private Label GAMElb92= new Label();
+
+    @FXML
+    private Label GAMElb93= new Label();
+
+    @FXML
+    private Label GAMElb94= new Label();
+
+    @FXML
+    private Label GAMElb95= new Label();
+
+    @FXML
+    private Label GAMElb96= new Label();
+
+    @FXML
+    private Label GAMElb97= new Label();
+
+    @FXML
+    private Label GAMElb98= new Label();
+
+    @FXML
+    private Label GAMElb99= new Label();
+
+    @FXML
+    private Label GAMElb100= new Label();
+
+    @FXML
+    private Label GAMElb101= new Label();
+
+    @FXML
+    private Label GAMElb102= new Label();
+
+    @FXML
+    private Label GAMElb103= new Label();
+
+    @FXML
+    private Label GAMElb104= new Label();
+
+    @FXML
+    private Label GAMElb105= new Label();
+
+    @FXML
+    private Label GAMElb106= new Label();
+
+    @FXML
+    private Label GAMElb107= new Label();
+
+    @FXML
+    private Label GAMElb108= new Label();
+
+    @FXML
+    private Label GAMElb109= new Label();
+
+    @FXML
+    private Label GAMElb110= new Label();
+
+    @FXML
+    private Label GAMElb111= new Label();
+
+    @FXML
+    private Label GAMElb112= new Label();
+
+    @FXML
+    private Label GAMElb113= new Label();
+
+    @FXML
+    private Label GAMElb114= new Label();
+
+    @FXML
+    private Label GAMElb115= new Label();
+
+    @FXML
+    private Label GAMElb116= new Label();
+
+    @FXML
+    private Label GAMElb117= new Label();
+
+    @FXML
+    private Label GAMElb118= new Label();
+
+    @FXML
+    private Label GAMElb119= new Label();
+
+    @FXML
+    private Label GAMElb120= new Label();
+
+    @FXML
+    private Label GAMElb121= new Label();
+
+    @FXML
+    private ArrayList<Label> labelList ;
 
     @FXML
     private BorderPane mainPane;
@@ -147,294 +418,6 @@ public class GameGUIController {
 
     @FXML
     private Label GAMEtime = new Label();
-
-    @FXML
-    private Label GAMElb11 = new Label();
-
-    @FXML
-    private Label GAMElb21 = new Label();
-
-    @FXML
-    private Label GAMElb31 = new Label();
-
-    @FXML
-    private Label GAMElb41 = new Label();
-
-    @FXML
-    private Label GAMElb141 = new Label();
-
-    @FXML
-    private Label GAMElb51 = new Label();
-
-    @FXML
-    private Label GAMElb61 = new Label();
-
-    @FXML
-    private Label GAMElb71 = new Label();
-
-    @FXML
-    private Label GAMElb81 = new Label();
-
-    @FXML
-    private Label GAMElb91 = new Label();
-
-    @FXML
-    private Label GAMElb102 = new Label();
-
-    @FXML
-    private Label GAMElb1011 = new Label();
-
-    @FXML
-    private Label GAMElb12 = new Label();
-
-    @FXML
-    private Label GAMElb22 = new Label();
-
-    @FXML
-    private Label GAMElb32 = new Label();
-
-    @FXML
-    private Label GAMElb42 = new Label();
-
-    @FXML
-    private Label GAMElb142 = new Label();
-
-    @FXML
-    private Label GAMElb52 = new Label();
-
-    @FXML
-    private Label GAMElb62 = new Label();
-
-    @FXML
-    private Label GAMElb72 = new Label();
-
-    @FXML
-    private Label GAMElb82 = new Label();
-
-    @FXML
-    private Label GAMElb92 = new Label();
-
-    @FXML
-    private Label GAMElb103 = new Label();
-
-    @FXML
-    private Label GAMElb1012 = new Label();
-
-    @FXML
-    private Label GAMElb13 = new Label();
-
-    @FXML
-    private Label GAMElb23 = new Label();
-
-    @FXML
-    private Label GAMElb33 = new Label();
-
-    @FXML
-    private Label GAMElb43 = new Label();
-
-    @FXML
-    private Label GAMElb143 = new Label();
-
-    @FXML
-    private Label GAMElb53 = new Label();
-
-    @FXML
-    private Label GAMElb63 = new Label();
-
-    @FXML
-    private Label GAMElb73 = new Label();
-
-    @FXML
-    private Label GAMElb83 = new Label();
-
-    @FXML
-    private Label GAMElb93 = new Label();
-
-    @FXML
-    private Label GAMElb104 = new Label();
-
-    @FXML
-    private Label GAMElb1013 = new Label();
-
-    @FXML
-    private Label GAMElb15 = new Label();
-
-    @FXML
-    private Label GAMElb24 = new Label();
-
-    @FXML
-    private Label GAMElb34 = new Label();
-
-    @FXML
-    private Label GAMElb44 = new Label();
-
-    @FXML
-    private Label GAMElb144 = new Label();
-
-    @FXML
-    private Label GAMElb54 = new Label();
-
-    @FXML
-    private Label GAMElb64 = new Label();
-
-    @FXML
-    private Label GAMElb74 = new Label();
-
-    @FXML
-    private Label GAMElb84 = new Label();
-
-    @FXML
-    private Label GAMElb94 = new Label();
-
-    @FXML
-    private Label GAMElb105 = new Label();
-
-    @FXML
-    private Label GAMElb1014 = new Label();
-
-    @FXML
-    private Label GAMElb16 = new Label();
-
-    @FXML
-    private Label GAMElb25 = new Label();
-
-    @FXML
-    private Label GAMElb35 = new Label();
-
-    @FXML
-    private Label GAMElb45 = new Label();
-
-    @FXML
-    private Label GAMElb145 = new Label();
-
-    @FXML
-    private Label GAMElb55 = new Label();
-
-    @FXML
-    private Label GAMElb65 = new Label();
-
-    @FXML
-    private Label GAMElb75 = new Label();
-
-    @FXML
-    private Label GAMElb85 = new Label();
-
-    @FXML
-    private Label GAMElb95 = new Label();
-
-    @FXML
-    private Label GAMElb106 = new Label();
-
-    @FXML
-    private Label GAMElb1015 = new Label();
-
-    @FXML
-    private Label GAMElb17 = new Label();
-
-    @FXML
-    private Label GAMElb26 = new Label();
-
-    @FXML
-    private Label GAMElb36 = new Label();
-
-    @FXML
-    private Label GAMElb46 = new Label();
-
-    @FXML
-    private Label GAMElb146 = new Label();
-
-    @FXML
-    private Label GAMElb56 = new Label();
-
-    @FXML
-    private Label GAMElb66 = new Label();
-
-    @FXML
-    private Label GAMElb76 = new Label();
-
-    @FXML
-    private Label GAMElb86 = new Label();
-
-    @FXML
-    private Label GAMElb96 = new Label();
-
-    @FXML
-    private Label GAMElb107 = new Label();
-
-    @FXML
-    private Label GAMElb1016 = new Label();
-
-    @FXML
-    private Label GAMElb18 = new Label();
-
-    @FXML
-    private Label GAMElb27 = new Label();
-
-    @FXML
-    private Label GAMElb37 = new Label();
-
-    @FXML
-    private Label GAMElb47 = new Label();
-
-    @FXML
-    private Label GAMElb147 = new Label();
-
-    @FXML
-    private Label GAMElb57 = new Label();
-
-    @FXML
-    private Label GAMElb67 = new Label();
-
-    @FXML
-    private Label GAMElb77 = new Label();
-
-    @FXML
-    private Label GAMElb87 = new Label();
-
-    @FXML
-    private Label GAMElb97 = new Label();
-
-    @FXML
-    private Label GAMElb108 = new Label();
-
-    @FXML
-    private Label GAMElb1017 = new Label();
-
-    @FXML
-    private Label GAMElb19 = new Label();
-
-    @FXML
-    private Label GAMElb28 = new Label();
-
-    @FXML
-    private Label GAMElb38 = new Label();
-
-    @FXML
-    private Label GAMElb48 = new Label();
-
-    @FXML
-    private Label GAMElb148 = new Label();
-
-    @FXML
-    private Label GAMElb68 = new Label();
-
-    @FXML
-    private Label GAMElb78 = new Label();
-
-    @FXML
-    private Label GAMElb88 = new Label();
-
-    @FXML
-    private Label GAMElb98 = new Label();
-
-    @FXML
-    private Label GAMElb109 = new Label();
-
-    @FXML
-    private Label GAMElb1018 = new Label();
-
-    @FXML
-    private Label GAMElb110 = new Label();
 
     @FXML
     private ImageView GAMEBackground = new ImageView();
@@ -592,6 +575,7 @@ public class GameGUIController {
         mp.play();
 
         //Creation of the labels ArrayList
+        /*
         labelsArray = new ArrayList<>();
         labelArray = new Label[123];
         labelArray[0]=GAMElb11;
@@ -723,6 +707,7 @@ public class GameGUIController {
         labelsArray.add( GAMElb911);
         labelsArray.add( GAMElb1021);
         labelsArray.add( GAMElb10111);
+         */
     }
 
     @FXML
