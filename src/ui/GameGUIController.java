@@ -16,6 +16,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -399,7 +400,7 @@ public class GameGUIController {
     private Label GAMElb121= new Label();
 
     @FXML
-    private ArrayList<Label> labelList ;
+    private ArrayList<Label> labelList;
 
     @FXML
     private BorderPane mainPane;
@@ -489,7 +490,7 @@ public class GameGUIController {
             }
         };
         timer.scheduleAtFixedRate(task, 1000, 1000);
-        labelArray[0].setText("aaaaaaaaaaaaaaaaaaaaaaaa");
+        fillLabels();
     }
 
     @FXML
@@ -742,16 +743,20 @@ public class GameGUIController {
     }
 
     private void fillLabels(){
-        for(int i=0;i<123;i++){
-            int text = random[i];
+        for(int i=0;i<labelList.size();i++){
+            int text = random[i+1];
             if(text==-1){
-                labelsArray.get(i).setText("X");
+                labelList.get(i).setText("X");
+                labelList.get(i).setTextFill(Color.RED);
             }
             else{
-                labelsArray.get(i).setText(text+"");
+                labelList.get(i).setText(text+"");
+                labelList.get(i).setTextFill(Color.BLACK);
             }
         }
     }
+
+
 
     private void cleanLabels(){
         for(int i=0;i<123;i++){
