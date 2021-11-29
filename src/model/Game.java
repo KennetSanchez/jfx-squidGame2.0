@@ -18,9 +18,12 @@ public class Game {
     private String obstaclesString;
     private int[] random;
     private int actualPlayerNegativeScore;
+    private int totalBoxesScore;
+    private ArrayList<Player> bestScores;
 
 
     public Game(){
+        totalBoxesScore=0;
         columns=11;
         rows=11;
         board=new int[rows][columns];
@@ -49,6 +52,7 @@ public class Game {
             else {
                 int temp=(int)(Math.random()*99)+1;
                 random[i]=temp;
+                totalBoxesScore+=temp;
             }
         }
     }
@@ -178,6 +182,12 @@ public class Game {
 
     public void placeObstacles(int n){
 
+    }
+
+    public void finishGame(String nickname,String time,int min,int secs){
+        double totalTimeInSeconds = min+(secs/60);
+        Player newPlayer = new Player(nickname,time,totalTimeInSeconds,actualPlayerNegativeScore,totalBoxesScore);
+        bestScores.add(newPlayer);
     }
 
     public int countObstaclesInRange(int a, int b){
