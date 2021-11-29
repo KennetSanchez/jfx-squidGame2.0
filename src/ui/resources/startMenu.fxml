@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane id="main-pane" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-radius: 15; -fx-background-color: #f0f7f7;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane id="main-pane" fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" style="-fx-background-radius: 15; -fx-background-color: #f0f7f7;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -14,7 +14,7 @@
                <children>
                   <Button id="main-pane-btn" fx:id="newGameBTN" mnemonicParsing="false" onAction="#newGame" styleClass="Button" stylesheets="@../css/style.css" text="New Game" />
                   <Button id="main-pane-btn" fx:id="scoreBoardBTN" mnemonicParsing="false" onAction="#scoreBoard" prefHeight="38.0" prefWidth="139.0" styleClass="Button" stylesheets="@../css/style.css" text="Scoreboard" />
-                  <Button id="main-pane-btn" fx:id="closeGameBTN" layoutX="265.0" layoutY="330.0" mnemonicParsing="false" onAction="#closeGame" prefHeight="31.0" prefWidth="94.0" styleClass="Button" stylesheets="@../css/style.css" text="Exit" />
+                  <Button id="main-pane-btn" fx:id="showInstructionsBTN" layoutX="265.0" layoutY="330.0" mnemonicParsing="false" onAction="#showInstructions" prefHeight="31.0" prefWidth="183.0" styleClass="Button" stylesheets="@../css/style.css" text="HowToPlay" />
                </children>
             </VBox>
          </children>

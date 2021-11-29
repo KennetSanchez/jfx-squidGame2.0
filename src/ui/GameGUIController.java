@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
@@ -415,7 +416,7 @@ public class GameGUIController {
     private Button scoreBoardBTN;
 
     @FXML
-    private Button closeGameBTN;
+    private Button showInstructionsBTN;
 
     @FXML
     private Label graphOptionLabel = new Label();
@@ -463,7 +464,40 @@ public class GameGUIController {
 
 
     @FXML
-    void closeGame(ActionEvent event) {
+    void showInstructions(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("How to play");
+        alert.setHeaderText("“This Is Hell. What Are The Rules In Hell?” ~Jang Deok-Su");
+        alert.setContentText("In this game, you need to reach the goal trying to step on the boxes with the smallest numbers and in the shortest time possible.\n" +
+                "Use wasd to move your character across the board");
+        alert.showAndWait();
+
+        Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+        alert2.setTitle("How to play (part 2)");
+        alert2.setHeaderText("“This Is Hell. What Are The Rules In Hell?” ~Jang Deok-Su");
+        alert2.setContentText("However there is a problem, the boxes values will only be shown for 10 seconds at the beginning.\n"+
+                "Also, the board is full of bottomless pits which will take you back to the start.\n"+
+                "But not everything is bad, the boxes that you have already stepped on will not give you a negative score again.");
+        alert2.showAndWait();
+
+        Alert alert3 = new Alert(Alert.AlertType.INFORMATION);
+        alert3.setTitle("How to play (part 3)");
+        alert3.setHeaderText("“This is hell. There are no rules in hell.” ~Jang Deok-Su");
+        alert3.setContentText("Fortunately, if you press the hint button you will have the opportunity to see the board for 5 seconds (but you will not be able to move during this time).\n" +
+                "You can only use this wildcard 5 times so use it wisely");
+        alert3.showAndWait();
+
+        Alert alert4 = new Alert(Alert.AlertType.INFORMATION);
+        alert4.setTitle("How to play (part 4)");
+        alert4.setHeaderText("“You Have A Reason To Leave This Place, But I Don’t.” – Ji-Yeong");
+        alert4.setContentText("If you feel that this is too much for you, you can give up (What a shame!). Pressing the surrender button will show you (With the help of graphs, how useful they are!) The path that you would travel to achieve the shortest time possible and the path that you would travel to step on the boxes with the smallest possible numbers.");
+        alert4.showAndWait();
+
+        Alert alert5 = new Alert(Alert.AlertType.INFORMATION);
+        alert5.setTitle("How to play (part 5)");
+        alert5.setHeaderText("“Red light.... Green light!.”");
+        alert5.setContentText("Try to enter the table of best players reaching the exit in the shortest time possible and stepping on the boxes with the smallest numbers.\n" + "We wish you good luck.");
+        alert5.show();
 
     }
 
