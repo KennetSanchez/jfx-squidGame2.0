@@ -411,9 +411,6 @@ public class GameGUIController {
     private Button newGameBTN;
 
     @FXML
-    private Button scoreBoardBTN;
-
-    @FXML
     private Button showInstructionsBTN;
 
     @FXML
@@ -450,6 +447,19 @@ public class GameGUIController {
     private int[] random;
     private boolean pausedGame;
     private int hintCounter;
+    private TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            if(!pausedGame){
+                secs++;
+                if (secs > 59) {
+                    secs = 0;
+                    min++;
+                }
+                Platform.runLater(() -> GAMEtime.setText(String.format("%02d:%02d", min, secs)));
+            }
+        }
+    };
 
     @FXML
     void changeMusicState(ActionEvent event) {
@@ -473,7 +483,7 @@ public class GameGUIController {
         Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
         alert2.setTitle("How to play (part 2)");
         alert2.setHeaderText("“This Is Hell. What Are The Rules In Hell?” ~Jang Deok-Su");
-        alert2.setContentText("However there is a problem, the boxes values will only be shown for 10 seconds at the beginning.\n"+
+        alert2.setContentText("However there is a problem, the boxes values will only be shown for 4 seconds at the beginning.\n"+
                 "Also, the board is full of bottomless pits which will take you back to the start.\n"+
                 "But not everything is bad, the boxes that you have already stepped on will not give you a negative score again.");
         alert2.showAndWait();
@@ -481,7 +491,7 @@ public class GameGUIController {
         Alert alert3 = new Alert(Alert.AlertType.INFORMATION);
         alert3.setTitle("How to play (part 3)");
         alert3.setHeaderText("“This is hell. There are no rules in hell.” ~Jang Deok-Su");
-        alert3.setContentText("Fortunately, if you press the hint button you will have the opportunity to see the board for 5 seconds (but you will not be able to move during this time).\n" +
+        alert3.setContentText("Fortunately, if you press the hint button you will have the opportunity to see the board for 2 seconds (but you will not be able to move during this time).\n" +
                 "You can only use this wildcard 5 times so use it wisely");
         alert3.showAndWait();
 
@@ -513,29 +523,13 @@ public class GameGUIController {
         GAMECharacter.setImage(new Image(String.valueOf(getClass().getResource("resources/Character.png"))));
         GAMECharacter.setLayoutX(originalX);
         GAMECharacter.setLayoutY(originalY);
-
-        timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                secs++;
-                if (secs > 59) {
-                    secs = 0;
-                    min++;
-                }
-                if (min > 59) {
-                    min = 0;
-                    hour++;
-                }
-                Platform.runLater(() -> GAMEtime.setText(String.format("%02d:%02d", min, secs)));
-            }
-        };
-        timer.scheduleAtFixedRate(task, 1000, 1000);
         fillLabels();
-        waitT(10000);
+        timer = new Timer();
+        timer.scheduleAtFixedRate(task, 1000, 1000);
+        waitT(4000,task);
     }
 
-    private void waitT(long time) throws InterruptedException {
+    private void waitT(long time,TimerTask task) throws InterruptedException {
         Task<Void> sleeper = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
@@ -556,6 +550,19 @@ public class GameGUIController {
         new Thread(sleeper).start();
     }
 
+
+
+    @FXML
+    void SCOREBOARDSave(ActionEvent event) {
+        String name = SCOREBOARDtxtField.getText();
+        timer.cancel();
+        if(!name.equals("")){
+            ((Stage)SCOREBOARDtxtField.getScene().getWindow()).close();
+            game.finishGame(name,GAMEtime.getText(),min,secs);
+            launchWindow("resources/startMenu.fxml", "SquidGame 2.0", Modality.NONE, StageStyle.DECORATED);
+        }
+    }
+
     @FXML
     void GAMEmove(KeyEvent event) {
         char keyPressed = event.getText().toLowerCase().charAt(0);
@@ -574,6 +581,11 @@ public class GameGUIController {
                             boardNumber+=11;
                             GAMECharacter.setLayoutY(y-77);
                         }
+                    }
+                    if(GAMECharacter.getLayoutY()<=maxY-77){
+                        ((Stage)GAMECharacter.getScene().getWindow()).close();
+                        launchWindow("resources/Scoreboard.fxml","Scoreboard", Modality.NONE, StageStyle.DECORATED);
+                        SCOREBOARDDataPane.setVisible(true);
                     }
                     //Aqui se debe mirar cuando gana y terminar el juego
                     break;
@@ -655,14 +667,14 @@ public class GameGUIController {
         if(hintCounter!=1){
             pausedGame=true;
             fillLabels();
-            waitT(5000);
+            waitT(2000,task);
             hintCounter--;
             GAMEhintsCounter.setText((hintCounter)+" / 5");
         }
         else{
             pausedGame=true;
             fillLabels();
-            waitT(5000);
+            waitT(2000,task);
             hintCounter--;
             GAMEhintsCounter.setText((hintCounter)+" / 5");
             GAMEhintButton.setDisable(true);
@@ -672,12 +684,14 @@ public class GameGUIController {
     @FXML
     void useAdjacencyList(ActionEvent event) throws FileNotFoundException, InterruptedException {
        ((Stage) graphOptionLabel.getScene().getWindow()).close();
+       game.linkMatrix(false);
         openGameScreen();
     }
 
     @FXML
     void useAdjacencyMatrix(ActionEvent event) throws FileNotFoundException, InterruptedException {
         ((Stage) graphOptionLabel.getScene().getWindow()).close();
+        game.linkMatrix(false);
         openGameScreen();
     }
 
@@ -730,6 +744,12 @@ public class GameGUIController {
 //--------------------------------------------------------- SCOREBOARD CODE --------------------------------------
     @FXML
     private Pane SCOREBOARDDataPane;
+
+    @FXML
+    private TextField SCOREBOARDtxtField;
+
+    @FXML
+    private Button scoreBoardBTN;
 
     @FXML
     private Pane SCOREBOARDscorePane;

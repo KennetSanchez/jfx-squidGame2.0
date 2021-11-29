@@ -1,5 +1,6 @@
 package structures;
 
+import java.io.Serializable;
 import java.util.*;
 
 public class GraphA<E extends Number> implements GraphInterface<E> {

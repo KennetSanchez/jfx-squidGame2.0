@@ -8,10 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Game;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 
 public class Main extends Application {
 
@@ -54,6 +51,15 @@ public class Main extends Application {
 
     @Override
     public void stop() {
+        game.initializeGame();
+        ObjectOutputStream oos;
+        try {
+            oos = new ObjectOutputStream(new FileOutputStream(GAME_PATH_FILE));
+            oos.writeObject(game);
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Platform.exit();
         System.exit(0);
         controller.stopTimer();

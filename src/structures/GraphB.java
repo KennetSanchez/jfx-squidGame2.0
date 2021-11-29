@@ -1,8 +1,9 @@
 package structures;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class GraphB<E extends Number> implements GraphInterface<E>{
+public class GraphB<E extends Number> implements GraphInterface<E> {
     private int numberOfVertices;
     private Hashtable<Integer,Vertex<E>> adjList;
     private Hashtable<Integer,String> shortestPaths;

@@ -7,17 +7,17 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="905.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="905.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane id="dataPane" fx:id="SCOREBOARDDataPane" layoutX="248.0" layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="241.0" prefWidth="409.0" stylesheets="@../css/style.css" visible="false">
          <children>
             <Label layoutX="47.0" layoutY="109.0" styleClass="Label" stylesheets="@../css/style.css" text="Nickname:" />
             <Label layoutX="117.0" layoutY="14.0" styleClass="Label" stylesheets="@../css/style.css" text="Congratulations!" />
-            <TextField layoutX="188.0" layoutY="109.0" prefHeight="23.0" prefWidth="149.0" stylesheets="@../css/style.css" />
-            <Button layoutX="122.0" layoutY="178.0" mnemonicParsing="false" stylesheets="@../css/style.css" text="Save" />
+            <TextField fx:id="SCOREBOARDtxtField" layoutX="188.0" layoutY="109.0" prefHeight="23.0" prefWidth="149.0" stylesheets="@../css/style.css" />
+            <Button layoutX="122.0" layoutY="178.0" mnemonicParsing="false" onAction="#SCOREBOARDSave" stylesheets="@../css/style.css" text="Save" />
          </children>
       </Pane>
-      <Pane fx:id="SCOREBOARDscorePane" prefHeight="583.0" prefWidth="905.0" visible = "false">
+      <Pane fx:id="SCOREBOARDscorePane" prefHeight="583.0" prefWidth="905.0" visible="false">
          <children>
             <TableView fx:id="SCOREBOARDtvScores" layoutX="187.0" layoutY="53.0" prefHeight="417.0" prefWidth="532.0" stylesheets="@../css/style.css">
               <columns>

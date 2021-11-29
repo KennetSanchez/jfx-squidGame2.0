@@ -2,19 +2,20 @@ package model;
 
 import structures.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Hashtable;
 
 
-public class Game {
+public class Game implements Serializable {
 
     private ArrayList<Integer> obstaclesToPlace;
     private int[][] board;
     private int rows;
     private int columns;
-    private GraphA<Integer> graphA;
-    private GraphB<Integer> graphB;
+    transient GraphA<Integer> graphA;
+    transient GraphB<Integer> graphB;
     private String obstaclesString;
     private int[] random;
     private int actualPlayerNegativeScore;
@@ -22,14 +23,20 @@ public class Game {
     private ArrayList<Player> bestScores;
 
 
-    public Game(){
+    public Game() {
+        bestScores=new ArrayList<>();
+        initializeGame();
+    }
+
+    public void initializeGame(){
         totalBoxesScore=0;
         columns=11;
         rows=11;
         board=new int[rows][columns];
         boardExample();
         obstaclesString = ",38,39,41,59,60,61,62,64,83,";
-        graphA=new GraphA(123);
+        graphA=new GraphA<>(123);
+        graphB=new GraphB<>(123);
         random=new int[123];
         //antes del generateRandoms tiene que estar el metodo de generar los obstaculos aleatorios
         generateRandoms();
@@ -59,11 +66,13 @@ public class Game {
 
     public boolean linkMatrix(boolean graph){
         if(graph){
+            graphA = new GraphA<>(123);
             graphA.addEdgeDirected(0,6,random[6]);
             graphA.addEdgeDirected(116,122,0);
             return linkMatrix(1,2);
         }
         else {
+            graphB = new GraphB<>(123);
             graphB.addEdgeDirected(0,6,random[6]);
             graphB.addEdgeDirected(116,122,0);
             return linkMatrixB(1,2);
@@ -188,6 +197,7 @@ public class Game {
         double totalTimeInSeconds = min+(secs/60);
         Player newPlayer = new Player(nickname,time,totalTimeInSeconds,actualPlayerNegativeScore,totalBoxesScore);
         bestScores.add(newPlayer);
+        initializeGame();
     }
 
     public int countObstaclesInRange(int a, int b){
