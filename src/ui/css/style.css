@@ -17,7 +17,7 @@ Button:pressed{
 }
 
 TextField{
-    -fx-font: Consolas;
+    -fx-font-family: Consolas;
     -fx-font-size: 10px;
     -fx-font-weight: bold;
     -fx-background-radius: 8;
@@ -28,5 +28,22 @@ TextField{
     -fx-font-size: 20px;
     -fx-text-fill: black;
     -fx-font-weight: bold;
+}
+
+TableColumn{
+    -fx-font-family: Consolas;
+    -fx-font-size: 10px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-border-radius: 8 px;
+
+}
+
+TableView{
+    -fx-font-family: Consolas;
+    -fx-font-size: 15px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15px;
 }
 

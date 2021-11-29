@@ -624,7 +624,9 @@ public class GameGUIController {
 
     @FXML
     void scoreBoard(ActionEvent event) {
-
+        ((Stage)scoreBoardBTN.getScene().getWindow()).close();
+        launchWindow("resources/SCOREBOARD.fxml", "Squidgame 2.0", Modality.NONE, StageStyle.DECORATED);
+        SCOREBOARDscorePane.setVisible(true);
     }
 
     MediaPlayer mp;
@@ -643,7 +645,9 @@ public class GameGUIController {
 
     @FXML
     void GAMEgiveUp(ActionEvent event) {
-
+        ((Stage)GAMElb1.getScene().getWindow()).close();
+        launchWindow("resources/Scoreboard.fxml", "Scoreboard", Modality.NONE, StageStyle.DECORATED);
+        SCOREBOARDscorePane.setVisible(true);
     }
 
     @FXML
@@ -744,7 +748,8 @@ public class GameGUIController {
 
     @FXML
     void backToMenu(ActionEvent event) {
-        launchWindow("resources/startMenu.fxml", "SquidGame 2.0",Modality.NONE, StageStyle.DECORATED);
+        ((Stage)SCOREBOARDscorePane.getScene().getWindow()).close();
+        launchWindow("resources/startMenu.fxml", "SquidGame 2.0", Modality.NONE, StageStyle.DECORATED);
         SCOREBOARDDataPane.setVisible(false);
         SCOREBOARDscorePane.setVisible(false);
     }
