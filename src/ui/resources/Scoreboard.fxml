@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="905.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane id="dataPane" fx:id="SCOREBOARDDataPane" layoutX="248.0" layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="241.0" prefWidth="409.0" stylesheets="@../css/style.css" visible="false">
@@ -18,12 +17,12 @@
             <Button layoutX="122.0" layoutY="178.0" mnemonicParsing="false" stylesheets="@../css/style.css" text="Save" />
          </children>
       </Pane>
-      <Pane fx:id="SCOREBOARDscorePane" prefHeight="583.0" prefWidth="905.0" visible="false">
+      <Pane fx:id="SCOREBOARDscorePane" prefHeight="583.0" prefWidth="905.0" visible = "false">
          <children>
             <TableView fx:id="SCOREBOARDtvScores" layoutX="187.0" layoutY="53.0" prefHeight="417.0" prefWidth="532.0" stylesheets="@../css/style.css">
               <columns>
                 <TableColumn fx:id="SCOREBOARDtcNickName" prefWidth="251.0" text="Nickname" />
-                <TableColumn fx:id="SCOREBOARDtcScore" prefWidth="166.0" text="Score" />
+                <TableColumn fx:id="SCOREBOARDtcScore" prefWidth="166.0" text="Efficiency (%)" />
                   <TableColumn fx:id="SCOREBOARDtcTime" prefWidth="114.0" text="Time" />
               </columns>
             </TableView>
