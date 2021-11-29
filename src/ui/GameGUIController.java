@@ -10,14 +10,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -722,6 +720,33 @@ public class GameGUIController {
             System.out.println("Can't load requested window right now.\nRequested window: \"" + fxml + "\"");
             System.err.println(npe.getMessage());
         }
+    }
+
+
+//--------------------------------------------------------- SCOREBOARD CODE --------------------------------------
+    @FXML
+    private Pane SCOREBOARDDataPane;
+
+    @FXML
+    private Pane SCOREBOARDscorePane;
+
+    @FXML
+    private TableView<String> SCOREBOARDtvScores;
+
+    @FXML
+    private TableColumn<String, String> SCOREBOARDtcNickName;
+
+    @FXML
+    private TableColumn<String, String> SCOREBOARDtcScore;
+
+    @FXML
+    private TableColumn<String, String> SCOREBOARDtcTime;
+
+    @FXML
+    void backToMenu(ActionEvent event) {
+        launchWindow("resources/startMenu.fxml", "SquidGame 2.0",Modality.NONE, StageStyle.DECORATED);
+        SCOREBOARDDataPane.setVisible(false);
+        SCOREBOARDscorePane.setVisible(false);
     }
 
 
