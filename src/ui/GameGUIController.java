@@ -22,19 +22,357 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
 import model.Game;
 
-import javax.swing.text.Style;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
+
 
 public class GameGUIController {
+
+    //-------------------------------------     CODE FOR ALL WINDOWS    -------------------------------------
+
+    Game game;
+    MediaPlayer mp;
+    public GameGUIController(Game game){
+        this.game=game;
+        random = game.getRandom();
+        hintCounter=5;
+        //Music code
+        String songName = "Squid game song - pink soldiers.mp3";
+        String path = "src/ui/resources/" + songName;
+        Media media = new Media(new File(path).toURI().toString());
+        mp = new MediaPlayer(media);
+        mp.setCycleCount(MediaPlayer.INDEFINITE);
+        mp.play();
+    }
+
+    private void launchWindow(String fxml, String title, Modality modality, StageStyle style) {
+        try {
+            Parent loadedPane = loadFxml(fxml);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(loadedPane));
+            stage.setTitle(title);
+            stage.initModality(modality);
+            stage.initStyle(style);
+            stage.setResizable(false);
+            stage.show();
+        } catch (NullPointerException npe) {
+            System.out.println("Can't load requested window right now.\nRequested window: \"" + fxml + "\"");
+            System.err.println(npe.getMessage());
+        }
+    }
+
+    private Parent loadFxml(String resources) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resources));
+            fxmlLoader.setController(this);
+            return fxmlLoader.load();
+        } catch (Exception e) {
+            System.out.println(e);
+            System.out.println("Can't load requested document right now.\nRequested document: \"" + resources + "\"");
+            throw new NullPointerException("Document is null");
+        }
+    }
+
+    //------------------------------------- MENU CODE   -------------------------------------
+
+    @FXML
+    void showInstructions(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("How to play");
+        alert.setHeaderText("“This Is Hell. What Are The Rules In Hell?” ~Jang Deok-Su");
+        alert.setContentText("In this game, you need to reach the goal trying to step on the boxes with the smallest numbers and in the shortest time possible.\n" +
+                "Use wasd to move your character across the board");
+        alert.showAndWait();
+
+        Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+        alert2.setTitle("How to play (part 2)");
+        alert2.setHeaderText("“This Is Hell. What Are The Rules In Hell?” ~Jang Deok-Su");
+        alert2.setContentText("However there is a problem, the boxes values will only be shown for 4 seconds at the beginning.\n"+
+                "Also, the board is full of bottomless pits which will take you back to the start.\n"+
+                "But not everything is bad, the boxes that you have already stepped on will not give you a negative score again.");
+        alert2.showAndWait();
+
+        Alert alert3 = new Alert(Alert.AlertType.INFORMATION);
+        alert3.setTitle("How to play (part 3)");
+        alert3.setHeaderText("“This is hell. There are no rules in hell.” ~Jang Deok-Su");
+        alert3.setContentText("Fortunately, if you press the hint button you will have the opportunity to see the board for 2 seconds (but you will not be able to move during this time).\n" +
+                "You can only use this wildcard 5 times so use it wisely");
+        alert3.showAndWait();
+
+        Alert alert4 = new Alert(Alert.AlertType.INFORMATION);
+        alert4.setTitle("How to play (part 4)");
+        alert4.setHeaderText("“You Have A Reason To Leave This Place, But I Don’t.” – Ji-Yeong");
+        alert4.setContentText("If you feel that this is too much for you, you can give up (What a shame!). Pressing the surrender button will show you (With the help of graphs, how useful they are!) The path that you would travel to achieve the shortest time possible and the path that you would travel to step on the boxes with the smallest possible numbers.");
+        alert4.showAndWait();
+
+        Alert alert5 = new Alert(Alert.AlertType.INFORMATION);
+        alert5.setTitle("How to play (part 5)");
+        alert5.setHeaderText("“Red light.... Green light!.”");
+        alert5.setContentText("Try to enter the table of best players reaching the exit in the shortest time possible and stepping on the boxes with the smallest numbers.\n" + "We wish you good luck.");
+        alert5.show();
+
+    }
+
+    //-------------------------------------     ADJACENCY OPTIONS CODE      -------------------------------------
+
+    @FXML
+    void newGame(ActionEvent event) {
+        launchWindow("resources/GraphOption.fxml","Choose your graph",Modality.NONE,StageStyle.DECORATED);
+    }
+
+    @FXML
+    void useAdjacencyList(ActionEvent event) throws FileNotFoundException, InterruptedException {
+        ((Stage) graphOptionLabel.getScene().getWindow()).close();
+        game.linkMatrix(false);
+        openGameScreen();
+    }
+
+    @FXML
+    void useAdjacencyMatrix(ActionEvent event) throws FileNotFoundException, InterruptedException {
+        ((Stage) graphOptionLabel.getScene().getWindow()).close();
+        game.linkMatrix(false);
+        openGameScreen();
+    }
+    //-------------------------------------     GAME CODE      -------------------------------------
+
+    private final double originalX = 718;
+    private final double originalY = 929;
+    private ArrayList<Label> labelsArray;
+    private Label[] labelArray;
+    private final double maxX = 1377;
+    private final double minX = 57;
+    private final double maxY = 112;
+    private int boardNumber = -5;
+    private int[] random;
+    private boolean pausedGame;
+    private int hintCounter;
+
+    private TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            if(!pausedGame){
+                secs++;
+                if (secs > 59) {
+                    secs = 0;
+                    min++;
+                }
+                Platform.runLater(() -> GAMEtime.setText(String.format("%02d:%02d", min, secs)));
+            }
+        }
+    };
+
+    @FXML
+    void changeMusicState(ActionEvent event) {
+        if("PLAYING".equalsIgnoreCase(mp.getStatus() + "")){
+            mp.pause();
+        }else{
+            mp.play();
+        }
+    }
+
+    @FXML
+    void GAMEmove(KeyEvent event) {
+        char keyPressed = event.getText().toLowerCase().charAt(0);
+        double x = GAMECharacter.getLayoutX();
+        double y = GAMECharacter.getLayoutY();
+        if(!pausedGame){
+            switch (keyPressed){
+                case 'w':
+                    if(y>=maxY || x==originalX){
+                        if(game.getObstaclesString().contains(","+(boardNumber+11)+",")){
+                            boardNumber=-5;
+                            GAMECharacter.setLayoutX(originalX);
+                            GAMECharacter.setLayoutY(originalY);
+                        }
+                        else{
+                            boardNumber+=11;
+                            GAMECharacter.setLayoutY(y-77);
+                        }
+                    }
+                    if(GAMECharacter.getLayoutY()<=maxY-77){
+                        ((Stage)GAMECharacter.getScene().getWindow()).close();
+                        launchWindow("resources/Scoreboard.fxml","Scoreboard", Modality.NONE, StageStyle.DECORATED);
+                        SCOREBOARDDataPane.setVisible(true);
+                    }
+                    //Aqui se debe mirar cuando gana y terminar el juego
+                    break;
+                case 'a':
+                    if(y!=originalY && x >= minX+3){
+                        if(game.getObstaclesString().contains(","+(boardNumber-1)+",")) {
+                            boardNumber=-5;
+                            GAMECharacter.setLayoutX(originalX);
+                            GAMECharacter.setLayoutY(originalY);
+                        }
+                        else {
+                            boardNumber--;
+                            GAMECharacter.setLayoutX(x - 132);
+                        }
+                    }
+                    break;
+                case 's':
+                    if(y+77<=originalY-77){
+                        if(game.getObstaclesString().contains(","+(boardNumber-11)+",")) {
+                            boardNumber=-5;
+                            GAMECharacter.setLayoutX(originalX);
+                            GAMECharacter.setLayoutY(originalY);
+                        }
+                        else {
+                            boardNumber-=11;
+                            GAMECharacter.setLayoutY(y + 77);
+                        }
+                    }
+                    break;
+                case 'd':
+                    if(y!=originalY && x <= maxX){
+                        if(game.getObstaclesString().contains(","+(boardNumber+1)+",")) {
+                            boardNumber=-5;
+                            GAMECharacter.setLayoutX(originalX);
+                            GAMECharacter.setLayoutY(originalY);
+                        }
+                        else {
+                            boardNumber++;
+                            GAMECharacter.setLayoutX(x + 132);
+                        }
+                    }
+                    break;
+            }
+            game.giveNegativeScore(boardNumber);
+            System.out.println(game.getActualPlayerNegativeScore());
+        }
+    }
+
+    @FXML
+    void GAMEgiveUp(ActionEvent event) {
+        ((Stage)GAMElb1.getScene().getWindow()).close();
+        launchWindow("resources/Scoreboard.fxml", "Scoreboard", Modality.NONE, StageStyle.DECORATED);
+        SCOREBOARDscorePane.setVisible(true);
+    }
+
+    @FXML
+    void GAMEhint(ActionEvent event) throws InterruptedException {
+        if(hintCounter!=1){
+            pausedGame=true;
+            fillLabels();
+            waitT(2000,task);
+            hintCounter--;
+            GAMEhintsCounter.setText((hintCounter)+" / 5");
+        }
+        else{
+            pausedGame=true;
+            fillLabels();
+            waitT(2000,task);
+            hintCounter--;
+            GAMEhintsCounter.setText((hintCounter)+" / 5");
+            GAMEhintButton.setDisable(true);
+        }
+    }
+
+
+    private void openGameScreen() throws FileNotFoundException, InterruptedException {
+        pausedGame=true;
+        ((Stage) newGameBTN.getScene().getWindow()).close();
+        launchWindow("resources/Game.fxml","SquidGame 2.0",Modality.NONE, StageStyle.DECORATED);
+        GAMEBackground.setImage(new Image(String.valueOf(getClass().getResource("resources/Background.png"))));
+        GAMEPlatforms.setImage(new Image(String.valueOf(getClass().getResource("resources/Platforms.png"))));
+        GAMECharacter.setImage(new Image(String.valueOf(getClass().getResource("resources/Character.png"))));
+        GAMECharacter.setLayoutX(originalX);
+        GAMECharacter.setLayoutY(originalY);
+        fillLabels();
+        timer = new Timer();
+        timer.scheduleAtFixedRate(task, 1000, 1000);
+        waitT(4000,task);
+    }
+
+    private void waitT(long time,TimerTask task) throws InterruptedException {
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(time);
+                } catch (InterruptedException e) {
+                }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                cleanLabels();
+                pausedGame=false;
+            }
+        });
+        new Thread(sleeper).start();
+    }
+
+    private Timer timer = new Timer();
+    private int secs = 0, min = 0, hour = 0;
+
+    public void stopTimer(){
+        min = 0;
+        secs= 0;
+        timer.cancel();
+    }
+
+    private void fillLabels(){
+        for(int i=0;i<labelList.size();i++){
+            int text = random[i+1];
+            if(text==-1){
+                labelList.get(i).setText("X");
+                labelList.get(i).setTextFill(Color.RED);
+            }
+            else{
+                labelList.get(i).setText(text+"");
+                labelList.get(i).setTextFill(Color.BLACK);
+            }
+        }
+    }
+
+    private void cleanLabels(){
+        for(int i=0;i<labelList.size();i++){
+            labelList.get(i).setText("");
+        }
+    }
+
+
+//--------------------------------------------------------- SCOREBOARD CODE --------------------------------------
+    @FXML
+    void backToMenu(ActionEvent event) {
+        ((Stage)SCOREBOARDscorePane.getScene().getWindow()).close();
+        launchWindow("resources/startMenu.fxml", "SquidGame 2.0", Modality.NONE, StageStyle.DECORATED);
+        SCOREBOARDDataPane.setVisible(false);
+        SCOREBOARDscorePane.setVisible(false);
+    }
+
+    @FXML
+    void SCOREBOARDSave(ActionEvent event) {
+        String name = SCOREBOARDtxtField.getText();
+        timer.cancel();
+        if(!name.equals("")){
+            ((Stage)SCOREBOARDtxtField.getScene().getWindow()).close();
+            game.finishGame(name,GAMEtime.getText(),min,secs);
+            launchWindow("resources/startMenu.fxml", "SquidGame 2.0", Modality.NONE, StageStyle.DECORATED);
+        }
+    }
+
+
+
+    @FXML
+    void scoreBoard(ActionEvent event) {
+        ((Stage)scoreBoardBTN.getScene().getWindow()).close();
+        launchWindow("resources/SCOREBOARD.fxml", "Squidgame 2.0", Modality.NONE, StageStyle.DECORATED);
+        SCOREBOARDscorePane.setVisible(true);
+    }
+
+
+
+    //---------------------------------------- FXML COMPONENTS ----------------------------------------------------
+
     @FXML
     private Label GAMEhintsCounter = new Label();
 
@@ -433,315 +771,7 @@ public class GameGUIController {
 
     @FXML
     private Button GAMEhintButton;
-    //-------------------------------------     CODE FOR ALL WINDOWS    -------------------------------------
-    Game game;
 
-    private final double originalX = 718;
-    private final double originalY = 929;
-    private ArrayList<Label> labelsArray;
-    private Label[] labelArray;
-    private final double maxX = 1377;
-    private final double minX = 57;
-    private final double maxY = 112;
-    private int boardNumber = -5;
-    private int[] random;
-    private boolean pausedGame;
-    private int hintCounter;
-    private TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            if(!pausedGame){
-                secs++;
-                if (secs > 59) {
-                    secs = 0;
-                    min++;
-                }
-                Platform.runLater(() -> GAMEtime.setText(String.format("%02d:%02d", min, secs)));
-            }
-        }
-    };
-
-    @FXML
-    void changeMusicState(ActionEvent event) {
-        if("PLAYING".equalsIgnoreCase(mp.getStatus() + "")){
-            mp.pause();
-        }else{
-            mp.play();
-        }
-    }
-
-
-    @FXML
-    void showInstructions(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("How to play");
-        alert.setHeaderText("“This Is Hell. What Are The Rules In Hell?” ~Jang Deok-Su");
-        alert.setContentText("In this game, you need to reach the goal trying to step on the boxes with the smallest numbers and in the shortest time possible.\n" +
-                "Use wasd to move your character across the board");
-        alert.showAndWait();
-
-        Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-        alert2.setTitle("How to play (part 2)");
-        alert2.setHeaderText("“This Is Hell. What Are The Rules In Hell?” ~Jang Deok-Su");
-        alert2.setContentText("However there is a problem, the boxes values will only be shown for 4 seconds at the beginning.\n"+
-                "Also, the board is full of bottomless pits which will take you back to the start.\n"+
-                "But not everything is bad, the boxes that you have already stepped on will not give you a negative score again.");
-        alert2.showAndWait();
-
-        Alert alert3 = new Alert(Alert.AlertType.INFORMATION);
-        alert3.setTitle("How to play (part 3)");
-        alert3.setHeaderText("“This is hell. There are no rules in hell.” ~Jang Deok-Su");
-        alert3.setContentText("Fortunately, if you press the hint button you will have the opportunity to see the board for 2 seconds (but you will not be able to move during this time).\n" +
-                "You can only use this wildcard 5 times so use it wisely");
-        alert3.showAndWait();
-
-        Alert alert4 = new Alert(Alert.AlertType.INFORMATION);
-        alert4.setTitle("How to play (part 4)");
-        alert4.setHeaderText("“You Have A Reason To Leave This Place, But I Don’t.” – Ji-Yeong");
-        alert4.setContentText("If you feel that this is too much for you, you can give up (What a shame!). Pressing the surrender button will show you (With the help of graphs, how useful they are!) The path that you would travel to achieve the shortest time possible and the path that you would travel to step on the boxes with the smallest possible numbers.");
-        alert4.showAndWait();
-
-        Alert alert5 = new Alert(Alert.AlertType.INFORMATION);
-        alert5.setTitle("How to play (part 5)");
-        alert5.setHeaderText("“Red light.... Green light!.”");
-        alert5.setContentText("Try to enter the table of best players reaching the exit in the shortest time possible and stepping on the boxes with the smallest numbers.\n" + "We wish you good luck.");
-        alert5.show();
-
-    }
-
-    @FXML
-    void newGame(ActionEvent event) {
-        launchWindow("resources/GraphOption.fxml","Choose your graph",Modality.NONE,StageStyle.DECORATED);
-    }
-
-    private void openGameScreen() throws FileNotFoundException, InterruptedException {
-        pausedGame=true;
-        ((Stage) newGameBTN.getScene().getWindow()).close();
-        launchWindow("resources/Game.fxml","SquidGame 2.0",Modality.NONE, StageStyle.DECORATED);
-        GAMEBackground.setImage(new Image(String.valueOf(getClass().getResource("resources/Background.png"))));
-        GAMEPlatforms.setImage(new Image(String.valueOf(getClass().getResource("resources/Platforms.png"))));
-        GAMECharacter.setImage(new Image(String.valueOf(getClass().getResource("resources/Character.png"))));
-        GAMECharacter.setLayoutX(originalX);
-        GAMECharacter.setLayoutY(originalY);
-        fillLabels();
-        timer = new Timer();
-        timer.scheduleAtFixedRate(task, 1000, 1000);
-        waitT(4000,task);
-    }
-
-    private void waitT(long time,TimerTask task) throws InterruptedException {
-        Task<Void> sleeper = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                try {
-                    Thread.sleep(time);
-                } catch (InterruptedException e) {
-                }
-                return null;
-            }
-        };
-        sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle(WorkerStateEvent event) {
-                cleanLabels();
-                pausedGame=false;
-            }
-        });
-        new Thread(sleeper).start();
-    }
-
-
-
-    @FXML
-    void SCOREBOARDSave(ActionEvent event) {
-        String name = SCOREBOARDtxtField.getText();
-        timer.cancel();
-        if(!name.equals("")){
-            ((Stage)SCOREBOARDtxtField.getScene().getWindow()).close();
-            game.finishGame(name,GAMEtime.getText(),min,secs);
-            launchWindow("resources/startMenu.fxml", "SquidGame 2.0", Modality.NONE, StageStyle.DECORATED);
-        }
-    }
-
-    @FXML
-    void GAMEmove(KeyEvent event) {
-        char keyPressed = event.getText().toLowerCase().charAt(0);
-        double x = GAMECharacter.getLayoutX();
-        double y = GAMECharacter.getLayoutY();
-        if(!pausedGame){
-            switch (keyPressed){
-                case 'w':
-                    if(y>=maxY || x==originalX){
-                        if(game.getObstaclesString().contains(","+(boardNumber+11)+",")){
-                            boardNumber=-5;
-                            GAMECharacter.setLayoutX(originalX);
-                            GAMECharacter.setLayoutY(originalY);
-                        }
-                        else{
-                            boardNumber+=11;
-                            GAMECharacter.setLayoutY(y-77);
-                        }
-                    }
-                    if(GAMECharacter.getLayoutY()<=maxY-77){
-                        ((Stage)GAMECharacter.getScene().getWindow()).close();
-                        launchWindow("resources/Scoreboard.fxml","Scoreboard", Modality.NONE, StageStyle.DECORATED);
-                        SCOREBOARDDataPane.setVisible(true);
-                    }
-                    //Aqui se debe mirar cuando gana y terminar el juego
-                    break;
-                case 'a':
-                    if(y!=originalY && x >= minX+3){
-                        if(game.getObstaclesString().contains(","+(boardNumber-1)+",")) {
-                            boardNumber=-5;
-                            GAMECharacter.setLayoutX(originalX);
-                            GAMECharacter.setLayoutY(originalY);
-                        }
-                        else {
-                            boardNumber--;
-                            GAMECharacter.setLayoutX(x - 132);
-                        }
-                    }
-                    break;
-                case 's':
-                    if(y+77<=originalY-77){
-                        if(game.getObstaclesString().contains(","+(boardNumber-11)+",")) {
-                            boardNumber=-5;
-                            GAMECharacter.setLayoutX(originalX);
-                            GAMECharacter.setLayoutY(originalY);
-                        }
-                        else {
-                            boardNumber-=11;
-                            GAMECharacter.setLayoutY(y + 77);
-                        }
-                    }
-                    break;
-                case 'd':
-                    if(y!=originalY && x <= maxX){
-                        if(game.getObstaclesString().contains(","+(boardNumber+1)+",")) {
-                            boardNumber=-5;
-                            GAMECharacter.setLayoutX(originalX);
-                            GAMECharacter.setLayoutY(originalY);
-                        }
-                        else {
-                            boardNumber++;
-                            GAMECharacter.setLayoutX(x + 132);
-                        }
-                    }
-                    break;
-            }
-            game.giveNegativeScore(boardNumber);
-            System.out.println(game.getActualPlayerNegativeScore());
-        }
-    }
-
-    @FXML
-    void scoreBoard(ActionEvent event) {
-        ((Stage)scoreBoardBTN.getScene().getWindow()).close();
-        launchWindow("resources/SCOREBOARD.fxml", "Squidgame 2.0", Modality.NONE, StageStyle.DECORATED);
-        SCOREBOARDscorePane.setVisible(true);
-    }
-
-    MediaPlayer mp;
-    public GameGUIController(Game game){
-        this.game=game;
-        random = game.getRandom();
-        hintCounter=5;
-        //Music code
-        String songName = "Squid game song - pink soldiers.mp3";
-        String path = "src/ui/resources/" + songName;
-        Media media = new Media(new File(path).toURI().toString());
-        mp = new MediaPlayer(media);
-        mp.setCycleCount(MediaPlayer.INDEFINITE);
-        mp.play();
-    }
-
-    @FXML
-    void GAMEgiveUp(ActionEvent event) {
-        ((Stage)GAMElb1.getScene().getWindow()).close();
-        launchWindow("resources/Scoreboard.fxml", "Scoreboard", Modality.NONE, StageStyle.DECORATED);
-        SCOREBOARDscorePane.setVisible(true);
-    }
-
-    @FXML
-    void GAMEhint(ActionEvent event) throws InterruptedException {
-        if(hintCounter!=1){
-            pausedGame=true;
-            fillLabels();
-            waitT(2000,task);
-            hintCounter--;
-            GAMEhintsCounter.setText((hintCounter)+" / 5");
-        }
-        else{
-            pausedGame=true;
-            fillLabels();
-            waitT(2000,task);
-            hintCounter--;
-            GAMEhintsCounter.setText((hintCounter)+" / 5");
-            GAMEhintButton.setDisable(true);
-        }
-    }
-
-    @FXML
-    void useAdjacencyList(ActionEvent event) throws FileNotFoundException, InterruptedException {
-       ((Stage) graphOptionLabel.getScene().getWindow()).close();
-       game.linkMatrix(false);
-        openGameScreen();
-    }
-
-    @FXML
-    void useAdjacencyMatrix(ActionEvent event) throws FileNotFoundException, InterruptedException {
-        ((Stage) graphOptionLabel.getScene().getWindow()).close();
-        game.linkMatrix(false);
-        openGameScreen();
-    }
-
-    private Timer timer = new Timer();
-    private int secs = 0, min = 0, hour = 0;
-
-    public void stopTimer(){
-        min = 0;
-        secs= 0;
-        timer.cancel();
-    }
-
-    private void fillLabels(){
-        for(int i=0;i<labelList.size();i++){
-            int text = random[i+1];
-            if(text==-1){
-                labelList.get(i).setText("X");
-                labelList.get(i).setTextFill(Color.RED);
-            }
-            else{
-                labelList.get(i).setText(text+"");
-                labelList.get(i).setTextFill(Color.BLACK);
-            }
-        }
-    }
-
-    private void cleanLabels(){
-        for(int i=0;i<labelList.size();i++){
-            labelList.get(i).setText("");
-        }
-    }
-
-    private void launchWindow(String fxml, String title, Modality modality, StageStyle style) {
-        try {
-            Parent loadedPane = loadFxml(fxml);
-            Stage stage = new Stage();
-            stage.setScene(new Scene(loadedPane));
-            stage.setTitle(title);
-            stage.initModality(modality);
-            stage.initStyle(style);
-            stage.setResizable(false);
-            stage.show();
-        } catch (NullPointerException npe) {
-            System.out.println("Can't load requested window right now.\nRequested window: \"" + fxml + "\"");
-            System.err.println(npe.getMessage());
-        }
-    }
-
-
-//--------------------------------------------------------- SCOREBOARD CODE --------------------------------------
     @FXML
     private Pane SCOREBOARDDataPane;
 
@@ -765,27 +795,5 @@ public class GameGUIController {
 
     @FXML
     private TableColumn<String, String> SCOREBOARDtcTime;
-
-    @FXML
-    void backToMenu(ActionEvent event) {
-        ((Stage)SCOREBOARDscorePane.getScene().getWindow()).close();
-        launchWindow("resources/startMenu.fxml", "SquidGame 2.0", Modality.NONE, StageStyle.DECORATED);
-        SCOREBOARDDataPane.setVisible(false);
-        SCOREBOARDscorePane.setVisible(false);
-    }
-
-
-
-    private Parent loadFxml(String resources) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resources));
-            fxmlLoader.setController(this);
-            return fxmlLoader.load();
-        } catch (Exception e) {
-            System.out.println(e);
-            System.out.println("Can't load requested document right now.\nRequested document: \"" + resources + "\"");
-            throw new NullPointerException("Document is null");
-        }
-    }
 
 }
