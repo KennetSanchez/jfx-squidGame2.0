@@ -205,6 +205,15 @@ public class GameGUIController {
         }
     }
 
+    public void winGame(){
+        ((Stage)GAMECharacter.getScene().getWindow()).close();
+        pausedGame=true;
+        boardNumber=0;
+        launchWindow("resources/Scoreboard.fxml","Scoreboard", Modality.NONE, StageStyle.DECORATED);
+        hintCounter=5;
+        SCOREBOARDDataPane.setVisible(true);
+    }
+
     @FXML
     void GAMEmove(KeyEvent event) {
         char keyPressed = event.getText().toLowerCase().charAt(0);
@@ -225,11 +234,7 @@ public class GameGUIController {
                         }
                     }
                     if(GAMECharacter.getLayoutY()<=maxY-77){
-                        ((Stage)GAMECharacter.getScene().getWindow()).close();
-                        pausedGame=true;
-                        boardNumber=0;
-                        launchWindow("resources/Scoreboard.fxml","Scoreboard", Modality.NONE, StageStyle.DECORATED);
-                        SCOREBOARDDataPane.setVisible(true);
+                        winGame();
                     }
                     break;
                 case 'a':
@@ -274,6 +279,18 @@ public class GameGUIController {
             }
             game.giveNegativeScore(boardNumber);
         }
+    }
+
+    @FXML
+    void GAMEGoToMenu(ActionEvent event) {
+        ((Stage)GAMECharacter.getScene().getWindow()).close();
+        pausedGame=true;
+        boardNumber=0;
+        launchWindow("resources/startMenu.fxml","Squid Game 2.0", Modality.NONE, StageStyle.DECORATED);
+        hintCounter=5;
+        min=0;
+        secs=0;
+        game.initializeGame();
     }
 
     @FXML

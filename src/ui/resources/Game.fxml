@@ -37,7 +37,7 @@
                   <Font name="Consolas Bold" size="30.0" />
                </font>
             </Label>
-            <Button layoutX="16.0" layoutY="927.0" mnemonicParsing="false" onAction="#GAMEgiveUp" prefHeight="37.0" prefWidth="124.0" styleClass="Button" stylesheets="@../css/style.css" text="Menu" textFill="WHITE">
+            <Button layoutX="16.0" layoutY="927.0" mnemonicParsing="false" onAction="#GAMEGoToMenu" prefHeight="37.0" prefWidth="124.0" styleClass="Button" stylesheets="@../css/style.css" text="Menu" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="20.0" />
                </font>
