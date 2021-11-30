@@ -41,10 +41,33 @@ public class Game implements Serializable {
         actualPlayerNegativeScore=0;
     }
 
+    public String giveBfs(boolean graph){
+        if(graph){
+             graphA.BFS(0);
+             return graphA.getBfsShortestPaths().get(122);
+        }
+        else {
+            graphB.BFS(0);
+            return graphB.getShortestPaths().get(122);
+        }
+    }
+
+    public String giveDijkstra(boolean graph){
+        if(graph){
+            graphA.dijkstra(0);
+            graphA.findDijkstraShortestPaths();
+            return graphA.getDijkstraShortestPaths().get(116);
+        }
+        else {
+            graphB.dijkstra(0);
+            graphB.findDijkstraShortestPaths();
+            return graphB.getDijkstraShortestPaths().get(116);
+        }
+    }
+
     public void giveNegativeScore(int boardPosition){
         if(boardPosition>-5 && boardPosition < 122){
             actualPlayerNegativeScore+=random[boardPosition];
-            random[boardPosition]=0;
         }
     }
 
@@ -67,6 +90,7 @@ public class Game implements Serializable {
             graphA = new GraphA<>(123);
             graphA.addEdgeDirected(0,6,random[6]);
             graphA.addEdgeDirected(116,122,0);
+            graphA.addEdgeDirected(122,116,0);
             return linkMatrix(1,2);
         }
         else {
@@ -94,16 +118,19 @@ public class Game implements Serializable {
                 if (origin % 11 != 0) {
                     if (origin <= 110) {
                         if (!(obstaclesString.contains(","+destination+","))) {
+                            System.out.println("Grafo de "+origin+" a "+destination);
                             graphA.addEdgeDirected(origin, destination, random[destination]);
                             graphA.addEdgeDirected(destination, origin, random[origin]);
 
                         }
                         if (!(obstaclesString.contains(","+(origin+11)+","))) {
+                            System.out.println("Grafo de "+origin+" a "+(origin+11));
                             graphA.addEdgeDirected(origin, origin + 11, random[origin + 11]);
                             graphA.addEdgeDirected(origin + 11,origin, random[origin]);
                         }
                     } else {
                         if (!(obstaclesString.contains(","+(destination)+","))) {
+                            System.out.println("Grafo de "+origin+" a "+destination);
                             graphA.addEdgeDirected(origin, destination, random[destination]);
                             graphA.addEdgeDirected(destination, origin, random[origin]);
                         }
@@ -112,6 +139,7 @@ public class Game implements Serializable {
                 } else {
                     if (origin <= 110) {
                         if (!(obstaclesString.contains(","+(origin+11)+","))) {
+                            System.out.println("Grafo de "+origin+" a "+(origin+11));
                             graphA.addEdgeDirected(origin, origin + 11, random[origin + 11]);
                             graphA.addEdgeDirected(origin + 11,origin, random[origin]);
                         }
@@ -190,6 +218,8 @@ public class Game implements Serializable {
     public void placeObstacles(int n){
 
     }
+
+
 
     public void finishGame(String nickname,String time,int min,int secs){
         double totalTimeInSeconds = min+(secs/60);

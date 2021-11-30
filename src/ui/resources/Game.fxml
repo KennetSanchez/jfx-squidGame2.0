@@ -15,7 +15,7 @@
       <ImageView fx:id="GAMEPlatforms" fitHeight="867.0" fitWidth="1447.0" layoutX="12.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true" />
       <Pane layoutX="1478.0" prefHeight="1006.0" prefWidth="172.0" style="-fx-background-color: #797979;">
          <children>
-            <Button layoutX="16.0" layoutY="280.0" mnemonicParsing="false" onAction="#GAMEgiveUp" prefHeight="37.0" prefWidth="124.0" styleClass="Button" stylesheets="@../css/style.css" text="Give up" textFill="WHITE">
+            <Button fx:id="GAMEGiveUpBTN" layoutX="16.0" layoutY="280.0" mnemonicParsing="false" onAction="#GAMEgiveUp" prefHeight="37.0" prefWidth="124.0" styleClass="Button" stylesheets="@../css/style.css" text="Give up" textFill="WHITE">
                <font>
                   <Font name="Consolas Bold" size="20.0" />
                </font>

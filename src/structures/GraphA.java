@@ -312,17 +312,17 @@ public class GraphA<E extends Number> implements GraphInterface<E> {
 
     public void findDijkstraShortestPaths(){
         dijkstraShortestPaths=new Hashtable<>();
+        String aux = "";
         for(int i=0;i<numberOfVertices;i++){
+            aux = "";
             int pos = parent[i];
-            StringBuilder input1 = new StringBuilder();
-            input1.append(i+",");
+            aux = i+","+aux;
             while(pos!=-1){
-                input1.append(pos+",");
+                aux = pos+","+aux;
                 pos=parent[pos];
             }
-            input1.reverse();
-            String info = input1.substring(1,input1.length());
-            dijkstraShortestPaths.put(i,info);
+            dijkstraShortestPaths.put(i,aux.substring(0,aux.length()-1));
+            aux="";
         }
     }
 

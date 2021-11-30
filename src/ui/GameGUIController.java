@@ -23,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -158,6 +159,7 @@ public class GameGUIController {
     @FXML
     void useAdjacencyList(ActionEvent event) throws FileNotFoundException, InterruptedException {
         ((Stage) graphOptionLabel.getScene().getWindow()).close();
+        graph = false;
         game.linkMatrix(false);
         openGameScreen();
     }
@@ -165,7 +167,8 @@ public class GameGUIController {
     @FXML
     void useAdjacencyMatrix(ActionEvent event) throws FileNotFoundException, InterruptedException {
         ((Stage) graphOptionLabel.getScene().getWindow()).close();
-        game.linkMatrix(false);
+        graph=true;
+        game.linkMatrix(true);
         openGameScreen();
     }
     //-------------------------------------     GAME CODE      -------------------------------------
@@ -181,6 +184,7 @@ public class GameGUIController {
     private int[] random;
     private boolean pausedGame;
     private int hintCounter;
+    private boolean graph; //False for adjacency list, true for adjacency matrix
 
     private TimerTask task = new TimerTask() {
         @Override
@@ -295,9 +299,38 @@ public class GameGUIController {
 
     @FXML
     void GAMEgiveUp(ActionEvent event) {
-        ((Stage)GAMElb1.getScene().getWindow()).close();
-        launchWindow("resources/Scoreboard.fxml", "Scoreboard", Modality.NONE, StageStyle.DECORATED);
-        SCOREBOARDscorePane.setVisible(true);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Let's see graphs in action");
+        alert.setHeaderText("“What a shame!");
+        alert.setContentText("They will be shown below:\n" +
+                "*   In yellow the boxes that you should have crossed to achieve the shortest possible time (shortest path BFS)\n" +
+                "*   In blue the boxes that you had to cross to obtain the least amount of negative points possible (minimum weight path with dijkstra)\n"
+                +"*  In green the boxes that are part of both paths");
+        alert.showAndWait();
+        pausedGame=true;
+        fillLabels();
+        paintLabels(game.giveBfs(graph), game.giveDijkstra(graph));
+        GAMEhintButton.setDisable(true);
+        GAMEGiveUpBTN.setDisable(true);
+    }
+
+    public void paintLabels(String order1,String order2){
+        String[] order1S = order1.split(",");
+        for(int i=1;i<order1S.length-1;i++){
+            int index = Integer.parseInt(order1S[i])-1;
+            labelList.get(index).setTextFill(Paint.valueOf("#CCCC00"));
+        }
+
+        String[] order2S = order2.split(",");
+        for(int i=1;i<order2S.length;i++){
+            int index = Integer.parseInt(order2S[i])-1;
+            if(labelList.get(index).getTextFill().equals(Paint.valueOf("#CCCC00"))){
+                labelList.get(index).setTextFill(Color.GREEN);
+            }
+            else {
+                labelList.get(index).setTextFill(Color.BLUE);
+            }
+        }
     }
 
     @FXML
@@ -305,6 +338,8 @@ public class GameGUIController {
         if(hintCounter!=1){
             pausedGame=true;
             fillLabels();
+            GAMEGiveUpBTN.setDisable(true);
+            GAMEhintButton.setDisable(true);
             waitT(2000,task);
             hintCounter--;
             GAMEhintsCounter.setText((hintCounter)+" / 5");
@@ -312,7 +347,9 @@ public class GameGUIController {
         else{
             pausedGame=true;
             fillLabels();
-            waitT(2000,task);
+            GAMEGiveUpBTN.setDisable(true);
+            GAMEhintButton.setDisable(true);
+            waitTVerySpecificCase(2000,task);
             hintCounter--;
             GAMEhintsCounter.setText((hintCounter)+" / 5");
             GAMEhintButton.setDisable(true);
@@ -331,6 +368,8 @@ public class GameGUIController {
         GAMECharacter.setLayoutY(originalY);
         fillLabels();
         timer = new Timer();
+        GAMEGiveUpBTN.setDisable(true);
+        GAMEhintButton.setDisable(true);
         waitT(4000,task);
     }
 
@@ -350,6 +389,30 @@ public class GameGUIController {
             public void handle(WorkerStateEvent event) {
                 cleanLabels();
                 pausedGame=false;
+                GAMEGiveUpBTN.setDisable(false);
+                GAMEhintButton.setDisable(false);
+            }
+        });
+        new Thread(sleeper).start();
+    }
+
+    private void waitTVerySpecificCase(long time,TimerTask task) throws InterruptedException { //Sorry, no other ideas about this hehe
+        Task<Void> sleeper = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    Thread.sleep(time);
+                } catch (InterruptedException e) {
+                }
+                return null;
+            }
+        };
+        sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle(WorkerStateEvent event) {
+                cleanLabels();
+                pausedGame=false;
+                GAMEGiveUpBTN.setDisable(false);
             }
         });
         new Thread(sleeper).start();
@@ -810,6 +873,9 @@ public class GameGUIController {
 
     @FXML
     private Button GAMEhintButton;
+
+    @FXML
+    private Button GAMEGiveUpBTN;
 
     @FXML
     private Pane SCOREBOARDDataPane;
