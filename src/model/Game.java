@@ -32,11 +32,11 @@ public class Game implements Serializable {
         rows=11;
         board=new int[rows][columns];
         boardExample();
-        obstaclesString = ",38,39,41,59,60,61,62,64,83,";
+        obstaclesString = ",28,82,83,84,92,96,";
         graphA=new GraphA<>(123);
         graphB=new GraphB<>(123);
         random=new int[123];
-        //antes del generateRandoms tiene que estar el metodo de generar los obstaculos aleatorios
+        searchObstaclesPlace(15);
         generateRandoms();
         actualPlayerNegativeScore=0;
     }
@@ -118,19 +118,16 @@ public class Game implements Serializable {
                 if (origin % 11 != 0) {
                     if (origin <= 110) {
                         if (!(obstaclesString.contains(","+destination+","))) {
-                            System.out.println("Grafo de "+origin+" a "+destination);
                             graphA.addEdgeDirected(origin, destination, random[destination]);
                             graphA.addEdgeDirected(destination, origin, random[origin]);
 
                         }
                         if (!(obstaclesString.contains(","+(origin+11)+","))) {
-                            System.out.println("Grafo de "+origin+" a "+(origin+11));
                             graphA.addEdgeDirected(origin, origin + 11, random[origin + 11]);
                             graphA.addEdgeDirected(origin + 11,origin, random[origin]);
                         }
                     } else {
                         if (!(obstaclesString.contains(","+(destination)+","))) {
-                            System.out.println("Grafo de "+origin+" a "+destination);
                             graphA.addEdgeDirected(origin, destination, random[destination]);
                             graphA.addEdgeDirected(destination, origin, random[origin]);
                         }
@@ -139,7 +136,6 @@ public class Game implements Serializable {
                 } else {
                     if (origin <= 110) {
                         if (!(obstaclesString.contains(","+(origin+11)+","))) {
-                            System.out.println("Grafo de "+origin+" a "+(origin+11));
                             graphA.addEdgeDirected(origin, origin + 11, random[origin + 11]);
                             graphA.addEdgeDirected(origin + 11,origin, random[origin]);
                         }
@@ -191,7 +187,7 @@ public class Game implements Serializable {
             }
         }
         linkMatrixB(origin+1,destination+1);
-        return false; //Creo que no es necesario xd
+        return false;
     }
     public void boardExample(){
         int temp=1;
@@ -232,7 +228,7 @@ public class Game implements Serializable {
         int count=0;
             for(int i=a;i<=b;i++){
                 if(a>=1&&a<=122){
-                    if(obstaclesString.contains(i+",")||obstaclesString.contains(0+""+i+",")){
+                    if(obstaclesString.contains(","+(i)+",")){
                         count++;
                     }
                 }
@@ -240,23 +236,22 @@ public class Game implements Serializable {
             return count;
     }
     public boolean foundAPlace(int a){
-        if(!(obstaclesString.contains(a+",")||obstaclesString.contains(0+""+a+","))){
-            //Validation  down, left, right
-            if(!(((obstaclesString.contains((a+1)+","))||(obstaclesString.contains(0+""+(a+1)+",")))||
-                            ((obstaclesString.contains((a-1)+","))||(obstaclesString.contains(0+""+(a-1)+",")))||
-                                     ((obstaclesString.contains((a+11)+","))||(obstaclesString.contains(0+""+(a+11)+","))))){
-                                            //Validation down, down-left, down-right
-                                            if(!((obstaclesString.contains((a-10)+",")||obstaclesString.contains(0+""+(a-10)+","))||
-                                                    (obstaclesString.contains((a-11)+",")||obstaclesString.contains(0+""+(a-11)+","))||
-                                                            (obstaclesString.contains((a-12)+",")||obstaclesString.contains(0+""+(a-12)+",")))){
-                                                            //Validation up-right and up-left
-                                                            if(!((obstaclesString.contains((a+10)+",")||obstaclesString.contains(0+""+(a+10)+","))||
-                                                                    (obstaclesString.contains((a+12)+",")||obstaclesString.contains(0+""+(a+12)+",")))){
-                                                                    return true;
-                                                            }
-                                            }
-            }
+        //God forgive me pls
+        if(a>11&&a<111){
+            if(!(obstaclesString.contains(","+a+","))){
+                //Validation  down, left, right
+                if(!(obstaclesString.contains(","+(a+1)+","))&&
+                        !(obstaclesString.contains(","+(a-1)+","))
+                        &&!(obstaclesString.contains(","+(a+11)+","))&&
+                        !(obstaclesString.contains(","+(a-10)+","))&&
+                        !(obstaclesString.contains(","+(a-11)+","))&&
+                        !(obstaclesString.contains(","+(a-12)+","))&&
+                        !(obstaclesString.contains(","+(a+10)+","))
+                        &&!(obstaclesString.contains(","+(a+12)+","))){
+                    return true;
+                }
 
+            }
         }
        return false;
     }
@@ -267,7 +262,15 @@ public class Game implements Serializable {
                     for(int j=i;j<=i+30;j++){
                         if(countObstaclesInRange(i,i+30)<6) {
                             if (foundAPlace(j)) {
-                                obstaclesToPlace.add(j);
+                                obstaclesString+=j+",";
+                                double decision = Math.random();
+                                if(decision<0.5){
+                                    obstaclesString+=(j+1)+",";
+                                }
+                                else {
+                                    obstaclesString+=(j-1)+",";
+                                }
+
                             }
                         }
                     }

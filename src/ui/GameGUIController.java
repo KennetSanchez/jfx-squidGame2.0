@@ -220,69 +220,75 @@ public class GameGUIController {
 
     @FXML
     void GAMEmove(KeyEvent event) {
-        char keyPressed = event.getText().toLowerCase().charAt(0);
-        double x = GAMECharacter.getLayoutX();
-        double y = GAMECharacter.getLayoutY();
-        if(!pausedGame){
-            switch (keyPressed){
-                case 'w':
-                    if(y>=maxY || x==originalX){
-                        if(game.getObstaclesString().contains(","+(boardNumber+11)+",")){
-                            boardNumber=-5;
-                            GAMECharacter.setLayoutX(originalX);
-                            GAMECharacter.setLayoutY(originalY);
+        try{
+            char keyPressed = event.getText().toLowerCase().charAt(0);
+            double x = GAMECharacter.getLayoutX();
+            double y = GAMECharacter.getLayoutY();
+            if(!pausedGame){
+                switch (keyPressed){
+                    case 'w':
+                        if(y>=maxY || x==originalX){
+                            if(game.getObstaclesString().contains(","+(boardNumber+11)+",")){
+                                boardNumber=-5;
+                                GAMECharacter.setLayoutX(originalX);
+                                GAMECharacter.setLayoutY(originalY);
+                            }
+                            else{
+                                boardNumber+=11;
+                                GAMECharacter.setLayoutY(y-77);
+                            }
                         }
-                        else{
-                            boardNumber+=11;
-                            GAMECharacter.setLayoutY(y-77);
+                        if(GAMECharacter.getLayoutY()<=maxY-77){
+                            winGame();
                         }
-                    }
-                    if(GAMECharacter.getLayoutY()<=maxY-77){
-                        winGame();
-                    }
-                    break;
-                case 'a':
-                    if(y!=originalY && x >= minX+3){
-                        if(game.getObstaclesString().contains(","+(boardNumber-1)+",")) {
-                            boardNumber=-5;
-                            GAMECharacter.setLayoutX(originalX);
-                            GAMECharacter.setLayoutY(originalY);
+                        break;
+                    case 'a':
+                        if(y!=originalY && x >= minX+3){
+                            if(game.getObstaclesString().contains(","+(boardNumber-1)+",")) {
+                                boardNumber=-5;
+                                GAMECharacter.setLayoutX(originalX);
+                                GAMECharacter.setLayoutY(originalY);
+                            }
+                            else {
+                                boardNumber--;
+                                GAMECharacter.setLayoutX(x - 132);
+                            }
                         }
-                        else {
-                            boardNumber--;
-                            GAMECharacter.setLayoutX(x - 132);
+                        break;
+                    case 's':
+                        if(y+77<=originalY-77){
+                            if(game.getObstaclesString().contains(","+(boardNumber-11)+",")) {
+                                boardNumber=-5;
+                                GAMECharacter.setLayoutX(originalX);
+                                GAMECharacter.setLayoutY(originalY);
+                            }
+                            else {
+                                boardNumber-=11;
+                                GAMECharacter.setLayoutY(y + 77);
+                            }
                         }
-                    }
-                    break;
-                case 's':
-                    if(y+77<=originalY-77){
-                        if(game.getObstaclesString().contains(","+(boardNumber-11)+",")) {
-                            boardNumber=-5;
-                            GAMECharacter.setLayoutX(originalX);
-                            GAMECharacter.setLayoutY(originalY);
+                        break;
+                    case 'd':
+                        if(y!=originalY && x <= maxX){
+                            if(game.getObstaclesString().contains(","+(boardNumber+1)+",")) {
+                                boardNumber=-5;
+                                GAMECharacter.setLayoutX(originalX);
+                                GAMECharacter.setLayoutY(originalY);
+                            }
+                            else {
+                                boardNumber++;
+                                GAMECharacter.setLayoutX(x + 132);
+                            }
                         }
-                        else {
-                            boardNumber-=11;
-                            GAMECharacter.setLayoutY(y + 77);
-                        }
-                    }
-                    break;
-                case 'd':
-                    if(y!=originalY && x <= maxX){
-                        if(game.getObstaclesString().contains(","+(boardNumber+1)+",")) {
-                            boardNumber=-5;
-                            GAMECharacter.setLayoutX(originalX);
-                            GAMECharacter.setLayoutY(originalY);
-                        }
-                        else {
-                            boardNumber++;
-                            GAMECharacter.setLayoutX(x + 132);
-                        }
-                    }
-                    break;
+                        break;
+                }
+                game.giveNegativeScore(boardNumber);
             }
-            game.giveNegativeScore(boardNumber);
+        }catch (Exception e){
+            //Nada jaja
         }
+
+
     }
 
     @FXML
