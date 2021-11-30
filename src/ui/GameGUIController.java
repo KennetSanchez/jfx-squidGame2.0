@@ -1,5 +1,6 @@
 package ui;
 
+import animatefx.animation.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,17 +45,22 @@ public class GameGUIController {
 
     Game game;
     MediaPlayer mp;
+
     public GameGUIController(Game game){
         this.game=game;
         random = game.getRandom();
         hintCounter=5;
+
         //Music code
         String songName = "Squid game song - pink soldiers.mp3";
         String path = "src/ui/resources/" + songName;
         Media media = new Media(new File(path).toURI().toString());
+
         mp = new MediaPlayer(media);
         mp.setCycleCount(MediaPlayer.INDEFINITE);
+        mp.setVolume(0.5);
         mp.play();
+
         pausedGame=true;
         timer.scheduleAtFixedRate(task, 1000, 1000);
     }
@@ -225,6 +231,7 @@ public class GameGUIController {
             double x = GAMECharacter.getLayoutX();
             double y = GAMECharacter.getLayoutY();
             if(!pausedGame){
+                new ZoomIn(GAMECharacter).play();
                 switch (keyPressed){
                     case 'w':
                         if(y>=maxY || x==originalX){
@@ -285,10 +292,12 @@ public class GameGUIController {
                 game.giveNegativeScore(boardNumber);
             }
         }catch (Exception e){
-            //Nada jaja
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning!");
+            alert.setHeaderText("Unknowed keys");
+            alert.setContentText("You only can only use the \"W, A, S, D\" keys to move");
+            alert.show();
         }
-
-
     }
 
     @FXML
