@@ -1,6 +1,8 @@
 package ui;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -11,6 +13,8 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -24,6 +28,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import model.Game;
+import model.Player;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -49,6 +54,8 @@ public class GameGUIController {
         mp = new MediaPlayer(media);
         mp.setCycleCount(MediaPlayer.INDEFINITE);
         mp.play();
+        pausedGame=true;
+        timer.scheduleAtFixedRate(task, 1000, 1000);
     }
 
     private void launchWindow(String fxml, String title, Modality modality, StageStyle style) {
@@ -116,7 +123,29 @@ public class GameGUIController {
         alert5.setHeaderText("“Red light.... Green light!.”");
         alert5.setContentText("Try to enter the table of best players reaching the exit in the shortest time possible and stepping on the boxes with the smallest numbers.\n" + "We wish you good luck.");
         alert5.show();
+    }
 
+    @FXML
+    void scoreBoard(ActionEvent event) {
+        ((Stage)scoreBoardBTN.getScene().getWindow()).close();
+        launchWindow("resources/SCOREBOARD.fxml", "Squidgame 2.0", Modality.NONE, StageStyle.DECORATED);
+        SCOREBOARDscorePane.setVisible(true);
+        refreshScoreboardTV();
+    }
+
+    private void refreshScoreboardTV(){
+        SCOREBOARDtcNickName.setCellValueFactory(new PropertyValueFactory<>("nickName"));
+        SCOREBOARDtcScore.setCellValueFactory(new PropertyValueFactory<>("negativeScorePercentString"));
+        SCOREBOARDtcTime.setCellValueFactory(new PropertyValueFactory<>("time"));
+        game.sortBestScores();
+        ObservableList<Player> aList = FXCollections.observableArrayList(game.getBestScores());
+        SCOREBOARDtvScores.setItems(aList);
+
+        SCOREBOARDtcNickName.setCellFactory(TextFieldTableCell.forTableColumn());
+        SCOREBOARDtcScore.setCellFactory(TextFieldTableCell.forTableColumn());
+        SCOREBOARDtcTime.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        SCOREBOARDtvScores.getColumns().setAll(SCOREBOARDtcNickName,SCOREBOARDtcScore,SCOREBOARDtcTime);
     }
 
     //-------------------------------------     ADJACENCY OPTIONS CODE      -------------------------------------
@@ -197,10 +226,11 @@ public class GameGUIController {
                     }
                     if(GAMECharacter.getLayoutY()<=maxY-77){
                         ((Stage)GAMECharacter.getScene().getWindow()).close();
+                        pausedGame=true;
+                        boardNumber=0;
                         launchWindow("resources/Scoreboard.fxml","Scoreboard", Modality.NONE, StageStyle.DECORATED);
                         SCOREBOARDDataPane.setVisible(true);
                     }
-                    //Aqui se debe mirar cuando gana y terminar el juego
                     break;
                 case 'a':
                     if(y!=originalY && x >= minX+3){
@@ -243,7 +273,6 @@ public class GameGUIController {
                     break;
             }
             game.giveNegativeScore(boardNumber);
-            System.out.println(game.getActualPlayerNegativeScore());
         }
     }
 
@@ -285,7 +314,6 @@ public class GameGUIController {
         GAMECharacter.setLayoutY(originalY);
         fillLabels();
         timer = new Timer();
-        timer.scheduleAtFixedRate(task, 1000, 1000);
         waitT(4000,task);
     }
 
@@ -321,7 +349,7 @@ public class GameGUIController {
 
     private void fillLabels(){
         for(int i=0;i<labelList.size();i++){
-            int text = random[i+1];
+            int text = game.getRandom()[i+1];
             if(text==-1){
                 labelList.get(i).setText("X");
                 labelList.get(i).setTextFill(Color.RED);
@@ -352,21 +380,15 @@ public class GameGUIController {
     @FXML
     void SCOREBOARDSave(ActionEvent event) {
         String name = SCOREBOARDtxtField.getText();
-        timer.cancel();
+        pausedGame=true;
         if(!name.equals("")){
             ((Stage)SCOREBOARDtxtField.getScene().getWindow()).close();
             game.finishGame(name,GAMEtime.getText(),min,secs);
+            min=0;
+            secs=0;
+            game.initializeGame();
             launchWindow("resources/startMenu.fxml", "SquidGame 2.0", Modality.NONE, StageStyle.DECORATED);
         }
-    }
-
-
-
-    @FXML
-    void scoreBoard(ActionEvent event) {
-        ((Stage)scoreBoardBTN.getScene().getWindow()).close();
-        launchWindow("resources/SCOREBOARD.fxml", "Squidgame 2.0", Modality.NONE, StageStyle.DECORATED);
-        SCOREBOARDscorePane.setVisible(true);
     }
 
 
@@ -785,15 +807,17 @@ public class GameGUIController {
     private Pane SCOREBOARDscorePane;
 
     @FXML
-    private TableView<String> SCOREBOARDtvScores;
+    private TableView<Player> SCOREBOARDtvScores;
 
     @FXML
-    private TableColumn<String, String> SCOREBOARDtcNickName;
+    private TableColumn<Player, String> SCOREBOARDtcNickName;
 
     @FXML
-    private TableColumn<String, String> SCOREBOARDtcScore;
+    private TableColumn<Player, String> SCOREBOARDtcScore;
 
     @FXML
-    private TableColumn<String, String> SCOREBOARDtcTime;
+    private TableColumn<Player, String> SCOREBOARDtcTime;
+
+    private final ObservableList<Player> dataList = FXCollections.observableArrayList();
 
 }

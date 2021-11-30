@@ -3,9 +3,7 @@ package model;
 import structures.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Hashtable;
+import java.util.*;
 
 
 public class Game implements Serializable {
@@ -248,8 +246,28 @@ public class Game implements Serializable {
 
     }
 
+    public void sortBestScores(){
+        Collections.sort(bestScores);
+    }
+
     public ArrayList<Integer> getObstaclesToPlace() {
         return obstaclesToPlace;
+    }
+
+    public int getTotalBoxesScore() {
+        return totalBoxesScore;
+    }
+
+    public void setTotalBoxesScore(int totalBoxesScore) {
+        this.totalBoxesScore = totalBoxesScore;
+    }
+
+    public ArrayList<Player> getBestScores() {
+        return bestScores;
+    }
+
+    public void setBestScores(ArrayList<Player> bestScores) {
+        this.bestScores = bestScores;
     }
 
     public void setObstaclesToPlace(ArrayList<Integer> obstaclesToPlace) {
