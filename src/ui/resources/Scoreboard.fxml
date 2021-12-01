@@ -22,7 +22,7 @@
             <TableView fx:id="SCOREBOARDtvScores" layoutX="187.0" layoutY="53.0" prefHeight="417.0" prefWidth="532.0" stylesheets="@../css/style.css">
               <columns>
                 <TableColumn fx:id="SCOREBOARDtcNickName" prefWidth="251.0" text="Nickname" />
-                <TableColumn fx:id="SCOREBOARDtcScore" prefWidth="166.0" text="Efficiency (%)" />
+                <TableColumn fx:id="SCOREBOARDtcScore" prefWidth="166.0" text="Negative Boxes (%)" />
                   <TableColumn fx:id="SCOREBOARDtcTime" prefWidth="114.0" text="Time" />
               </columns>
             </TableView>

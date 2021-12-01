@@ -28,6 +28,7 @@ public class Game implements Serializable {
 
     public void initializeGame(){
         totalBoxesScore=0;
+        actualPlayerNegativeScore=0;
         columns=11;
         rows=11;
         board=new int[rows][columns];
@@ -38,7 +39,6 @@ public class Game implements Serializable {
         random=new int[123];
         searchObstaclesPlace(15);
         generateRandoms();
-        actualPlayerNegativeScore=0;
     }
 
     public String giveBfs(boolean graph){
