@@ -42,7 +42,7 @@ public class GameTest {
         game.linkMatrix(true);
         assertEquals(game.getGraphA().getAdj()[0][6], game.getRandom()[6]);
     }
-
+//
     @Test
     public void genericObstacleTest() {
         gameScene1();
