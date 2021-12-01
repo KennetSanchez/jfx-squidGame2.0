@@ -47,7 +47,7 @@ public class GameTest {
     public void genericObstacleTest() {
         gameScene1();
         game.genericObstacle();
-        assertTrue(game.getObstaclesString().contains("38"));
+        assertEquals(game.getObstaclesString().charAt(3),44);
     }
 
     @Test
