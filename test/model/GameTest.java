@@ -6,10 +6,57 @@ import java.util.Arrays;
 import java.util.Hashtable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GameTest {
     private Game game = new Game();
 
+    private void gameScene1() {
+        game.initializeGame();
+        game.linkMatrix(true);
+
+    }
+
+    @Test
+    public void giveBFSTest() {
+        gameScene1();
+        assertEquals(game.giveBfs(true).charAt(0), 48);
+    }
+
+    @Test
+    public void giveDijkstraTest() {
+        gameScene1();
+        assertEquals(game.giveDijkstra(true).charAt(2), 54);
+    }
+
+    @Test
+    public void generateRandomsTest() {
+        gameScene1();
+        game.generateRandoms();
+        assertEquals(game.getRandom()[28], -1);
+    }
+
+    @Test
+    public void linkMatrixTest() {
+        gameScene1();
+        game.linkMatrix(true);
+        assertEquals(game.getGraphA().getAdj()[0][6], game.getRandom()[6]);
+    }
+
+    @Test
+    public void genericObstacleTest() {
+        gameScene1();
+        game.genericObstacle();
+        assertTrue(game.getObstaclesString().contains("38"));
+    }
+
+    @Test
+    public void finishGameTest(){
+        gameScene1();
+        game.finishGame("pablo","20",1,0);
+        assertEquals(game.getBestScores().get(0).getNickName(),"pablo");
+    }
+/*
     private void setupScene1(){
         //Manual board creation with no random obstacles
         int[] newRandom = new int[122];
@@ -55,5 +102,5 @@ public class GameTest {
         assertEquals(test.get(83),null);
 
 
-    }
+    }*/
 }
